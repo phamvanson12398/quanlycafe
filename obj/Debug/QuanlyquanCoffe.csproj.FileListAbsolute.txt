@@ -1,0 +1,13 @@
+E:\CoffeManage\Winform\QuanlyquanCoffe\QuanlyquanCoffe\bin\Debug\QuanlyquanCoffe.exe.config
+E:\CoffeManage\Winform\QuanlyquanCoffe\QuanlyquanCoffe\bin\Debug\QuanlyquanCoffe.exe
+E:\CoffeManage\Winform\QuanlyquanCoffe\QuanlyquanCoffe\bin\Debug\QuanlyquanCoffe.pdb
+E:\CoffeManage\Winform\QuanlyquanCoffe\QuanlyquanCoffe\obj\Debug\QuanlyquanCoffe.csproj.AssemblyReference.cache
+E:\CoffeManage\Winform\QuanlyquanCoffe\QuanlyquanCoffe\obj\Debug\QuanlyquanCoffe.Properties.Resources.resources
+E:\CoffeManage\Winform\QuanlyquanCoffe\QuanlyquanCoffe\obj\Debug\QuanlyquanCoffe.csproj.GenerateResource.cache
+E:\CoffeManage\Winform\QuanlyquanCoffe\QuanlyquanCoffe\obj\Debug\QuanlyquanCoffe.csproj.CoreCompileInputs.cache
+E:\CoffeManage\Winform\QuanlyquanCoffe\QuanlyquanCoffe\obj\Debug\QuanlyquanCoffe.exe
+E:\CoffeManage\Winform\QuanlyquanCoffe\QuanlyquanCoffe\obj\Debug\QuanlyquanCoffe.pdb
+E:\CoffeManage\Winform\QuanlyquanCoffe\QuanlyquanCoffe\obj\Debug\QuanlyquanCoffe.fTableManager.resources
+E:\CoffeManage\Winform\QuanlyquanCoffe\QuanlyquanCoffe\obj\Debug\QuanlyquanCoffe.fLogin.resources
+E:\CoffeManage\Winform\QuanlyquanCoffe\QuanlyquanCoffe\obj\Debug\QuanlyquanCoffe.fAccoutProfile.resources
+E:\CoffeManage\Winform\QuanlyquanCoffe\QuanlyquanCoffe\obj\Debug\QuanlyquanCoffe.fAdmin.resources
