@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace QuanlyquanCoffe
 {
@@ -15,8 +16,24 @@ namespace QuanlyquanCoffe
         public fAdmin()
         {
             InitializeComponent();
-        }
+            LoadAccoutList();
 
+        }
+        void LoadAccoutList()
+        {
+            string StrConnection = "Data Source=DESKTOP-6P3EB2J;Initial Catalog=QuanLyQuanCafe;Integrated Security=True;Encrypt=False";
+            SqlConnection connection = new SqlConnection(StrConnection);
+            string query = "select * from Account";
+            connection.Open();
+            SqlCommand command = new SqlCommand(query, connection);
+            DataTable data = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            adapter.Fill(data);
+            connection.Close();
+            dtgvAccount.DataSource = data;
+
+
+        }
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
