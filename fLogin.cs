@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanlyquanCoffe.DAO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,12 +19,26 @@ namespace QuanlyquanCoffe
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnLogin(object sender, EventArgs e)
         {
-            this.Hide();
-            fTableManager f = new fTableManager();
-            f.ShowDialog();
-            this.Show();
+            string username = txbUsername.Text;
+            string password = txbPassword.Text;
+             if (Login(username,password))
+            {
+                this.Hide();
+                fTableManager f = new fTableManager();
+                f.ShowDialog();
+                this.Show();
+                }
+                else
+                {
+                MessageBox.Show("Sai tên tài khoản hoặc mật khẩu");
+                }
+            }
+        
+       bool Login(string username,string password)
+        {
+           return AccountDAO.Instance.Login(username,password); 
         }
 
         private void button2_Click(object sender, EventArgs e)

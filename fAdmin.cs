@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using QuanlyquanCoffe.DAO;
 
 namespace QuanlyquanCoffe
 {
@@ -17,21 +18,20 @@ namespace QuanlyquanCoffe
         {
             InitializeComponent();
             LoadAccoutList();
+            LoadFoodList();
+        }
+        void LoadFoodList()
+        {
+            string query = "select * from Food";
+
+            dtgvFood.DataSource = Dataprovider.Instance.ExcuteQuery(query, new object[] { "Hoàng Nguyễn" });
 
         }
         void LoadAccoutList()
         {
-            string StrConnection = "Data Source=DESKTOP-6P3EB2J;Initial Catalog=QuanLyQuanCafe;Integrated Security=True;Encrypt=False";
-            SqlConnection connection = new SqlConnection(StrConnection);
-            string query = "select * from Account";
-            connection.Open();
-            SqlCommand command = new SqlCommand(query, connection);
-            DataTable data = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-            adapter.Fill(data);
-            connection.Close();
-            dtgvAccount.DataSource = data;
-
+            string query = "execute USP_GetAccountByUserName @username ";
+         
+            dtgvAccount.DataSource = Dataprovider.Instance.ExcuteQuery(query,new object[] {"Hoàng Nguyễn"});
 
         }
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
