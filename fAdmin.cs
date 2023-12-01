@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using QuanlyquanCoffe.DAO;
+using System.Collections;
 
 namespace QuanlyquanCoffe
 {
@@ -24,14 +25,16 @@ namespace QuanlyquanCoffe
         {
             string query = "select * from Food";
 
-            dtgvFood.DataSource = Dataprovider.Instance.ExcuteQuery(query, new object[] { "Hoàng Nguyễn" });
+            dtgvFood.DataSource = Dataprovider.Instance.ExcuteQuery(query);
 
         }
         void LoadAccoutList()
         {
-            string query = "execute USP_GetAccountByUserName @username ";
-         
-            dtgvAccount.DataSource = Dataprovider.Instance.ExcuteQuery(query,new object[] {"Hoàng Nguyễn"});
+            //string query = "execute USP_GetAccountByUserName @username ";
+
+            //dtgvAccount.DataSource = Dataprovider.Instance.ExcuteQuery(query,new object[] {"Hoàng Nguyễn"});
+            string query = "select * from Account";
+            dtgvAccount.DataSource = Dataprovider.Instance.ExcuteQuery(query);
 
         }
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)

@@ -20,8 +20,8 @@ namespace QuanlyquanCoffe.DAO
         private AccountDAO() { }
         public bool Login(string username, string password)
         {
-            string query = "select * from Account where Username=N'"+username+"' and Password=N'"+password+"' ";
-            DataTable result = Dataprovider.Instance.ExcuteQuery(query);
+            string query = "USP_Login @username , @password";
+            DataTable result = Dataprovider.Instance.ExcuteQuery(query, new object[] { username, password });
             return result.Rows.Count>0;
         }
     }
