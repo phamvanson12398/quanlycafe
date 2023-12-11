@@ -15,13 +15,14 @@ namespace QuanlyquanCoffe.DTO
             this.ID = id;
             this.CategoryID = category;
         }
-        public Food(DataRow row)
-        {
-            Name = row["name"].ToString();
-            Price = (float)Convert.ToDouble(row["price"].ToString());
-            ID = (int)row["id"];
-            CategoryID = (int)row["idCategory"];
-        }
+         public Food(DataRow row)
+         {
+             Name = row["name"].ToString();
+             Price = (float)Convert.ToDouble(row["price"].ToString());
+             ID = (int)row["id"];
+             CategoryID = (int)row["idCategory"];
+         }
+
         private Food() { }
         private int categoryID;
         private float price;

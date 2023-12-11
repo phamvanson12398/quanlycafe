@@ -18,16 +18,18 @@ namespace QuanlyquanCoffe
         public fAdmin()
         {
             InitializeComponent();
+            LoadDateTimePickerBill();
             LoadAccoutList();
-            LoadFoodList();
+            LoadListBillByDate(dtpkfromDate.Value, dtpktoDate.Value);
         }
-        void LoadFoodList()
+        #region methods
+       /* void LoadFoodList()
         {
             string query = "select * from Food";
 
             dtgvFood.DataSource = Dataprovider.Instance.ExcuteQuery(query);
 
-        }
+        }*/
         void LoadAccoutList()
         {
             //string query = "execute USP_GetAccountByUserName @username ";
@@ -35,8 +37,26 @@ namespace QuanlyquanCoffe
             //dtgvAccount.DataSource = Dataprovider.Instance.ExcuteQuery(query,new object[] {"Hoàng Nguyễn"});
             string query = "select * from Account";
             dtgvAccount.DataSource = Dataprovider.Instance.ExcuteQuery(query);
+        }
+        void LoadListBillByDate(DateTime checkin,DateTime checkout)
+        {
+            
+           dtgvBill.DataSource= BillDAO.Instance.GetBillListByDate(checkin, checkout);
 
         }
+        void LoadDateTimePickerBill()
+        {
+            DateTime today=DateTime.Now;
+            dtpkfromDate.Value = new DateTime(today.Year, today.Month, 1);
+            dtpktoDate.Value=dtpkfromDate.Value.AddMonths(1).AddDays(-1);
+        }
+        void LoadListFood()
+        {
+            dtgvFood.DataSource=FoodDAO.Instance.GetListFood();
+        }
+        #endregion
+        #region events
+
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
@@ -49,6 +69,7 @@ namespace QuanlyquanCoffe
 
         private void btnViewBill_Click(object sender, EventArgs e)
         {
+            LoadListBillByDate(dtpkfromDate.Value,dtpktoDate.Value);
 
         }
 
@@ -88,6 +109,17 @@ namespace QuanlyquanCoffe
         }
 
         private void tabPage1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+        
+        private void button3_Click(object sender, EventArgs e)
+        {
+            LoadListFood();
+        }
+
+        private void dtgvFood_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

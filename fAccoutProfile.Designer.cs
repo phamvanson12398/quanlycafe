@@ -38,10 +38,10 @@
             this.txbPassWord = new System.Windows.Forms.TextBox();
             this.lbPassword = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txbNewPassword = new System.Windows.Forms.TextBox();
             this.newPassWord = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txbReenterPass = new System.Windows.Forms.TextBox();
             this.resetEnterPassWord = new System.Windows.Forms.Label();
             this.btUpdate = new System.Windows.Forms.Button();
             this.btExit = new System.Windows.Forms.Button();
@@ -133,20 +133,20 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.textBox1);
+            this.panel4.Controls.Add(this.txbNewPassword);
             this.panel4.Controls.Add(this.newPassWord);
             this.panel4.Location = new System.Drawing.Point(12, 238);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(440, 63);
             this.panel4.TabIndex = 4;
             // 
-            // textBox1
+            // txbNewPassword
             // 
-            this.textBox1.Location = new System.Drawing.Point(187, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(236, 22);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.UseSystemPasswordChar = true;
+            this.txbNewPassword.Location = new System.Drawing.Point(187, 12);
+            this.txbNewPassword.Name = "txbNewPassword";
+            this.txbNewPassword.Size = new System.Drawing.Size(236, 22);
+            this.txbNewPassword.TabIndex = 1;
+            this.txbNewPassword.UseSystemPasswordChar = true;
             // 
             // newPassWord
             // 
@@ -160,20 +160,20 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.textBox2);
+            this.panel5.Controls.Add(this.txbReenterPass);
             this.panel5.Controls.Add(this.resetEnterPassWord);
             this.panel5.Location = new System.Drawing.Point(12, 307);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(440, 63);
             this.panel5.TabIndex = 5;
             // 
-            // textBox2
+            // txbReenterPass
             // 
-            this.textBox2.Location = new System.Drawing.Point(187, 12);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(236, 22);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.UseSystemPasswordChar = true;
+            this.txbReenterPass.Location = new System.Drawing.Point(187, 12);
+            this.txbReenterPass.Name = "txbReenterPass";
+            this.txbReenterPass.Size = new System.Drawing.Size(236, 22);
+            this.txbReenterPass.TabIndex = 1;
+            this.txbReenterPass.UseSystemPasswordChar = true;
             // 
             // resetEnterPassWord
             // 
@@ -194,6 +194,7 @@
             this.btUpdate.TabIndex = 6;
             this.btUpdate.Text = "Cập nhật";
             this.btUpdate.UseVisualStyleBackColor = false;
+            this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
             // 
             // btExit
             // 
@@ -222,6 +223,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Name = "fAccoutProfile";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thông tin cá nhân";
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -249,10 +251,10 @@
         private System.Windows.Forms.TextBox txbPassWord;
         private System.Windows.Forms.Label lbPassword;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txbNewPassword;
         private System.Windows.Forms.Label newPassWord;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txbReenterPass;
         private System.Windows.Forms.Label resetEnterPassWord;
         private System.Windows.Forms.Button btUpdate;
         private System.Windows.Forms.Button btExit;
