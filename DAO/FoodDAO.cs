@@ -27,5 +27,17 @@ namespace QuanlyquanCoffe.DAO
             }
             return list;
         }
+        public List<Food> GetListFood()
+        {
+            List<Food> list = new List<Food>();
+            string query = "select * from Food";
+            DataTable data = Dataprovider.Instance.ExcuteQuery(query);
+            foreach (DataRow item in data.Rows)
+            {
+                Food food = new Food(item);
+                list.Add(food);
+            }
+            return list;
+        }
     }
 }

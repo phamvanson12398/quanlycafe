@@ -166,6 +166,7 @@
             // 
             // dtgvAccount
             // 
+            this.dtgvAccount.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvAccount.Location = new System.Drawing.Point(12, 86);
             this.dtgvAccount.Name = "dtgvAccount";
@@ -707,6 +708,7 @@
             this.button3.TabIndex = 5;
             this.button3.Text = "Xem";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -878,6 +880,7 @@
             this.dtgvFood.RowTemplate.Height = 24;
             this.dtgvFood.Size = new System.Drawing.Size(440, 461);
             this.dtgvFood.TabIndex = 0;
+            this.dtgvFood.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvFood_CellContentClick);
             // 
             // tcBill
             // 
@@ -896,17 +899,17 @@
             this.panel2.Controls.Add(this.btnViewBill);
             this.panel2.Controls.Add(this.dtpktoDate);
             this.panel2.Controls.Add(this.dtpkfromDate);
-            this.panel2.Location = new System.Drawing.Point(6, 6);
+            this.panel2.Location = new System.Drawing.Point(6, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(887, 36);
+            this.panel2.Size = new System.Drawing.Size(887, 42);
             this.panel2.TabIndex = 1;
             // 
             // btnViewBill
             // 
             this.btnViewBill.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.btnViewBill.Location = new System.Drawing.Point(389, 0);
+            this.btnViewBill.Location = new System.Drawing.Point(390, 0);
             this.btnViewBill.Name = "btnViewBill";
-            this.btnViewBill.Size = new System.Drawing.Size(85, 36);
+            this.btnViewBill.Size = new System.Drawing.Size(85, 39);
             this.btnViewBill.TabIndex = 2;
             this.btnViewBill.Text = "Thống kê";
             this.btnViewBill.UseVisualStyleBackColor = true;
@@ -937,12 +940,13 @@
             // 
             // dtgvBill
             // 
+            this.dtgvBill.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgvBill.Location = new System.Drawing.Point(0, -16);
+            this.dtgvBill.Location = new System.Drawing.Point(0, 0);
             this.dtgvBill.Name = "dtgvBill";
             this.dtgvBill.RowHeadersWidth = 51;
             this.dtgvBill.RowTemplate.Height = 24;
-            this.dtgvBill.Size = new System.Drawing.Size(881, 524);
+            this.dtgvBill.Size = new System.Drawing.Size(881, 508);
             this.dtgvBill.TabIndex = 0;
             this.dtgvBill.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvBill_CellContentClick);
             // 

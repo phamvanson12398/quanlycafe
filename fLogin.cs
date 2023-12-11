@@ -1,4 +1,5 @@
 ﻿using QuanlyquanCoffe.DAO;
+using QuanlyquanCoffe.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,8 +26,9 @@ namespace QuanlyquanCoffe
             string password = txbPassword.Text;
              if (Login(username,password))
             {
+                Account loginAccount =AccountDAO.Instance.GetAccountByUserName(username);            
+                fTableManager f = new fTableManager(loginAccount);
                 this.Hide();
-                fTableManager f = new fTableManager();
                 f.ShowDialog();
                 this.Show();
                 }
