@@ -133,13 +133,13 @@ namespace QuanlyquanCoffe
         }
         private void flpTable_Paint(object sender, PaintEventArgs e)
         {
-
         }
-
         private void fTableManager_Load(object sender, EventArgs e)
         {
-
         }
+
+
+
 
         private void cb_Category(object sender, EventArgs e)
         {

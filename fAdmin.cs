@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using QuanlyquanCoffe.DAO;
 using System.Collections;
+using QuanlyquanCoffe.DTO;
 
 namespace QuanlyquanCoffe
 {
@@ -21,6 +22,9 @@ namespace QuanlyquanCoffe
             LoadDateTimePickerBill();
             LoadAccoutList();
             LoadListBillByDate(dtpkfromDate.Value, dtpktoDate.Value);
+            LoadListFood();
+            AddFoodBinding();
+            LoadCategoryIntoComboBox(cbFoodCategory);
         }
         #region methods
        /* void LoadFoodList()
@@ -49,6 +53,16 @@ namespace QuanlyquanCoffe
             DateTime today=DateTime.Now;
             dtpkfromDate.Value = new DateTime(today.Year, today.Month, 1);
             dtpktoDate.Value=dtpkfromDate.Value.AddMonths(1).AddDays(-1);
+        }
+        void AddFoodBinding() {
+            txbFoodName.DataBindings.Add(new Binding("Text", dtgvFood.DataSource, "Name"));
+            txbFoodID.DataBindings.Add(new Binding("Text",dtgvFood.DataSource,"id"));
+            nmFoodPrice.DataBindings.Add(new Binding("Value", dtgvFood.DataSource, "price"));
+        }
+        void LoadCategoryIntoComboBox(ComboBox cb)
+        {
+            cb.DataSource = CategoryDAO.Instance.GetListCategory();
+            cb.DisplayMember = "Name";
         }
         void LoadListFood()
         {
@@ -122,6 +136,29 @@ namespace QuanlyquanCoffe
         private void dtgvFood_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void txbFoodID_TextChanged(object sender, EventArgs e)
+        {
+            if (dtgvFood.SelectedCells.Count > 0)
+            {
+                int id = (int)dtgvFood.SelectedCells[0].OwningRow.Cells["CategoryID"].Value;
+             
+                    Category category = CategoryDAO.Instance.GetCategoryByID(id);
+                    cbFoodCategory.SelectedItem = category;
+                int index = -1;
+                int i = 0;
+                foreach(Category item  in cbFoodCategory.Items)
+                {
+                    if (item.ID == category.ID)
+                    {
+                        index = i;
+                        break;
+                    }
+                    i++;
+                }
+                cbFoodCategory.SelectedIndex = index;
+            }
         }
     }
 }

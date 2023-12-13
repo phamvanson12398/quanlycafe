@@ -1,5 +1,6 @@
 ﻿using QuanlyquanCoffe.DTO;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -27,6 +28,18 @@ namespace QuanlyquanCoffe.DAO
                 list.Add(category);
             }
             return list;
+        }
+        public Category GetCategoryByID(int id)
+        {
+            Category category = new Category();
+            string query = "select * from FoodCategory where id="+id;
+            DataTable data = Dataprovider.Instance.ExcuteQuery(query);
+            foreach (DataRow item in data.Rows)
+            {
+                category = new Category(item);
+                return category;
+            }
+            return category;
         }
     }
 }

@@ -9,6 +9,7 @@ namespace QuanlyquanCoffe.DTO
 {
     public class Category
     {
+        public Category() { }
         public Category(int id,string name)
         {
             this.ID = id;
