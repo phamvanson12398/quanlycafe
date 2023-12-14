@@ -39,5 +39,19 @@ namespace QuanlyquanCoffe.DAO
             }
             return list;
         }
+        public bool InsertFood(string name, int id, float price)
+        {
+            string query = string.Format("INSERT dbo.Food ( name, idCategory, price ) VALUES  ( N'{0}', {1}, {2})", name, id, price);
+            int result = Dataprovider.Instance.ExcuteNonQuery(query);
+
+            return result > 0;
+        }
+        public bool UpdateFood(int idFood,string name, int id, float price)
+        {
+            string query = string.Format("update dbo.Food  set name=N'{0}',idCategory={1},price={2} where id={3}", name, id, price,idFood);
+            int result = Dataprovider.Instance.ExcuteNonQuery(query);
+
+            return result > 0;
+        }
     }
 }

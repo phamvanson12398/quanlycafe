@@ -21,7 +21,7 @@ namespace QuanlyquanCoffe.DAO
         }
 
         private Dataprovider() { }
-        private string StrConnection = "Data Source=DESKTOP-6P3EB2J;Initial Catalog=QuanLyQuanCafe;Integrated Security=True;Encrypt=False";
+        private string StrConnection = "Data Source=DESKTOP-6P3EB2J;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
         public DataTable ExcuteQuery(string query, object[] parameter=null) {
             DataTable data = new DataTable();
 
