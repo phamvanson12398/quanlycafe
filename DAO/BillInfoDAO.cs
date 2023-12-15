@@ -16,6 +16,10 @@ namespace QuanlyquanCoffe.DAO
           private  set { instance = value; }
         }
         private BillInfoDAO() { }
+        public void DeleteBillInfoByFoodID(int id)
+        {
+            Dataprovider.Instance.ExcuteQuery("delete BillInfo where idBill="+id);
+        }
         public List<BillInfo> GetListBillInfos(int id) {
         List<BillInfo> listbillInfos = new List<BillInfo>();
             DataTable data = Dataprovider.Instance.ExcuteQuery("select * from BillInfo where idBill = "+id);

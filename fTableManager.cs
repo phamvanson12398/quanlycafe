@@ -103,6 +103,15 @@ namespace QuanlyquanCoffe
         #endregion
 
         #region Events
+        private void thêmMónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnAddFood_Click(this, new EventArgs());
+        }
+
+        private void thanhToánToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnCheck_Click(this, new EventArgs());
+        }
         void btn_Click(object sender, EventArgs e)
         {
             int TableId = ((sender as Button).Tag as Table).ID;
@@ -129,8 +138,34 @@ namespace QuanlyquanCoffe
         private void adminToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fAdmin f = new fAdmin();
+            f.loginAccount = LoginAccount;
+            f.InsertFood+=F_InsertFood;
+            f.DeleteFood += F_DeleteFood;
+            f.UpdateFood += F_UpdateFood;
             f.ShowDialog();
         }
+
+        private void F_UpdateFood(object sender, EventArgs e)
+        {
+            LoadFoodListCategoryID((cbCategory.SelectedItem as Category).ID);
+            if(lsvBill.Tag != null)
+            ShowBill((lsvBill.Tag as Table).ID);
+        }
+
+        private void F_DeleteFood(object sender, EventArgs e)
+        {
+            LoadFoodListCategoryID((cbCategory.SelectedItem as Category).ID);
+            ShowBill((lsvBill.Tag as Table).ID);
+            LoadTable();
+        }
+
+        private void F_InsertFood(object sender, EventArgs e)
+        {
+            LoadFoodListCategoryID((cbCategory.SelectedItem as Category).ID);
+            if(lsvBill.Tag != null)
+            ShowBill((lsvBill.Tag as Table).ID);
+        }
+
         private void flpTable_Paint(object sender, PaintEventArgs e)
         {
         }
@@ -159,6 +194,7 @@ namespace QuanlyquanCoffe
             if (table == null)
             {
                 MessageBox.Show("Vui lòng chọn một bàn !!!", "Thông báo", MessageBoxButtons.OK);
+                return;
             }
             else { 
                 int idBill = BillDAO.Instance.getUnCheckBillIDbyTableID(table.ID);
@@ -226,5 +262,7 @@ namespace QuanlyquanCoffe
         {
 
         }
+
+
     }
 }
