@@ -34,5 +34,9 @@ namespace QuanlyquanCoffe.DAO
             }
             return tablelist;
         }
+        public DataTable GetListTable ()
+        {
+            return Dataprovider.Instance.ExcuteQuery("select id as N'Mã số',name as N'Tên bàn',status as N'Trạng thái' from TableFood");
+        }
     }
 }

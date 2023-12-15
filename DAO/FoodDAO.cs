@@ -30,7 +30,23 @@ namespace QuanlyquanCoffe.DAO
         public List<Food> GetListFood()
         {
             List<Food> list = new List<Food>();
+
             string query = "select * from Food";
+
+            DataTable data = Dataprovider.Instance.ExcuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                Food food = new Food(item);
+                list.Add(food);
+            }
+
+            return list;
+        }
+
+        public List<Food> SearchFoodbyName(string name) {
+            List<Food> list = new List<Food>();
+            string query =string.Format("SELECT * FROM dbo.Food WHERE dbo.fuConvertToUnsign1(name) LIKE N'%' + dbo.fuConvertToUnsign1(N'{0}') + '%'", name);
             DataTable data = Dataprovider.Instance.ExcuteQuery(query);
             foreach (DataRow item in data.Rows)
             {
@@ -49,6 +65,14 @@ namespace QuanlyquanCoffe.DAO
         public bool UpdateFood(int idFood,string name, int id, float price)
         {
             string query = string.Format("update dbo.Food  set name=N'{0}',idCategory={1},price={2} where id={3}", name, id, price,idFood);
+            int result = Dataprovider.Instance.ExcuteNonQuery(query);
+
+            return result > 0;
+        }
+        public bool DeleteFood(int idFood)
+        {
+            BillInfoDAO.Instance.DeleteBillInfoByFoodID(idFood);
+            string query = "Delete Food where id="+idFood;
             int result = Dataprovider.Instance.ExcuteNonQuery(query);
 
             return result > 0;

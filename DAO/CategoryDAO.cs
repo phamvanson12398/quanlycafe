@@ -29,6 +29,10 @@ namespace QuanlyquanCoffe.DAO
             }
             return list;
         }
+        public DataTable GetListCategoryFood()
+        {
+            return Dataprovider.Instance.ExcuteQuery("select id as N'Mã số',name as N'Tên danh mục' from FoodCategory");
+        }
         public Category GetCategoryByID(int id)
         {
             Category category = new Category();
