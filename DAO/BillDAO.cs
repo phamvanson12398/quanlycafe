@@ -40,6 +40,14 @@ namespace QuanlyquanCoffe.DAO
         {
             return Dataprovider.Instance.ExcuteQuery("exec USP_GetListBillByDate @checkin , @checkout",new object[] { checkin, checkout });
         }
+        public DataTable GetBillListByDateAndPage(DateTime checkin, DateTime checkout,int pageNumber)
+        {
+            return Dataprovider.Instance.ExcuteQuery("exec USP_GetListBillByDateAndPage @checkin , @checkout , @page", new object[] { checkin, checkout,pageNumber });
+        }
+        public int GetNumBillListByDate(DateTime checkin, DateTime checkout)
+        {
+            return (int)Dataprovider.Instance.ExcuteScalar("exec USP_GetNumBillByDate @checkin , @checkout", new object[] { checkin, checkout });
+        }
         public int GetMaxIDBill()
         {
             try

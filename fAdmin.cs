@@ -14,6 +14,8 @@ using QuanlyquanCoffe.DTO;
 using System.Diagnostics;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Globalization;
+using System.Threading;
 
 namespace QuanlyquanCoffe
 {
@@ -56,6 +58,8 @@ namespace QuanlyquanCoffe
             AddCategoryBinding();
             AddTableBinding();
             LoadCategoryFoodList();
+            txbPageBill_TextChanged(this, new EventArgs());
+            ShowTotalBill();
 
         }
         //Table
@@ -102,6 +106,7 @@ namespace QuanlyquanCoffe
         {
             
            dtgvBill.DataSource= BillDAO.Instance.GetBillListByDate(checkin, checkout);
+            
 
         }
         void LoadDateTimePickerBill()
@@ -400,8 +405,99 @@ namespace QuanlyquanCoffe
         }
 
 
+
+
         #endregion
 
-      
+        private void btnFirstBillPage_Click(object sender, EventArgs e)
+        {
+            txbPageBill.Text = "1";
+        }
+
+        private void btnLastBillPage_Click(object sender, EventArgs e)
+        {
+            int sumRecord = BillDAO.Instance.GetNumBillListByDate(dtpkfromDate.Value,dtpktoDate.Value);
+            int LastPage = sumRecord / 10;
+            if (sumRecord % 10 != 0)
+            {
+                LastPage++;
+            }
+            txbPageBill.Text=LastPage.ToString();
+        }
+
+        private void txbPageBill_TextChanged(object sender, EventArgs e)
+        {
+            dtgvBill.DataSource = BillDAO.Instance.GetBillListByDateAndPage(dtpkfromDate.Value, dtpktoDate.Value,Convert.ToInt32(txbPageBill.Text));
+        }
+        
+        private void btnPreviousBillPage_Click(object sender, EventArgs e)
+        {
+            int page =Convert.ToInt32(txbPageBill.Text);
+            if (page > 1)
+            {
+                page--;
+            }
+            txbPageBill.Text=page.ToString();
+        }
+
+        private void btnNextBillPage_Click(object sender, EventArgs e)
+        {
+            int page = Convert.ToInt32(txbPageBill.Text);
+            int sumRecord = BillDAO.Instance.GetNumBillListByDate(dtpkfromDate.Value, dtpktoDate.Value);
+            if (sumRecord % 10 == 0) { 
+                if (page < sumRecord/10)
+                {
+                    page++;
+                }
+            }
+            else
+            {
+                if (page < ((sumRecord / 10)+1))
+                {
+                    page++;
+                }
+            }
+            txbPageBill.Text = page.ToString();
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void ShowTotalBill()
+        {
+
+            string connectionString = "Data Source=DESKTOP-6P3EB2J;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
+            
+
+            
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                
+                string sql = "SELECT SUM(b.totalPrice) FROM Bill AS b WHERE b.status = 1";
+
+                
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                  
+
+                    
+                    object result = command.ExecuteScalar();
+
+                    
+                    if (result != DBNull.Value && result != null)
+                    {
+                        double sum = Convert.ToDouble(result);
+                      
+                        CultureInfo culture = new CultureInfo("vi-VN");
+                        Thread.CurrentThread.CurrentCulture = culture;
+                        txbTotalBillAll.Text = sum.ToString("c",culture);
+                    }
+
+                }
+            }
+        }
     }
 }

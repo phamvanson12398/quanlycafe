@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fAccoutProfile));
             this.panel2 = new System.Windows.Forms.Panel();
             this.txbUserName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -187,7 +188,7 @@
             // 
             // btUpdate
             // 
-            this.btUpdate.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btUpdate.BackColor = System.Drawing.Color.SandyBrown;
             this.btUpdate.Location = new System.Drawing.Point(260, 376);
             this.btUpdate.Name = "btUpdate";
             this.btUpdate.Size = new System.Drawing.Size(90, 40);
@@ -198,7 +199,7 @@
             // 
             // btExit
             // 
-            this.btExit.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btExit.BackColor = System.Drawing.Color.SandyBrown;
             this.btExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btExit.Location = new System.Drawing.Point(356, 376);
             this.btExit.Name = "btExit";
@@ -213,6 +214,7 @@
             this.AcceptButton = this.btUpdate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Linen;
             this.CancelButton = this.btExit;
             this.ClientSize = new System.Drawing.Size(467, 428);
             this.Controls.Add(this.btExit);
@@ -222,6 +224,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fAccoutProfile";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thông tin cá nhân";
