@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fAdmin));
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dtgvAccount = new System.Windows.Forms.DataGridView();
             this.panel25 = new System.Windows.Forms.Panel();
@@ -80,10 +81,19 @@
             this.panel18 = new System.Windows.Forms.Panel();
             this.dtgvCategoryFood = new System.Windows.Forms.DataGridView();
             this.tpFood = new System.Windows.Forms.TabPage();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txbSearchFoodName = new System.Windows.Forms.TextBox();
             this.btn_searchfood = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.button3 = new System.Windows.Forms.Button();
             this.btnDeleteFood = new System.Windows.Forms.Button();
             this.btnEditFood = new System.Windows.Forms.Button();
@@ -109,8 +119,17 @@
             this.dtpktoDate = new System.Windows.Forms.DateTimePicker();
             this.dtpkfromDate = new System.Windows.Forms.DateTimePicker();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txbTotalBillAll = new System.Windows.Forms.TextBox();
+            this.txbPageBill = new System.Windows.Forms.TextBox();
+            this.btnNextBillPage = new System.Windows.Forms.Button();
+            this.btnPreviousBillPage = new System.Windows.Forms.Button();
+            this.btnLastBillPage = new System.Windows.Forms.Button();
+            this.btnFirstBillPage = new System.Windows.Forms.Button();
             this.dtgvBill = new System.Windows.Forms.DataGridView();
             this.tcAdmin = new System.Windows.Forms.TabControl();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).BeginInit();
             this.panel25.SuspendLayout();
@@ -135,8 +154,17 @@
             this.panel18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvCategoryFood)).BeginInit();
             this.tpFood.SuspendLayout();
+            this.panel15.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel4.SuspendLayout();
             this.panel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmFoodPrice)).BeginInit();
@@ -150,10 +178,13 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvBill)).BeginInit();
             this.tcAdmin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.Color.Linen;
             this.tabPage2.Controls.Add(this.dtgvAccount);
             this.tabPage2.Controls.Add(this.panel25);
             this.tabPage2.Controls.Add(this.panel19);
@@ -163,7 +194,6 @@
             this.tabPage2.Size = new System.Drawing.Size(898, 559);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "Tài khoản";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // dtgvAccount
             // 
@@ -265,14 +295,14 @@
             // 
             // nmAccountType
             // 
-            this.nmAccountType.Location = new System.Drawing.Point(159, 12);
+            this.nmAccountType.Location = new System.Drawing.Point(171, 12);
             this.nmAccountType.Maximum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.nmAccountType.Name = "nmAccountType";
-            this.nmAccountType.Size = new System.Drawing.Size(45, 22);
+            this.nmAccountType.Size = new System.Drawing.Size(65, 22);
             this.nmAccountType.TabIndex = 1;
             // 
             // label6
@@ -296,9 +326,9 @@
             // 
             // txbDisplayName
             // 
-            this.txbDisplayName.Location = new System.Drawing.Point(158, 12);
+            this.txbDisplayName.Location = new System.Drawing.Point(171, 12);
             this.txbDisplayName.Name = "txbDisplayName";
-            this.txbDisplayName.Size = new System.Drawing.Size(221, 22);
+            this.txbDisplayName.Size = new System.Drawing.Size(208, 22);
             this.txbDisplayName.TabIndex = 1;
             // 
             // label9
@@ -322,9 +352,9 @@
             // 
             // txbUserName
             // 
-            this.txbUserName.Location = new System.Drawing.Point(158, 12);
+            this.txbUserName.Location = new System.Drawing.Point(171, 12);
             this.txbUserName.Name = "txbUserName";
-            this.txbUserName.Size = new System.Drawing.Size(221, 22);
+            this.txbUserName.Size = new System.Drawing.Size(208, 22);
             this.txbUserName.TabIndex = 1;
             // 
             // label10
@@ -339,6 +369,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.Color.Linen;
             this.tabPage1.Controls.Add(this.panel24);
             this.tabPage1.Controls.Add(this.panel14);
             this.tabPage1.Controls.Add(this.panel11);
@@ -348,7 +379,6 @@
             this.tabPage1.Size = new System.Drawing.Size(898, 559);
             this.tabPage1.TabIndex = 5;
             this.tabPage1.Text = "Bàn ăn";
-            this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click_1);
             // 
             // panel24
@@ -515,6 +545,7 @@
             // 
             // tpFoodCategory
             // 
+            this.tpFoodCategory.BackColor = System.Drawing.Color.Linen;
             this.tpFoodCategory.Controls.Add(this.panel12);
             this.tpFoodCategory.Controls.Add(this.panel13);
             this.tpFoodCategory.Controls.Add(this.panel18);
@@ -524,7 +555,6 @@
             this.tpFoodCategory.Size = new System.Drawing.Size(898, 559);
             this.tpFoodCategory.TabIndex = 2;
             this.tpFoodCategory.Text = "Danh mục";
-            this.tpFoodCategory.UseVisualStyleBackColor = true;
             // 
             // panel12
             // 
@@ -581,6 +611,7 @@
             // 
             // panel13
             // 
+            this.panel13.Controls.Add(this.pictureBox10);
             this.panel13.Controls.Add(this.panel16);
             this.panel13.Controls.Add(this.panel17);
             this.panel13.Location = new System.Drawing.Point(458, 89);
@@ -665,6 +696,8 @@
             // 
             // tpFood
             // 
+            this.tpFood.BackColor = System.Drawing.Color.Linen;
+            this.tpFood.Controls.Add(this.panel15);
             this.tpFood.Controls.Add(this.panel6);
             this.tpFood.Controls.Add(this.panel5);
             this.tpFood.Controls.Add(this.panel4);
@@ -675,10 +708,47 @@
             this.tpFood.Size = new System.Drawing.Size(898, 559);
             this.tpFood.TabIndex = 1;
             this.tpFood.Text = "Thức ăn";
-            this.tpFood.UseVisualStyleBackColor = true;
+            // 
+            // panel15
+            // 
+            this.panel15.Controls.Add(this.pictureBox4);
+            this.panel15.Controls.Add(this.pictureBox3);
+            this.panel15.Controls.Add(this.pictureBox2);
+            this.panel15.Location = new System.Drawing.Point(459, 89);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(431, 123);
+            this.panel15.TabIndex = 4;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(157, -19);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(123, 157);
+            this.pictureBox4.TabIndex = 2;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(307, 16);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(121, 100);
+            this.pictureBox3.TabIndex = 1;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(13, 16);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(105, 122);
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.pictureBox1);
             this.panel6.Controls.Add(this.txbSearchFoodName);
             this.panel6.Controls.Add(this.btn_searchfood);
             this.panel6.Location = new System.Drawing.Point(459, 6);
@@ -686,16 +756,25 @@
             this.panel6.Size = new System.Drawing.Size(434, 74);
             this.panel6.TabIndex = 3;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(36, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(70, 70);
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            // 
             // txbSearchFoodName
             // 
-            this.txbSearchFoodName.Location = new System.Drawing.Point(37, 23);
+            this.txbSearchFoodName.Location = new System.Drawing.Point(146, 26);
             this.txbSearchFoodName.Name = "txbSearchFoodName";
-            this.txbSearchFoodName.Size = new System.Drawing.Size(274, 22);
+            this.txbSearchFoodName.Size = new System.Drawing.Size(183, 22);
             this.txbSearchFoodName.TabIndex = 7;
             // 
             // btn_searchfood
             // 
-            this.btn_searchfood.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btn_searchfood.BackColor = System.Drawing.Color.PeachPuff;
             this.btn_searchfood.Location = new System.Drawing.Point(335, 3);
             this.btn_searchfood.Name = "btn_searchfood";
             this.btn_searchfood.Size = new System.Drawing.Size(96, 68);
@@ -706,6 +785,10 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.pictureBox8);
+            this.panel5.Controls.Add(this.pictureBox7);
+            this.panel5.Controls.Add(this.pictureBox6);
+            this.panel5.Controls.Add(this.pictureBox5);
             this.panel5.Controls.Add(this.button3);
             this.panel5.Controls.Add(this.btnDeleteFood);
             this.panel5.Controls.Add(this.btnEditFood);
@@ -715,47 +798,96 @@
             this.panel5.Size = new System.Drawing.Size(446, 74);
             this.panel5.TabIndex = 2;
             // 
+            // pictureBox8
+            // 
+            this.pictureBox8.BackColor = System.Drawing.Color.PeachPuff;
+            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
+            this.pictureBox8.Location = new System.Drawing.Point(320, 21);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox8.TabIndex = 3;
+            this.pictureBox8.TabStop = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.BackColor = System.Drawing.Color.PeachPuff;
+            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
+            this.pictureBox7.Location = new System.Drawing.Point(3, 21);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(40, 30);
+            this.pictureBox7.TabIndex = 2;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.BackColor = System.Drawing.Color.PeachPuff;
+            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
+            this.pictureBox6.Location = new System.Drawing.Point(220, 21);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox6.TabIndex = 2;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.BackColor = System.Drawing.Color.PeachPuff;
+            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
+            this.pictureBox5.Location = new System.Drawing.Point(117, 21);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox5.TabIndex = 1;
+            this.pictureBox5.TabStop = false;
+            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
+            // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.button3.BackColor = System.Drawing.Color.PeachPuff;
+            this.button3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Location = new System.Drawing.Point(309, 3);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(96, 68);
             this.button3.TabIndex = 5;
             this.button3.Text = "Xem";
+            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // btnDeleteFood
             // 
-            this.btnDeleteFood.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnDeleteFood.BackColor = System.Drawing.Color.PeachPuff;
+            this.btnDeleteFood.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteFood.Location = new System.Drawing.Point(207, 3);
             this.btnDeleteFood.Name = "btnDeleteFood";
             this.btnDeleteFood.Size = new System.Drawing.Size(96, 68);
             this.btnDeleteFood.TabIndex = 4;
             this.btnDeleteFood.Text = "Xóa";
+            this.btnDeleteFood.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDeleteFood.UseVisualStyleBackColor = false;
             this.btnDeleteFood.Click += new System.EventHandler(this.btnDeleteFood_Click);
             // 
             // btnEditFood
             // 
-            this.btnEditFood.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnEditFood.BackColor = System.Drawing.Color.PeachPuff;
+            this.btnEditFood.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditFood.Location = new System.Drawing.Point(105, 3);
             this.btnEditFood.Name = "btnEditFood";
             this.btnEditFood.Size = new System.Drawing.Size(96, 68);
             this.btnEditFood.TabIndex = 3;
             this.btnEditFood.Text = "Sửa";
+            this.btnEditFood.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEditFood.UseVisualStyleBackColor = false;
             this.btnEditFood.Click += new System.EventHandler(this.btnEditFood_Click);
             // 
             // btnAddFood
             // 
-            this.btnAddFood.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnAddFood.Location = new System.Drawing.Point(3, 3);
+            this.btnAddFood.BackColor = System.Drawing.Color.PeachPuff;
+            this.btnAddFood.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddFood.Location = new System.Drawing.Point(-4, 3);
             this.btnAddFood.Name = "btnAddFood";
-            this.btnAddFood.Size = new System.Drawing.Size(96, 68);
+            this.btnAddFood.Size = new System.Drawing.Size(103, 68);
             this.btnAddFood.TabIndex = 2;
             this.btnAddFood.Text = "Thêm";
+            this.btnAddFood.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddFood.UseVisualStyleBackColor = false;
             this.btnAddFood.Click += new System.EventHandler(this.btnAddFood1);
             // 
@@ -765,9 +897,9 @@
             this.panel4.Controls.Add(this.panel9);
             this.panel4.Controls.Add(this.panel8);
             this.panel4.Controls.Add(this.panel7);
-            this.panel4.Location = new System.Drawing.Point(459, 89);
+            this.panel4.Location = new System.Drawing.Point(459, 218);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(434, 464);
+            this.panel4.Size = new System.Drawing.Size(434, 335);
             this.panel4.TabIndex = 1;
             // 
             // panel10
@@ -893,6 +1025,8 @@
             // dtgvFood
             // 
             this.dtgvFood.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dtgvFood.BackgroundColor = System.Drawing.Color.Linen;
+            this.dtgvFood.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dtgvFood.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvFood.Location = new System.Drawing.Point(3, 3);
             this.dtgvFood.Name = "dtgvFood";
@@ -904,6 +1038,7 @@
             // 
             // tcBill
             // 
+            this.tcBill.BackColor = System.Drawing.Color.Linen;
             this.tcBill.Controls.Add(this.panel2);
             this.tcBill.Controls.Add(this.panel1);
             this.tcBill.Location = new System.Drawing.Point(4, 25);
@@ -912,10 +1047,10 @@
             this.tcBill.Size = new System.Drawing.Size(898, 559);
             this.tcBill.TabIndex = 0;
             this.tcBill.Text = "Doanh thu";
-            this.tcBill.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.Linen;
             this.panel2.Controls.Add(this.btnViewBill);
             this.panel2.Controls.Add(this.dtpktoDate);
             this.panel2.Controls.Add(this.dtpkfromDate);
@@ -926,13 +1061,14 @@
             // 
             // btnViewBill
             // 
+            this.btnViewBill.BackColor = System.Drawing.Color.PeachPuff;
             this.btnViewBill.ForeColor = System.Drawing.SystemColors.Desktop;
             this.btnViewBill.Location = new System.Drawing.Point(390, 0);
             this.btnViewBill.Name = "btnViewBill";
             this.btnViewBill.Size = new System.Drawing.Size(85, 39);
             this.btnViewBill.TabIndex = 2;
             this.btnViewBill.Text = "Thống kê";
-            this.btnViewBill.UseVisualStyleBackColor = true;
+            this.btnViewBill.UseVisualStyleBackColor = false;
             this.btnViewBill.Click += new System.EventHandler(this.btnViewBill_Click);
             // 
             // dtpktoDate
@@ -952,21 +1088,107 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.pictureBox9);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.txbTotalBillAll);
+            this.panel1.Controls.Add(this.txbPageBill);
+            this.panel1.Controls.Add(this.btnNextBillPage);
+            this.panel1.Controls.Add(this.btnPreviousBillPage);
+            this.panel1.Controls.Add(this.btnLastBillPage);
+            this.panel1.Controls.Add(this.btnFirstBillPage);
             this.panel1.Controls.Add(this.dtgvBill);
             this.panel1.Location = new System.Drawing.Point(6, 42);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(887, 511);
             this.panel1.TabIndex = 0;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(528, 425);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(141, 32);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Doanh số:";
+            // 
+            // txbTotalBillAll
+            // 
+            this.txbTotalBillAll.BackColor = System.Drawing.Color.Bisque;
+            this.txbTotalBillAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbTotalBillAll.Location = new System.Drawing.Point(675, 425);
+            this.txbTotalBillAll.Multiline = true;
+            this.txbTotalBillAll.Name = "txbTotalBillAll";
+            this.txbTotalBillAll.Size = new System.Drawing.Size(178, 38);
+            this.txbTotalBillAll.TabIndex = 6;
+            // 
+            // txbPageBill
+            // 
+            this.txbPageBill.BackColor = System.Drawing.Color.PeachPuff;
+            this.txbPageBill.Location = new System.Drawing.Point(399, 477);
+            this.txbPageBill.Name = "txbPageBill";
+            this.txbPageBill.ReadOnly = true;
+            this.txbPageBill.Size = new System.Drawing.Size(97, 22);
+            this.txbPageBill.TabIndex = 5;
+            this.txbPageBill.Text = "1";
+            this.txbPageBill.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txbPageBill.TextChanged += new System.EventHandler(this.txbPageBill_TextChanged);
+            // 
+            // btnNextBillPage
+            // 
+            this.btnNextBillPage.BackColor = System.Drawing.Color.PeachPuff;
+            this.btnNextBillPage.Location = new System.Drawing.Point(675, 469);
+            this.btnNextBillPage.Name = "btnNextBillPage";
+            this.btnNextBillPage.Size = new System.Drawing.Size(95, 39);
+            this.btnNextBillPage.TabIndex = 4;
+            this.btnNextBillPage.Text = "Next";
+            this.btnNextBillPage.UseVisualStyleBackColor = false;
+            this.btnNextBillPage.Click += new System.EventHandler(this.btnNextBillPage_Click);
+            // 
+            // btnPreviousBillPage
+            // 
+            this.btnPreviousBillPage.BackColor = System.Drawing.Color.PeachPuff;
+            this.btnPreviousBillPage.Location = new System.Drawing.Point(110, 469);
+            this.btnPreviousBillPage.Name = "btnPreviousBillPage";
+            this.btnPreviousBillPage.Size = new System.Drawing.Size(95, 39);
+            this.btnPreviousBillPage.TabIndex = 3;
+            this.btnPreviousBillPage.Text = "Previous";
+            this.btnPreviousBillPage.UseVisualStyleBackColor = false;
+            this.btnPreviousBillPage.Click += new System.EventHandler(this.btnPreviousBillPage_Click);
+            // 
+            // btnLastBillPage
+            // 
+            this.btnLastBillPage.BackColor = System.Drawing.Color.PeachPuff;
+            this.btnLastBillPage.Location = new System.Drawing.Point(786, 469);
+            this.btnLastBillPage.Name = "btnLastBillPage";
+            this.btnLastBillPage.Size = new System.Drawing.Size(95, 39);
+            this.btnLastBillPage.TabIndex = 2;
+            this.btnLastBillPage.Text = "Last";
+            this.btnLastBillPage.UseVisualStyleBackColor = false;
+            this.btnLastBillPage.Click += new System.EventHandler(this.btnLastBillPage_Click);
+            // 
+            // btnFirstBillPage
+            // 
+            this.btnFirstBillPage.BackColor = System.Drawing.Color.PeachPuff;
+            this.btnFirstBillPage.Location = new System.Drawing.Point(0, 469);
+            this.btnFirstBillPage.Name = "btnFirstBillPage";
+            this.btnFirstBillPage.Size = new System.Drawing.Size(95, 39);
+            this.btnFirstBillPage.TabIndex = 1;
+            this.btnFirstBillPage.Text = "First";
+            this.btnFirstBillPage.UseVisualStyleBackColor = false;
+            this.btnFirstBillPage.Click += new System.EventHandler(this.btnFirstBillPage_Click);
+            // 
             // dtgvBill
             // 
             this.dtgvBill.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dtgvBill.BackgroundColor = System.Drawing.Color.Linen;
+            this.dtgvBill.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dtgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvBill.Location = new System.Drawing.Point(0, 0);
             this.dtgvBill.Name = "dtgvBill";
             this.dtgvBill.RowHeadersWidth = 51;
             this.dtgvBill.RowTemplate.Height = 24;
-            this.dtgvBill.Size = new System.Drawing.Size(881, 508);
+            this.dtgvBill.Size = new System.Drawing.Size(881, 410);
             this.dtgvBill.TabIndex = 0;
             this.dtgvBill.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvBill_CellContentClick);
             // 
@@ -984,12 +1206,32 @@
             this.tcAdmin.TabIndex = 0;
             this.tcAdmin.SelectedIndexChanged += new System.EventHandler(this.tcAdmin_SelectedIndexChanged);
             // 
+            // pictureBox10
+            // 
+            this.pictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox10.Image")));
+            this.pictureBox10.Location = new System.Drawing.Point(10, 156);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(145, 145);
+            this.pictureBox10.TabIndex = 4;
+            this.pictureBox10.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
+            this.pictureBox9.Location = new System.Drawing.Point(0, 371);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(193, 92);
+            this.pictureBox9.TabIndex = 8;
+            this.pictureBox9.TabStop = false;
+            // 
             // fAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Linen;
             this.ClientSize = new System.Drawing.Size(951, 629);
             this.Controls.Add(this.tcAdmin);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Admin";
@@ -1025,9 +1267,18 @@
             this.panel18.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvCategoryFood)).EndInit();
             this.tpFood.ResumeLayout(false);
+            this.panel15.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
@@ -1043,8 +1294,11 @@
             this.tcBill.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvBill)).EndInit();
             this.tcAdmin.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1134,5 +1388,23 @@
         private System.Windows.Forms.ComboBox cbFoodCategory;
         private System.Windows.Forms.TextBox txbStatusTable;
         private System.Windows.Forms.NumericUpDown nmAccountType;
+        private System.Windows.Forms.Button btnNextBillPage;
+        private System.Windows.Forms.Button btnPreviousBillPage;
+        private System.Windows.Forms.Button btnLastBillPage;
+        private System.Windows.Forms.Button btnFirstBillPage;
+        private System.Windows.Forms.TextBox txbPageBill;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel15;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.TextBox txbTotalBillAll;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.PictureBox pictureBox9;
     }
 }

@@ -66,10 +66,10 @@ namespace QuanlyquanCoffe
                 switch (item.Status)
                 {
                     case "Trống":
-                        btn.BackColor = Color.Aqua;
+                        btn.BackColor = Color.PeachPuff;
                         break;
                     default:
-                        btn.BackColor = Color.LightPink;
+                        btn.BackColor = Color.SandyBrown;
                         break;
                 }
                 flpTable.Controls.Add(btn);
@@ -263,6 +263,9 @@ namespace QuanlyquanCoffe
 
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
