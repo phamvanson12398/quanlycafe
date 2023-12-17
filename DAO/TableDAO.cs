@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Xml.Linq;
 
 namespace QuanlyquanCoffe.DAO
 {
@@ -37,6 +39,26 @@ namespace QuanlyquanCoffe.DAO
         public DataTable GetListTable ()
         {
             return Dataprovider.Instance.ExcuteQuery("select id as N'Mã số',name as N'Tên bàn',status as N'Trạng thái' from TableFood");
+        }
+        public bool InsertTable(string name)
+        {
+            string query = string.Format("INSERT TableFood(name) VALUES  ( N'{0}')", name);
+            int result = Dataprovider.Instance.ExcuteNonQuery(query);
+
+            return result > 0;
+        }
+        public bool UpdateTable(string name, int id,string status)
+        {
+            string query = string.Format("update TableFood  set name=N'{0}',status=N'{1}' where id={2}", name,status, id);
+            int result = Dataprovider.Instance.ExcuteNonQuery(query);
+
+            return result > 0;
+        }
+        public bool DeleteTable(int id,string status)
+        {
+            string query = string.Format("Delete from TableFood where id={0} and status=N'{1}'", id,status);
+            int result = Dataprovider.Instance.ExcuteNonQuery(query);
+            return result > 0;
         }
     }
 }

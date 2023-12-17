@@ -77,5 +77,10 @@ namespace QuanlyquanCoffe.DAO
 
             return result > 0;
         }
+        public void DeleteFoodByIDCategory(int id)
+        {
+            Dataprovider.Instance.ExcuteQuery(string.Format("delete from BillInfo where idFood=(select id from Food where idCategory={0})",id));
+            Dataprovider.Instance.ExcuteQuery("Delete from Food where idCategory="+id);
+        }
     }
 }
