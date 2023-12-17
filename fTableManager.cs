@@ -68,6 +68,9 @@ namespace QuanlyquanCoffe
                     case "Trống":
                         btn.BackColor = Color.PeachPuff;
                         break;
+                  /*  case "Đặt trước":
+                        btn.BackColor= Color.Brown;
+                        break;*/
                     default:
                         btn.BackColor = Color.SandyBrown;
                         break;
@@ -142,7 +145,57 @@ namespace QuanlyquanCoffe
             f.InsertFood+=F_InsertFood;
             f.DeleteFood += F_DeleteFood;
             f.UpdateFood += F_UpdateFood;
+            f.InsertCategory += F_InsertCategory;
+            f.UpdateCategory += F_UpdateCategory;
+            f.DeleteCategory += F_DeleteCategory;
+            f.UpdateTable += F_UpdateTable;
+            f.InsertTable += F_InsertTable;
+            f.DeleteTable += F_DeleteTable;
+
             f.ShowDialog();
+        }
+
+        private void F_DeleteCategory(object sender, EventArgs e)
+        {
+            LoadCategory();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+            LoadTable();
+        }
+
+        private void F_DeleteTable(object sender, EventArgs e)
+        {
+            LoadTable();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
+
+        private void F_InsertTable(object sender, EventArgs e)
+        {
+            LoadTable();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
+
+        private void F_UpdateTable(object sender, EventArgs e)
+        {
+            LoadTable();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
+
+        private void F_UpdateCategory(object sender, EventArgs e)
+        {
+            LoadCategory();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
+
+        private void F_InsertCategory(object sender, EventArgs e)
+        {
+            LoadCategory();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
         }
 
         private void F_UpdateFood(object sender, EventArgs e)
@@ -155,7 +208,10 @@ namespace QuanlyquanCoffe
         private void F_DeleteFood(object sender, EventArgs e)
         {
             LoadFoodListCategoryID((cbCategory.SelectedItem as Category).ID);
-            ShowBill((lsvBill.Tag as Table).ID);
+            if (lsvBill.Tag != null)
+            {
+                ShowBill((lsvBill.Tag as Table).ID);
+            }
             LoadTable();
         }
 
