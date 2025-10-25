@@ -27,6 +27,7 @@ namespace QuanlyquanCoffe.DAO
             }
             return -1;
         }
+<<<<<<< HEAD
         public void DeleteBill(int idBill)
         {
             string query = "DELETE FROM Bill WHERE id = @idBill";
@@ -35,6 +36,10 @@ namespace QuanlyquanCoffe.DAO
 
         public void CheckOut(int id, int discount, float totalprice)
         {
+=======
+        public void CheckOut(int id, int discount, float totalprice)
+        {
+>>>>>>> 295c355 (update: add fuction export file report)
             string query = "update Bill set dateCheckOut=GETDATE(),status=1" + ",discount=" + discount + ",totalPrice=" + totalprice + " where id =" + id;
             Dataprovider.Instance.ExcuteNonQuery(query);
         }

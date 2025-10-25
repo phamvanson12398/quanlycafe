@@ -17,7 +17,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+<<<<<<< HEAD
 using OfficeOpenXml; // Thư viện EPPlus   
+=======
+using OfficeOpenXml; // Thư viện EPPlus
+using System.IO;    // Để làm việc với FileInfo
+>>>>>>> 295c355 (update: add fuction export file report)
 using OfficeOpenXml.Style; // <-- THÊM CÁI NÀY
 using System.Drawing;
 
@@ -603,6 +608,7 @@ namespace QuanlyquanCoffe
         private void ShowTotalBill()
         {
 
+<<<<<<< HEAD
             string connectionString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
 <<<<<<< HEAD
 
@@ -611,6 +617,12 @@ namespace QuanlyquanCoffe
             
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
 
+=======
+            string connectionString = "Data Source=DESKTOP-2PIF1AG\\SQLEXPRESS01;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
+
+
+
+>>>>>>> 295c355 (update: add fuction export file report)
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -854,6 +866,9 @@ namespace QuanlyquanCoffe
 
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 295c355 (update: add fuction export file report)
 
         private void btnExportExcel_Click_1(object sender, EventArgs e)
         {
@@ -963,7 +978,10 @@ namespace QuanlyquanCoffe
                  MessageBox.Show("Ngày kết thúc không thể nhỏ hơn ngày bắt đầu. Đã tự động điều chỉnh.", "Thông báo");
             }
         }
+<<<<<<< HEAD
 =======
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+>>>>>>> 295c355 (update: add fuction export file report)
     }
 }

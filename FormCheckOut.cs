@@ -81,10 +81,14 @@ namespace QuanlyquanCoffe
             {
                 BillDAO.Instance.CheckOut(current_id_bill, (int)discount, (float)bill_total);
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if (MessageBox.Show("Thanh toán thành công")== System.Windows.Forms.DialogResult.OK) {
 =======
                 if(MessageBox.Show("Thanh toán thành công")== System.Windows.Forms.DialogResult.OK) {
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+                if (MessageBox.Show("Thanh toán thành công")== System.Windows.Forms.DialogResult.OK) {
+>>>>>>> 295c355 (update: add fuction export file report)
                     parentForm.ShowBill(table_id);
                     parentForm.LoadTable();
                     this.Close();
