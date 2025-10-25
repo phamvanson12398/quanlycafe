@@ -27,9 +27,9 @@ namespace QuanlyquanCoffe.DAO
             }
             return -1;
         }
-        public void CheckOut(int id,int discount,float totalprice)
+        public void CheckOut(int id, int discount, float totalprice)
         {
-            string query = "update Bill set dateCheckOut=GETDATE(),status=1"+",discount="+discount+",totalPrice="+totalprice+" where id ="+id;
+            string query = "update Bill set dateCheckOut=GETDATE(),status=1" + ",discount=" + discount + ",totalPrice=" + totalprice + " where id =" + id;
             Dataprovider.Instance.ExcuteNonQuery(query);
         }
 

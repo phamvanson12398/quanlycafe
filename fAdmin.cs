@@ -1,21 +1,26 @@
-﻿using System;
+﻿using QuanlyquanCoffe.DAO;
+using QuanlyquanCoffe.DTO;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using QuanlyquanCoffe.DAO;
-using System.Collections;
-using QuanlyquanCoffe.DTO;
-using System.Diagnostics;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using System.Globalization;
-using System.Threading;
+using OfficeOpenXml; // Thư viện EPPlus
+using System.IO;    // Để làm việc với FileInfo
+using OfficeOpenXml.Style; // <-- THÊM CÁI NÀY
+using System.Drawing;
 
 namespace QuanlyquanCoffe
 {
@@ -260,7 +265,16 @@ namespace QuanlyquanCoffe
         }
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
+            // Sự kiện này chạy khi bạn thay đổi "Ngày bắt đầu"
+            if (dtpkfromDate.Value > dtpktoDate.Value)
+            {
+                // Nếu "Ngày bắt đầu" bạn vừa chọn lớn hơn "Ngày kết thúc"
+                // Tự động gán "Ngày kết thúc" = "Ngày bắt đầu"
+                dtpktoDate.Value = dtpkfromDate.Value;
 
+                // (Tùy chọn) Hiển thị thông báo cho người dùng
+                 MessageBox.Show("Ngày bắt đầu không thể lớn hơn ngày kết thúc. Đã tự động điều chỉnh.", "Thông báo");
+            }
         }
 
         private void dtgvBill_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -546,6 +560,10 @@ namespace QuanlyquanCoffe
         private void txbPageBill_TextChanged(object sender, EventArgs e)
         {
             dtgvBill.DataSource = BillDAO.Instance.GetBillListByDateAndPage(dtpkfromDate.Value, dtpktoDate.Value,Convert.ToInt32(txbPageBill.Text));
+            if (dtgvBill.Columns["id"] != null) // Thêm kiểm tra để tránh lỗi
+            {
+                dtgvBill.Columns["id"].Visible = false;
+            }
         }
         
         private void btnPreviousBillPage_Click(object sender, EventArgs e)
@@ -586,10 +604,10 @@ namespace QuanlyquanCoffe
         private void ShowTotalBill()
         {
 
-            string connectionString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
-            
+            string connectionString = "Data Source=DESKTOP-2PIF1AG\\SQLEXPRESS01;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
 
-            
+
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -831,6 +849,115 @@ namespace QuanlyquanCoffe
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnExportExcel_Click_1(object sender, EventArgs e)
+        {
+            // 1. LẤY DỮ LIỆU TỪ DATAGRIDVIEW
+            DataTable dt = (DataTable)dtgvBill.DataSource;
+
+            // 2. YÊU CẦU NGƯỜI DÙNG CHỌN NƠI LƯU FILE
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Excel Files (*.xlsx)|*.xlsx|All Files (*.*)|*.*";
+            // Tự động tạo tên file dựa trên ngày bắt đầu và kết thúc
+            saveDialog.FileName = $"ThongKeDoanhThu_Tu_{dtpkfromDate.Value:dd-MM-yyyy}_Den_{dtpktoDate.Value:dd-MM-yyyy}.xlsx";
+
+            if (saveDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    // 3. SET LICENSE
+                    ExcelPackage.License.SetNonCommercialPersonal("fAdmin");
+
+                    using (var p = new ExcelPackage())
+                    {
+                        // TẠO MỘT SHEET MỚI
+                        var ws = p.Workbook.Worksheets.Add("DoanhThu");
+
+                        // 4. LOAD DỮ LIỆU TỪ DATATABLE VÀO SHEET
+                        ws.Cells["A1"].LoadFromDataTable(dt, true);
+
+                        // =======================================================
+                        // 4.1. LÀM ĐẸP (STYLING) CHO FILE EXCEL
+                        // =======================================================
+
+                        // A. Format cho Header (Dòng 1)
+                        int lastColumn = ws.Dimension.End.Column;
+                        using (var range = ws.Cells[1, 1, 1, lastColumn])
+                        {
+                            range.Style.Font.Bold = true;
+                            range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            range.Style.Fill.BackgroundColor.SetColor(Color.LightGray);
+                            range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        }
+
+                        // B. Format cột "Tổng tiền" (Cột B = 2)
+                        ws.Column(2).Style.Numberformat.Format = "#,##0";
+                        ws.Column(2).Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+
+                        // C. Format cột "Ngày vào" (Cột C = 3)
+                        ws.Column(3).Style.Numberformat.Format = "dd/MM/yyyy HH:mm";
+
+                        // D. Format cột "Ngày ra" (Cột D = 4)
+                        ws.Column(4).Style.Numberformat.Format = "dd/MM/yyyy HH:mm";
+
+
+                        // =======================================================
+                        // 4.2. THÊM TỔNG DOANH SỐ VÀO CUỐI (PHẦN MỚI)
+                        // =======================================================
+
+                        // Lấy dòng cuối cùng mà dữ liệu chiếm + 2 (để cách ra 1 dòng)
+                        int totalRow = ws.Dimension.End.Row + 2;
+
+                        // Ghi chữ "Doanh số:" vào cột A (cột 1)
+                        var labelCell = ws.Cells[totalRow, 1];
+                        labelCell.Value = "Doanh số:";
+                        labelCell.Style.Font.Bold = true;
+                        labelCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right; // Căn phải
+
+                        // Ghi giá trị Doanh số (lấy từ TextBox) vào cột B (cột 2)
+                        var valueCell = ws.Cells[totalRow, 2];
+                        valueCell.Value = txbTotalBillAll.Text; // Lấy text từ ô Doanh số
+                        valueCell.Style.Font.Bold = true;
+                        valueCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right; // Căn phải
+                                                                                              // Đặt định dạng số cho ô này (dù nó là text)
+                        valueCell.Style.Numberformat.Format = "#,##0";
+
+
+                        // E. (Tùy chọn) Tự động dãn cột cho vừa dữ liệu
+                        // Phải đặt ở cuối sau khi đã format và thêm tổng
+                        ws.Cells[ws.Dimension.Address].AutoFitColumns();
+
+                        // Điều chỉnh lại cột A và B một chút cho đẹp hơn
+                        ws.Column(1).Width = ws.Column(1).Width + 5;
+                        ws.Column(2).Width = ws.Column(2).Width + 5;
+
+                        // 5. LƯU FILE
+                        FileInfo file = new FileInfo(saveDialog.FileName);
+                        p.SaveAs(file);
+                    }
+
+                    MessageBox.Show("Xuất file Excel thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Có lỗi khi xuất file Excel: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void dtpktoDate_ValueChanged(object sender, EventArgs e)
+        {
+            // Sự kiện này chạy khi bạn thay đổi "Ngày kết thúc"
+            if (dtpktoDate.Value < dtpkfromDate.Value)
+            {
+                // Nếu "Ngày kết thúc" bạn vừa chọn nhỏ hơn "Ngày bắt đầu"
+                // Tự động gán "Ngày bắt đầu" = "Ngày kết thúc"
+                dtpkfromDate.Value = dtpktoDate.Value;
+
+                // (Tùy chọn) Hiển thị thông báo cho người dùng
+                 MessageBox.Show("Ngày kết thúc không thể nhỏ hơn ngày bắt đầu. Đã tự động điều chỉnh.", "Thông báo");
+            }
         }
     }
 }
