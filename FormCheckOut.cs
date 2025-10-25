@@ -80,7 +80,7 @@ namespace QuanlyquanCoffe
             if (MessageBox.Show(string.Format("Bạn có chắc muốn thanh toán hóa đơn cho {0} không ?", table_name), "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
             {
                 BillDAO.Instance.CheckOut(current_id_bill, (int)discount, (float)bill_total);
-                if(MessageBox.Show("Thanh toán thành công")== System.Windows.Forms.DialogResult.OK) {
+                if (MessageBox.Show("Thanh toán thành công")== System.Windows.Forms.DialogResult.OK) {
                     parentForm.ShowBill(table_id);
                     parentForm.LoadTable();
                     this.Close();
