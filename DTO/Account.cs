@@ -10,7 +10,7 @@ namespace QuanlyquanCoffe.DTO
     public class Account
     {
         public Account(string username,string displayname,int type,string password=null) {
-            this.Username = username;
+             this.Username = username;
             this.Password = password;
             this.Type = type;
             this.DisplayName = displayname;

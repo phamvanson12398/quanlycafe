@@ -16,7 +16,7 @@ namespace QuanlyquanCoffe.DAO
         public static CategoryDAO Instance {
             get { if (instance == null) { instance = new CategoryDAO(); }; return instance; }
             private set { instance = value; }
-        }
+         }
         public List<Category> GetListCategory()
         {
             List<Category> list = new List<Category>();
