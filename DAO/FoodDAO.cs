@@ -43,7 +43,11 @@ namespace QuanlyquanCoffe.DAO
 
             return list;
         }
-
+        public DataTable GetListFood1()
+        {
+            string query = "select id as N'ID' , name as N'Tên' , price as N'Giá' , idCategory as N'Loại' from Food";
+            return Dataprovider.Instance.ExcuteQuery(query);
+        }
         public List<Food> SearchFoodbyName(string name) {
             List<Food> list = new List<Food>();
             string query =string.Format("SELECT * FROM dbo.Food WHERE dbo.fuConvertToUnsign1(name) LIKE N'%' + dbo.fuConvertToUnsign1(N'{0}') + '%'", name);

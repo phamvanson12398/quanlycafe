@@ -79,6 +79,36 @@
     <Compile Include="fLogin.Designer.cs">
       <DependentUpon>fLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="ADD\AddFormFood.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ADD\AddFormFood.Designer.cs">
+      <DependentUpon>AddFormFood.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ADD\AddFormCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ADD\AddFormCategory.Designer.cs">
+      <DependentUpon>AddFormCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ADD\AddFormAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ADD\AddFormAccount.Designer.cs">
+      <DependentUpon>AddFormAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ADD\AddFormTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ADD\AddFormTable.Designer.cs">
+      <DependentUpon>AddFormTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormCheckOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCheckOut.Designer.cs">
+      <DependentUpon>FormCheckOut.cs</DependentUpon>
+    </Compile>
     <Compile Include="fTableManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +117,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ADD\AddFormAccount.resx">
+      <DependentUpon>AddFormAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ADD\AddFormCategory.resx">
+      <DependentUpon>AddFormCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ADD\AddFormFood.resx">
+      <DependentUpon>AddFormFood.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ADD\AddFormTable.resx">
+      <DependentUpon>AddFormTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fAccoutProfile.resx">
       <DependentUpon>fAccoutProfile.cs</DependentUpon>
     </EmbeddedResource>
@@ -95,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fLogin.resx">
       <DependentUpon>fLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCheckOut.resx">
+      <DependentUpon>FormCheckOut.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fTableManager.resx">
       <DependentUpon>fTableManager.cs</DependentUpon>

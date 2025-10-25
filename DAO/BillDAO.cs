@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace QuanlyquanCoffe.DAO
 {
@@ -38,6 +39,10 @@ namespace QuanlyquanCoffe.DAO
         }
         public DataTable GetBillListByDate(DateTime checkin,DateTime checkout)
         {
+            if (checkin == checkout)
+            {
+                checkout = checkout.AddDays(1);
+            }
             return Dataprovider.Instance.ExcuteQuery("exec USP_GetListBillByDate @checkin , @checkout",new object[] { checkin, checkout });
         }
         public DataTable GetBillListByDateAndPage(DateTime checkin, DateTime checkout,int pageNumber)
