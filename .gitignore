@@ -1,5 +1,8 @@
 bin/
 obj/
 .vs/
+<<<<<<< HEAD
 packages/
 whisper/
+=======
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)

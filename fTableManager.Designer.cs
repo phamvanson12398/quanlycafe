@@ -52,13 +52,21 @@
             this.nmDiscount = new System.Windows.Forms.NumericUpDown();
             this.btnCheck = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+<<<<<<< HEAD
             this.removeItemOfBill = new System.Windows.Forms.Button();
             this.btnRecordCall = new System.Windows.Forms.Button();
+=======
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
             this.nmFoodCount = new System.Windows.Forms.NumericUpDown();
             this.btnAddFood = new System.Windows.Forms.Button();
             this.cbFood = new System.Windows.Forms.ComboBox();
             this.cbCategory = new System.Windows.Forms.ComboBox();
             this.flpTable = new System.Windows.Forms.FlowLayoutPanel();
+<<<<<<< HEAD
+=======
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -77,8 +85,12 @@
             this.phímTắtChứcNăngToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
+<<<<<<< HEAD
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
             this.menuStrip1.Size = new System.Drawing.Size(821, 24);
+=======
+            this.menuStrip1.Size = new System.Drawing.Size(1095, 28);
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -88,7 +100,11 @@
             this.adminToolStripMenuItem.BackColor = System.Drawing.Color.PeachPuff;
             this.adminToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
+<<<<<<< HEAD
             this.adminToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+=======
+            this.adminToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
             this.adminToolStripMenuItem.Text = "ADMIN";
             this.adminToolStripMenuItem.Click += new System.EventHandler(this.adminToolStripMenuItem_Click);
             // 
@@ -100,21 +116,33 @@
             this.thoátToolStripMenuItem});
             this.thôngtintkToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.thôngtintkToolStripMenuItem.Name = "thôngtintkToolStripMenuItem";
+<<<<<<< HEAD
             this.thôngtintkToolStripMenuItem.Size = new System.Drawing.Size(123, 20);
+=======
+            this.thôngtintkToolStripMenuItem.Size = new System.Drawing.Size(151, 24);
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
             this.thôngtintkToolStripMenuItem.Text = "Thông tin tài khoản";
             this.thôngtintkToolStripMenuItem.Click += new System.EventHandler(this.thôngtintkToolStripMenuItem_Click);
             // 
             // thôngTinCáNhânToolStripMenuItem
             // 
             this.thôngTinCáNhânToolStripMenuItem.Name = "thôngTinCáNhânToolStripMenuItem";
+<<<<<<< HEAD
             this.thôngTinCáNhânToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+=======
+            this.thôngTinCáNhânToolStripMenuItem.Size = new System.Drawing.Size(210, 26);
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
             this.thôngTinCáNhânToolStripMenuItem.Text = "Thông tin cá nhân";
             this.thôngTinCáNhânToolStripMenuItem.Click += new System.EventHandler(this.thôngTinCáNhânToolStripMenuItem_Click);
             // 
             // thoátToolStripMenuItem
             // 
             this.thoátToolStripMenuItem.Name = "thoátToolStripMenuItem";
+<<<<<<< HEAD
             this.thoátToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+=======
+            this.thoátToolStripMenuItem.Size = new System.Drawing.Size(210, 26);
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
             this.thoátToolStripMenuItem.Text = "Đăng xuất";
             this.thoátToolStripMenuItem.Click += new System.EventHandler(this.ĐăngxuấtToolStripMenuItem_Click);
             // 
@@ -126,14 +154,22 @@
             this.thanhToánToolStripMenuItem});
             this.phímTắtChứcNăngToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.phímTắtChứcNăngToolStripMenuItem.Name = "phímTắtChứcNăngToolStripMenuItem";
+<<<<<<< HEAD
             this.phímTắtChứcNăngToolStripMenuItem.Size = new System.Drawing.Size(123, 20);
+=======
+            this.phímTắtChứcNăngToolStripMenuItem.Size = new System.Drawing.Size(150, 24);
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
             this.phímTắtChứcNăngToolStripMenuItem.Text = "Phím tắt chức năng";
             // 
             // thêmMónToolStripMenuItem
             // 
             this.thêmMónToolStripMenuItem.Name = "thêmMónToolStripMenuItem";
             this.thêmMónToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+<<<<<<< HEAD
             this.thêmMónToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+=======
+            this.thêmMónToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
             this.thêmMónToolStripMenuItem.Text = "Thêm món";
             this.thêmMónToolStripMenuItem.Click += new System.EventHandler(this.thêmMónToolStripMenuItem_Click);
             // 
@@ -141,7 +177,11 @@
             // 
             this.thanhToánToolStripMenuItem.Name = "thanhToánToolStripMenuItem";
             this.thanhToánToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+<<<<<<< HEAD
             this.thanhToánToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+=======
+            this.thanhToánToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
             this.thanhToánToolStripMenuItem.Text = "Thanh toán";
             this.thanhToánToolStripMenuItem.Click += new System.EventHandler(this.thanhToánToolStripMenuItem_Click);
             // 
@@ -304,6 +344,7 @@
             this.panel4.Size = new System.Drawing.Size(350, 59);
             this.panel4.TabIndex = 4;
             // 
+<<<<<<< HEAD
             // removeItemOfBill
             // 
             this.removeItemOfBill.Location = new System.Drawing.Point(237, 3);
@@ -331,6 +372,18 @@
             this.nmFoodCount.Margin = new System.Windows.Forms.Padding(2);
             this.nmFoodCount.Name = "nmFoodCount";
             this.nmFoodCount.Size = new System.Drawing.Size(40, 20);
+=======
+            // nmFoodCount
+            // 
+            this.nmFoodCount.Location = new System.Drawing.Point(396, 35);
+            this.nmFoodCount.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.nmFoodCount.Name = "nmFoodCount";
+            this.nmFoodCount.Size = new System.Drawing.Size(53, 22);
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
             this.nmFoodCount.TabIndex = 3;
             this.nmFoodCount.Value = new decimal(new int[] {
             1,
@@ -381,6 +434,31 @@
             this.flpTable.TabIndex = 5;
             this.flpTable.Paint += new System.Windows.Forms.PaintEventHandler(this.flpTable_Paint);
             // 
+<<<<<<< HEAD
+=======
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(126, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(103, 20);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Giảm giá(%)";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(255, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(94, 25);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Tổng tiền";
+            // 
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
             // fTableManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -441,7 +519,10 @@
         private System.Windows.Forms.NumericUpDown nmFoodCount;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+<<<<<<< HEAD
         private System.Windows.Forms.Button btnRecordCall;
         private System.Windows.Forms.Button removeItemOfBill;
+=======
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
     }
 }

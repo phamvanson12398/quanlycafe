@@ -604,8 +604,12 @@ namespace QuanlyquanCoffe
         {
 
             string connectionString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
+<<<<<<< HEAD
 
 
+=======
+            
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -849,6 +853,7 @@ namespace QuanlyquanCoffe
         {
 
         }
+<<<<<<< HEAD
 
         private void btnExportExcel_Click_1(object sender, EventArgs e)
         {
@@ -958,5 +963,7 @@ namespace QuanlyquanCoffe
                  MessageBox.Show("Ngày kết thúc không thể nhỏ hơn ngày bắt đầu. Đã tự động điều chỉnh.", "Thông báo");
             }
         }
+=======
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
     }
 }

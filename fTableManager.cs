@@ -51,7 +51,11 @@ namespace QuanlyquanCoffe
         {
             //adminToolStripMenuItem.Enabled = type == 1;
             adminToolStripMenuItem.Visible = type == 1;
+<<<<<<< HEAD
             thôngtintkToolStripMenuItem.Text += "(" + loginAccount.DisplayName + ")";
+=======
+            thôngtintkToolStripMenuItem.Text += "("+loginAccount.DisplayName+")";
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
         }
         void LoadCategory()
         {
@@ -66,7 +70,11 @@ namespace QuanlyquanCoffe
             cbFood.DisplayMember = "Name";
         }
 
+<<<<<<< HEAD
         public void LoadTable()
+=======
+       public void LoadTable()
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
         {
             flpTable.Controls.Clear();
             List<Table> Tablelist = TableDAO.Instance.LoadTableList();
@@ -91,7 +99,11 @@ namespace QuanlyquanCoffe
                 flpTable.Controls.Add(btn);
             }
         }
+<<<<<<< HEAD
         public void ShowBill(int id)
+=======
+       public void ShowBill(int id)
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
         {
             lsvBill.Items.Clear();
             List<QuanlyquanCoffe.DTO.Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(id);
@@ -324,9 +336,15 @@ namespace QuanlyquanCoffe
             f.table_name = table.Name;
             int idBill = BillDAO.Instance.getUnCheckBillIDbyTableID(table.ID);
             f.current_id_bill = idBill;
+<<<<<<< HEAD
             f.table_id = table.ID;
             f.ShowDialog();
 
+=======
+            f.table_id=table.ID;
+            f.ShowDialog();
+           
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
             /* int idBill = BillDAO.Instance.getUnCheckBillIDbyTableID(table.ID);
              int Discount=(int)nmDiscount.Value;
              double totalPrice = Convert.ToDouble(txbTotalPrice.Text.Split(',')[0]);
@@ -347,9 +365,15 @@ namespace QuanlyquanCoffe
         {
 
             int id1 = (lsvBill.Tag as Table).ID;
+<<<<<<< HEAD
             int id2 = (cbSwitchTable.SelectedItem as Table).ID;
             if (MessageBox.Show(String.Format("Bạn có thực sự muốn chuyển từ bàn {0} sang bàn {1}", (lsvBill.Tag as Table).Name, (cbSwitchTable.SelectedItem as Table).Name), "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
                 TableDAO.Instance.SwitchTable(id1, id2);
+=======
+            int id2=(cbSwitchTable.SelectedItem as Table).ID;
+            if (MessageBox.Show(String.Format("Bạn có thực sự muốn chuyển từ bàn {0} sang bàn {1}", (lsvBill.Tag as Table).Name, (cbSwitchTable.SelectedItem as Table).Name),"Thông báo",MessageBoxButtons.OKCancel)==System.Windows.Forms.DialogResult.OK)
+            TableDAO.Instance.SwitchTable(id1, id2);
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
             LoadTable();
         }
 
@@ -387,6 +411,7 @@ namespace QuanlyquanCoffe
         {
 
         }
+<<<<<<< HEAD
 
         private void btnRecordCall_Click(object sender, EventArgs e)
         {
@@ -691,5 +716,7 @@ namespace QuanlyquanCoffe
                 LoadTable();
             }
         }
+=======
+>>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
     }
 }
