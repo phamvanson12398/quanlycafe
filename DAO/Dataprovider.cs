@@ -21,7 +21,8 @@ namespace QuanlyquanCoffe.DAO
         }
 
         private Dataprovider() { }
-        private string StrConnection = "Data Source=DESKTOP-6P3EB2J;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
+        private string StrConnection = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
+        //Ham de thuc thi 1 cau lenh tuong tac voi db va no tra lai 1 datatable
         public DataTable ExcuteQuery(string query, object[] parameter=null) {
             DataTable data = new DataTable();
 
@@ -31,7 +32,7 @@ namespace QuanlyquanCoffe.DAO
                 connection.Open();             
 
                
-               if(parameter != null )
+               if(parameter != null)
                 {String[] listpara = query.Split(' ');
                     int i = 0;
                     foreach (string item in listpara)

@@ -43,7 +43,7 @@ namespace QuanlyquanCoffe.DAO
         }
         public DataTable GetListAccount()
         {
-            return Dataprovider.Instance.ExcuteQuery("select DisplayName ,UserName ,Type  from Account");
+            return Dataprovider.Instance.ExcuteQuery("select DisplayName as N'Tên hiển thị' ,UserName as N'Tên TK' ,Type as N'Loại TK' from Account");
         }
         public Account GetAccountByUserName(string username)
         {
@@ -54,9 +54,9 @@ namespace QuanlyquanCoffe.DAO
             }
             return null;
         }
-        public bool InsertAccount(string username,string displayname,int type)
+        public bool InsertAccount(string username,string displayname,int type, string password)
         {
-            string query = string.Format("INSERT Account ( UserName, DisplayName, Type ) VALUES  ( N'{0}', N'{1}', {2})", username, displayname, type);
+            string query = string.Format("INSERT Account ( UserName, DisplayName,PassWord, Type ) VALUES  ( N'{0}', N'{1}',N'{2}', {3})", username, displayname, password, type);
             int result = Dataprovider.Instance.ExcuteNonQuery(query);
 
             return result > 0;

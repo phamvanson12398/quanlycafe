@@ -24,7 +24,7 @@ namespace QuanlyquanCoffe.DAO
         public void SwitchTable(int id1,int id2)
         {
             Dataprovider.Instance.ExcuteQuery("USP_SwitchTable1 @idTable1 , @idTable2",new object[] {id1,id2});
-        }
+        }      
         public List<Table> LoadTableList()
         {
             List<Table> tablelist = new List<Table>();

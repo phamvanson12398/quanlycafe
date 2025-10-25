@@ -31,12 +31,12 @@ namespace QuanlyquanCoffe
                 this.Hide();
                 f.ShowDialog();
                 this.Show();
-                }
-                else
-                {
-                MessageBox.Show("Sai tên tài khoản hoặc mật khẩu");
-                }
             }
+            else
+            {
+            MessageBox.Show("Sai tên tài khoản hoặc mật khẩu");
+            }
+        }
         
        bool Login(string username,string password)
         {

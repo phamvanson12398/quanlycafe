@@ -75,6 +75,11 @@ namespace QuanlyquanCoffe
         {
             UpdateAccountInfo();
         }
+
+        private void fAccoutProfile_Load(object sender, EventArgs e)
+        {
+
+        }
     }
     public class AccountEvent : EventArgs
     {
