@@ -12,18 +12,30 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Menu = QuanlyquanCoffe.DTO.Menu;
+using System.Diagnostics;
+using System.IO;
+using NAudio.Wave;
+using System.Text.RegularExpressions;
 
 namespace QuanlyquanCoffe
 {
     public partial class fTableManager : Form
     {
-        private Account loginAccount;
 
+        private WaveInEvent waveIn;
+        private WaveFileWriter writer;
+        private string outputFile = Path.Combine(Application.StartupPath, "voice.wav");
+        private bool isRecording = false;
+
+        private Account loginAccount;
         public Account LoginAccount
         {
             get { return loginAccount; }
-            set { loginAccount = value;
-                ChangeAccount(loginAccount.Type);                      }
+            set
+            {
+                loginAccount = value;
+                ChangeAccount(loginAccount.Type);
+            }
         }
 
         public fTableManager(Account acc)
@@ -39,7 +51,7 @@ namespace QuanlyquanCoffe
         {
             //adminToolStripMenuItem.Enabled = type == 1;
             adminToolStripMenuItem.Visible = type == 1;
-            thôngtintkToolStripMenuItem.Text += "("+loginAccount.DisplayName+")";
+            thôngtintkToolStripMenuItem.Text += "(" + loginAccount.DisplayName + ")";
         }
         void LoadCategory()
         {
@@ -54,7 +66,7 @@ namespace QuanlyquanCoffe
             cbFood.DisplayMember = "Name";
         }
 
-       public void LoadTable()
+        public void LoadTable()
         {
             flpTable.Controls.Clear();
             List<Table> Tablelist = TableDAO.Instance.LoadTableList();
@@ -69,9 +81,9 @@ namespace QuanlyquanCoffe
                     case "Trống":
                         btn.BackColor = Color.PeachPuff;
                         break;
-                  /*  case "Đặt trước":
-                        btn.BackColor= Color.Brown;
-                        break;*/
+                    /*  case "Đặt trước":
+                          btn.BackColor= Color.Brown;
+                          break;*/
                     default:
                         btn.BackColor = Color.SandyBrown;
                         break;
@@ -79,7 +91,7 @@ namespace QuanlyquanCoffe
                 flpTable.Controls.Add(btn);
             }
         }
-       public void ShowBill(int id)
+        public void ShowBill(int id)
         {
             lsvBill.Items.Clear();
             List<QuanlyquanCoffe.DTO.Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(id);
@@ -96,7 +108,7 @@ namespace QuanlyquanCoffe
             CultureInfo culture = new CultureInfo("vi-VN");
             Thread.CurrentThread.CurrentCulture = culture;
             txbTotalPrice.Text = totalprice.ToString("c", culture);
-         
+
         }
         void LoadComboBoxTable(ComboBox cb)
         {
@@ -144,7 +156,7 @@ namespace QuanlyquanCoffe
         {
             fAdmin f = new fAdmin();
             f.loginAccount = LoginAccount;
-            f.InsertFood+=F_InsertFood;
+            f.InsertFood += F_InsertFood;
             f.DeleteFood += F_DeleteFood;
             f.UpdateFood += F_UpdateFood;
             f.InsertCategory += F_InsertCategory;
@@ -203,8 +215,8 @@ namespace QuanlyquanCoffe
         private void F_UpdateFood(object sender, EventArgs e)
         {
             LoadFoodListCategoryID((cbCategory.SelectedItem as Category).ID);
-            if(lsvBill.Tag != null)
-            ShowBill((lsvBill.Tag as Table).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
         }
 
         private void F_DeleteFood(object sender, EventArgs e)
@@ -220,8 +232,8 @@ namespace QuanlyquanCoffe
         private void F_InsertFood(object sender, EventArgs e)
         {
             LoadFoodListCategoryID((cbCategory.SelectedItem as Category).ID);
-            if(lsvBill.Tag != null)
-            ShowBill((lsvBill.Tag as Table).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
         }
 
         private void flpTable_Paint(object sender, PaintEventArgs e)
@@ -254,22 +266,23 @@ namespace QuanlyquanCoffe
                 MessageBox.Show("Vui lòng chọn một bàn !!!", "Thông báo", MessageBoxButtons.OK);
                 return;
             }
-            else { 
-                int idBill = BillDAO.Instance.getUnCheckBillIDbyTableID(table.ID);
-            int idFood = (cbFood.SelectedItem as Food).ID;
-            int count = (int)(nmFoodCount.Value);
-            if (idBill == -1)
-            {
-                BillDAO.Instance.InsertBill(table.ID);
-                BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxIDBill(), idFood, count);
-            }
             else
             {
-                BillInfoDAO.Instance.InsertBillInfo(idBill, idFood, count);
+                int idBill = BillDAO.Instance.getUnCheckBillIDbyTableID(table.ID);
+                int idFood = (cbFood.SelectedItem as Food).ID;
+                int count = (int)(nmFoodCount.Value);
+                if (idBill == -1)
+                {
+                    BillDAO.Instance.InsertBill(table.ID);
+                    BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxIDBill(), idFood, count);
+                }
+                else
+                {
+                    BillInfoDAO.Instance.InsertBillInfo(idBill, idFood, count);
+                }
+                ShowBill(table.ID);
+                LoadTable();
             }
-            ShowBill(table.ID);
-            LoadTable();
-        }
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
@@ -311,9 +324,9 @@ namespace QuanlyquanCoffe
             f.table_name = table.Name;
             int idBill = BillDAO.Instance.getUnCheckBillIDbyTableID(table.ID);
             f.current_id_bill = idBill;
-            f.table_id=table.ID;
+            f.table_id = table.ID;
             f.ShowDialog();
-           
+
             /* int idBill = BillDAO.Instance.getUnCheckBillIDbyTableID(table.ID);
              int Discount=(int)nmDiscount.Value;
              double totalPrice = Convert.ToDouble(txbTotalPrice.Text.Split(',')[0]);
@@ -332,11 +345,11 @@ namespace QuanlyquanCoffe
 
         private void btnSwitchTable_Click(object sender, EventArgs e)
         {
-            
+
             int id1 = (lsvBill.Tag as Table).ID;
-            int id2=(cbSwitchTable.SelectedItem as Table).ID;
-            if (MessageBox.Show(String.Format("Bạn có thực sự muốn chuyển từ bàn {0} sang bàn {1}", (lsvBill.Tag as Table).Name, (cbSwitchTable.SelectedItem as Table).Name),"Thông báo",MessageBoxButtons.OKCancel)==System.Windows.Forms.DialogResult.OK)
-            TableDAO.Instance.SwitchTable(id1, id2);
+            int id2 = (cbSwitchTable.SelectedItem as Table).ID;
+            if (MessageBox.Show(String.Format("Bạn có thực sự muốn chuyển từ bàn {0} sang bàn {1}", (lsvBill.Tag as Table).Name, (cbSwitchTable.SelectedItem as Table).Name), "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+                TableDAO.Instance.SwitchTable(id1, id2);
             LoadTable();
         }
 
@@ -374,5 +387,264 @@ namespace QuanlyquanCoffe
         {
 
         }
+
+        private void btnRecordCall_Click(object sender, EventArgs e)
+        {
+            if (!isRecording)
+            {
+                // Bắt đầu thu âm
+                waveIn = new WaveInEvent();
+                waveIn.WaveFormat = new WaveFormat(16000, 1);
+                waveIn.DataAvailable += WaveIn_DataAvailable;
+                waveIn.RecordingStopped += WaveIn_RecordingStopped;
+
+                writer = new WaveFileWriter(outputFile, waveIn.WaveFormat);
+                waveIn.StartRecording();
+
+                isRecording = true;
+                btnRecordCall.Text = "Đang ghi âm      ";
+            }
+            else
+            {
+                // Dừng thu âm
+                waveIn.StopRecording();
+            }
+        }
+        private void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
+        {
+            writer?.Write(e.Buffer, 0, e.BytesRecorded);
+            writer?.Flush();
+        }
+
+        private void WaveIn_RecordingStopped(object sender, StoppedEventArgs e)
+        {
+            writer?.Dispose();
+            waveIn?.Dispose();
+            writer = null;
+            waveIn = null;
+            isRecording = false;
+            btnRecordCall.Text = "Bật ghi âm";
+
+            try
+            {
+                // 1️⃣ Chuyển giọng nói sang text bằng Whisper offline
+                string prompt = GetTextFromWhisper(outputFile);
+
+                // 2️⃣ Gợi ý món offline (hoặc bạn có thể gửi lên GPT API nếu muốn)
+                List<string> resultStrings = SuggestFood(prompt); // List<string> dạng "Cafe sữa x1"
+
+                if (resultStrings.Count == 1 && resultStrings[0].ToLower().Contains("không nhận diện"))
+                {
+                    MessageBox.Show("Gọi món không thành công do món ăn không tồn tại!",
+                                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return; // Dừng luôn, không thêm vào bill
+                }
+
+                List<(string name, int qty)> foodOrders = resultStrings.Select(r =>
+                {
+                    var parts = r.Split(new char[] { 'x' }, 2);
+                    return (parts[0].Trim(), int.Parse(parts[1].Trim()));
+                }).ToList();
+
+                AddFoodsToBill(foodOrders);
+
+                // Hiển thị
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message, "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private string GetTextFromWhisper(string audioPath)
+        {
+
+           
+            string currentDir = AppDomain.CurrentDomain.BaseDirectory;
+            string upperPath = Path.GetFullPath(Path.Combine(currentDir, @"..\.."));
+            string whisperPath = Path.Combine(upperPath, "whisper", "Release");
+            string whisperExe = Path.Combine(whisperPath, "whisper-cli.exe");
+            string modelPath = Path.Combine(whisperPath, "ggml-small.bin");
+
+
+            // Chuẩn bị process để chạy Whisper
+            var process = new Process();
+            process.StartInfo.FileName = whisperExe;
+            process.StartInfo.Arguments = $"--model \"{modelPath}\" --language vi \"{audioPath}\" --output-txt";
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
+
+            try
+            {
+                process.Start();
+                process.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi chạy Whisper: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return string.Empty;
+            }
+
+            // File txt sẽ cùng thư mục với file .wav
+            string txtFile = Path.ChangeExtension(audioPath, ".wav.txt");
+
+            if (File.Exists(txtFile))
+            {
+                string text = File.ReadAllText(txtFile).Trim();
+
+                if (string.IsNullOrWhiteSpace(text))
+                {
+                    MessageBox.Show("Whisper không nhận được giọng nói!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return string.Empty;
+                }
+
+                //// Hiển thị text cho debug
+                //MessageBox.Show(text, "Text từ Whisper", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return text;
+            }
+            else
+            {
+                MessageBox.Show("Whisper chưa tạo file txt!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return string.Empty;
+            }
+        }
+
+
+
+
+      
+
+        private int ConvertWordToNumber(string word)
+        {
+            switch (word.Trim().ToLower())
+            {
+                case "một": return 1;
+                case "hai": return 2;
+                case "ba": return 3;
+                case "bốn": return 4;
+                case "năm": return 5;
+                case "sáu": return 6;
+                case "bảy": return 7;
+                case "tám": return 8;
+                case "chín": return 9;
+                case "mười": return 10;
+                default: return 1; // mặc định 1 nếu không nhận biết
+            }
+        }
+
+        private string RemoveDiacritics(string text)
+        {
+            var normalized = text.Normalize(NormalizationForm.FormD);
+            var sb = new StringBuilder();
+            foreach (var c in normalized)
+            {
+                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                    sb.Append(c);
+            }
+            return sb.ToString().Normalize(NormalizationForm.FormC);
+        }
+
+        private List<string> SuggestFood(string prompt)
+        {
+            if (string.IsNullOrWhiteSpace(prompt))
+                return new List<string> { "Không nhận được giọng nói" };
+
+            prompt = prompt.ToLower(); // giữ dấu
+
+            // Lấy danh sách món từ database
+            List<Food> foods = FoodDAO.Instance.GetListFood();
+
+            // Mảng lưu tên món và số lượng
+            List<string> foodNames = new List<string>();
+            List<int> quantities = new List<int>();
+
+            // Map chữ sang số
+            Dictionary<string, int> numberMap = new Dictionary<string, int>
+            {
+                {"một",1}, {"hai",2}, {"ba",3}, {"bốn",4}, {"năm",5},
+                {"sáu",6}, {"bảy",7}, {"tám",8}, {"chín",9}, {"mười",10}
+            };
+
+            // Tách prompt thành từ
+            var words = prompt.Split(new[] { ' ', ',', '.', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                string word = words[i];
+
+                foreach (var food in foods)
+                {
+                    string foodLower = food.Name.ToLower();
+
+                    if (foodLower.Contains(word))
+                    {
+                        int qty = 1;
+
+                        if (i > 0)
+                        {
+                            string prevWord = words[i - 1];
+
+                            if (numberMap.ContainsKey(prevWord))
+                                qty = numberMap[prevWord];
+                            else if (int.TryParse(prevWord, out int n))
+                                qty = n;
+                        }
+
+                        foodNames.Add(food.Name);
+                        quantities.Add(qty);
+                        break;
+                    }
+                }
+            }
+
+            if (foodNames.Count == 0)
+                return new List<string> { "không nhận diện được đồ ăn" };
+
+            // Gộp tên và số lượng
+            List<string> results = new List<string>();
+            for (int i = 0; i < foodNames.Count; i++)
+            {
+                results.Add($"{foodNames[i]} x{quantities[i]}");
+            }
+
+            return results;
+        }
+
+
+
+        private void AddFoodsToBill(List<(string name, int qty)> foodOrders)
+        {
+            Table table = lsvBill.Tag as Table;
+            if (table == null)
+            {
+                MessageBox.Show("Vui lòng chọn một bàn !!!", "Thông báo", MessageBoxButtons.OK);
+                return;
+            }
+
+            int idBill = BillDAO.Instance.getUnCheckBillIDbyTableID(table.ID);
+            if (idBill == -1)
+            {
+                // Tạo hóa đơn mới
+                BillDAO.Instance.InsertBill(table.ID);
+                idBill = BillDAO.Instance.GetMaxIDBill();
+            }
+
+            foreach (var order in foodOrders)
+            {
+                // Tìm ID món từ tên
+                Food food = FoodDAO.Instance.GetListFood().FirstOrDefault(f => f.Name == order.name);
+                if (food != null)
+                {
+                    BillInfoDAO.Instance.InsertBillInfo(idBill, food.ID, order.qty);
+                }
+            }
+
+            // Cập nhật giao diện
+            ShowBill(table.ID);
+            LoadTable();
+        }
+
+
+
     }
 }
