@@ -53,20 +53,27 @@
             this.btnCheck = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
 <<<<<<< HEAD
+<<<<<<< HEAD
             this.removeItemOfBill = new System.Windows.Forms.Button();
             this.btnRecordCall = new System.Windows.Forms.Button();
 =======
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+            this.btnRecordCall = new System.Windows.Forms.Button();
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             this.nmFoodCount = new System.Windows.Forms.NumericUpDown();
             this.btnAddFood = new System.Windows.Forms.Button();
             this.cbFood = new System.Windows.Forms.ComboBox();
             this.cbCategory = new System.Windows.Forms.ComboBox();
             this.flpTable = new System.Windows.Forms.FlowLayoutPanel();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -86,11 +93,16 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
 <<<<<<< HEAD
+<<<<<<< HEAD
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
             this.menuStrip1.Size = new System.Drawing.Size(821, 24);
 =======
             this.menuStrip1.Size = new System.Drawing.Size(1095, 28);
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(821, 24);
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -101,10 +113,14 @@
             this.adminToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
 <<<<<<< HEAD
+<<<<<<< HEAD
             this.adminToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
 =======
             this.adminToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+            this.adminToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             this.adminToolStripMenuItem.Text = "ADMIN";
             this.adminToolStripMenuItem.Click += new System.EventHandler(this.adminToolStripMenuItem_Click);
             // 
@@ -117,10 +133,14 @@
             this.thôngtintkToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.thôngtintkToolStripMenuItem.Name = "thôngtintkToolStripMenuItem";
 <<<<<<< HEAD
+<<<<<<< HEAD
             this.thôngtintkToolStripMenuItem.Size = new System.Drawing.Size(123, 20);
 =======
             this.thôngtintkToolStripMenuItem.Size = new System.Drawing.Size(151, 24);
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+            this.thôngtintkToolStripMenuItem.Size = new System.Drawing.Size(123, 20);
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             this.thôngtintkToolStripMenuItem.Text = "Thông tin tài khoản";
             this.thôngtintkToolStripMenuItem.Click += new System.EventHandler(this.thôngtintkToolStripMenuItem_Click);
             // 
@@ -128,10 +148,14 @@
             // 
             this.thôngTinCáNhânToolStripMenuItem.Name = "thôngTinCáNhânToolStripMenuItem";
 <<<<<<< HEAD
+<<<<<<< HEAD
             this.thôngTinCáNhânToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
 =======
             this.thôngTinCáNhânToolStripMenuItem.Size = new System.Drawing.Size(210, 26);
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+            this.thôngTinCáNhânToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             this.thôngTinCáNhânToolStripMenuItem.Text = "Thông tin cá nhân";
             this.thôngTinCáNhânToolStripMenuItem.Click += new System.EventHandler(this.thôngTinCáNhânToolStripMenuItem_Click);
             // 
@@ -139,10 +163,14 @@
             // 
             this.thoátToolStripMenuItem.Name = "thoátToolStripMenuItem";
 <<<<<<< HEAD
+<<<<<<< HEAD
             this.thoátToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
 =======
             this.thoátToolStripMenuItem.Size = new System.Drawing.Size(210, 26);
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+            this.thoátToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             this.thoátToolStripMenuItem.Text = "Đăng xuất";
             this.thoátToolStripMenuItem.Click += new System.EventHandler(this.ĐăngxuấtToolStripMenuItem_Click);
             // 
@@ -155,10 +183,14 @@
             this.phímTắtChứcNăngToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.phímTắtChứcNăngToolStripMenuItem.Name = "phímTắtChứcNăngToolStripMenuItem";
 <<<<<<< HEAD
+<<<<<<< HEAD
             this.phímTắtChứcNăngToolStripMenuItem.Size = new System.Drawing.Size(123, 20);
 =======
             this.phímTắtChứcNăngToolStripMenuItem.Size = new System.Drawing.Size(150, 24);
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+            this.phímTắtChứcNăngToolStripMenuItem.Size = new System.Drawing.Size(123, 20);
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             this.phímTắtChứcNăngToolStripMenuItem.Text = "Phím tắt chức năng";
             // 
             // thêmMónToolStripMenuItem
@@ -166,10 +198,14 @@
             this.thêmMónToolStripMenuItem.Name = "thêmMónToolStripMenuItem";
             this.thêmMónToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
 <<<<<<< HEAD
+<<<<<<< HEAD
             this.thêmMónToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
 =======
             this.thêmMónToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+            this.thêmMónToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             this.thêmMónToolStripMenuItem.Text = "Thêm món";
             this.thêmMónToolStripMenuItem.Click += new System.EventHandler(this.thêmMónToolStripMenuItem_Click);
             // 
@@ -178,10 +214,14 @@
             this.thanhToánToolStripMenuItem.Name = "thanhToánToolStripMenuItem";
             this.thanhToánToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
 <<<<<<< HEAD
+<<<<<<< HEAD
             this.thanhToánToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
 =======
             this.thanhToánToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+            this.thanhToánToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             this.thanhToánToolStripMenuItem.Text = "Thanh toán";
             this.thanhToánToolStripMenuItem.Click += new System.EventHandler(this.thanhToánToolStripMenuItem_Click);
             // 
@@ -332,7 +372,10 @@
             // 
             // panel4
             // 
+<<<<<<< HEAD
             this.panel4.Controls.Add(this.removeItemOfBill);
+=======
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             this.panel4.Controls.Add(this.btnRecordCall);
             this.panel4.Controls.Add(this.nmFoodCount);
             this.panel4.Controls.Add(this.btnAddFood);
@@ -345,6 +388,7 @@
             this.panel4.TabIndex = 4;
             // 
 <<<<<<< HEAD
+<<<<<<< HEAD
             // removeItemOfBill
             // 
             this.removeItemOfBill.Location = new System.Drawing.Point(237, 3);
@@ -355,6 +399,8 @@
             this.removeItemOfBill.UseVisualStyleBackColor = true;
             this.removeItemOfBill.Click += new System.EventHandler(this.removeItemOfBill_Click);
             // 
+=======
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             // btnRecordCall
             // 
             this.btnRecordCall.Location = new System.Drawing.Point(285, 3);
@@ -366,6 +412,7 @@
             this.btnRecordCall.UseVisualStyleBackColor = true;
             this.btnRecordCall.Click += new System.EventHandler(this.btnRecordCall_Click);
             // 
+<<<<<<< HEAD
             // nmFoodCount
             // 
             this.nmFoodCount.Location = new System.Drawing.Point(237, 34);
@@ -373,17 +420,24 @@
             this.nmFoodCount.Name = "nmFoodCount";
             this.nmFoodCount.Size = new System.Drawing.Size(40, 20);
 =======
+=======
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             // nmFoodCount
             // 
-            this.nmFoodCount.Location = new System.Drawing.Point(396, 35);
+            this.nmFoodCount.Location = new System.Drawing.Point(237, 27);
+            this.nmFoodCount.Margin = new System.Windows.Forms.Padding(2);
             this.nmFoodCount.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.nmFoodCount.Name = "nmFoodCount";
+<<<<<<< HEAD
             this.nmFoodCount.Size = new System.Drawing.Size(53, 22);
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+            this.nmFoodCount.Size = new System.Drawing.Size(40, 20);
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             this.nmFoodCount.TabIndex = 3;
             this.nmFoodCount.Value = new decimal(new int[] {
             1,
@@ -435,6 +489,7 @@
             this.flpTable.Paint += new System.Windows.Forms.PaintEventHandler(this.flpTable_Paint);
             // 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             // label1
             // 
@@ -459,6 +514,8 @@
             this.label2.Text = "Tổng tiền";
             // 
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             // fTableManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -520,9 +577,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
 <<<<<<< HEAD
+<<<<<<< HEAD
         private System.Windows.Forms.Button btnRecordCall;
         private System.Windows.Forms.Button removeItemOfBill;
 =======
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+        private System.Windows.Forms.Button btnRecordCall;
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
     }
 }

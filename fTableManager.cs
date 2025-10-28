@@ -52,10 +52,14 @@ namespace QuanlyquanCoffe
             //adminToolStripMenuItem.Enabled = type == 1;
             adminToolStripMenuItem.Visible = type == 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
             thôngtintkToolStripMenuItem.Text += "(" + loginAccount.DisplayName + ")";
 =======
             thôngtintkToolStripMenuItem.Text += "("+loginAccount.DisplayName+")";
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+            thôngtintkToolStripMenuItem.Text += "(" + loginAccount.DisplayName + ")";
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
         }
         void LoadCategory()
         {
@@ -71,10 +75,14 @@ namespace QuanlyquanCoffe
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         public void LoadTable()
 =======
        public void LoadTable()
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+        public void LoadTable()
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
         {
             flpTable.Controls.Clear();
             List<Table> Tablelist = TableDAO.Instance.LoadTableList();
@@ -100,10 +108,14 @@ namespace QuanlyquanCoffe
             }
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         public void ShowBill(int id)
 =======
        public void ShowBill(int id)
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+        public void ShowBill(int id)
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
         {
             lsvBill.Items.Clear();
             List<QuanlyquanCoffe.DTO.Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(id);
@@ -337,6 +349,7 @@ namespace QuanlyquanCoffe
             int idBill = BillDAO.Instance.getUnCheckBillIDbyTableID(table.ID);
             f.current_id_bill = idBill;
 <<<<<<< HEAD
+<<<<<<< HEAD
             f.table_id = table.ID;
             f.ShowDialog();
 
@@ -345,6 +358,11 @@ namespace QuanlyquanCoffe
             f.ShowDialog();
            
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+            f.table_id = table.ID;
+            f.ShowDialog();
+
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             /* int idBill = BillDAO.Instance.getUnCheckBillIDbyTableID(table.ID);
              int Discount=(int)nmDiscount.Value;
              double totalPrice = Convert.ToDouble(txbTotalPrice.Text.Split(',')[0]);
@@ -366,6 +384,7 @@ namespace QuanlyquanCoffe
 
             int id1 = (lsvBill.Tag as Table).ID;
 <<<<<<< HEAD
+<<<<<<< HEAD
             int id2 = (cbSwitchTable.SelectedItem as Table).ID;
             if (MessageBox.Show(String.Format("Bạn có thực sự muốn chuyển từ bàn {0} sang bàn {1}", (lsvBill.Tag as Table).Name, (cbSwitchTable.SelectedItem as Table).Name), "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
                 TableDAO.Instance.SwitchTable(id1, id2);
@@ -374,6 +393,11 @@ namespace QuanlyquanCoffe
             if (MessageBox.Show(String.Format("Bạn có thực sự muốn chuyển từ bàn {0} sang bàn {1}", (lsvBill.Tag as Table).Name, (cbSwitchTable.SelectedItem as Table).Name),"Thông báo",MessageBoxButtons.OKCancel)==System.Windows.Forms.DialogResult.OK)
             TableDAO.Instance.SwitchTable(id1, id2);
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+            int id2 = (cbSwitchTable.SelectedItem as Table).ID;
+            if (MessageBox.Show(String.Format("Bạn có thực sự muốn chuyển từ bàn {0} sang bàn {1}", (lsvBill.Tag as Table).Name, (cbSwitchTable.SelectedItem as Table).Name), "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+                TableDAO.Instance.SwitchTable(id1, id2);
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
             LoadTable();
         }
 
@@ -412,6 +436,9 @@ namespace QuanlyquanCoffe
 
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
 
         private void btnRecordCall_Click(object sender, EventArgs e)
         {
@@ -669,6 +696,7 @@ namespace QuanlyquanCoffe
             LoadTable();
         }
 
+<<<<<<< HEAD
         private void removeItemOfBill_Click(object sender, EventArgs e)
         {
             if (lsvBill.SelectedItems.Count == 0)
@@ -718,5 +746,9 @@ namespace QuanlyquanCoffe
         }
 =======
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+
+
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
     }
 }

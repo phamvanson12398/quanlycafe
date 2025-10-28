@@ -2,7 +2,12 @@ bin/
 obj/
 .vs/
 <<<<<<< HEAD
+<<<<<<< HEAD
 packages/
 whisper/
 =======
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
+=======
+packages/
+whisper/
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)

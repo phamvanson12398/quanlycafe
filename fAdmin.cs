@@ -18,11 +18,15 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 using OfficeOpenXml; // Thư viện EPPlus   
 =======
 using OfficeOpenXml; // Thư viện EPPlus
 using System.IO;    // Để làm việc với FileInfo
 >>>>>>> 295c355 (update: add fuction export file report)
+=======
+using OfficeOpenXml; // Thư viện EPPlus   
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
 using OfficeOpenXml.Style; // <-- THÊM CÁI NÀY
 using System.Drawing;
 
@@ -609,6 +613,7 @@ namespace QuanlyquanCoffe
         {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             string connectionString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
 <<<<<<< HEAD
 
@@ -619,6 +624,9 @@ namespace QuanlyquanCoffe
 
 =======
             string connectionString = "Data Source=DESKTOP-2PIF1AG\\SQLEXPRESS01;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
+=======
+            string connectionString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
+>>>>>>> cd3d953 (fix switch table and new function aiOrder)
 
 
 
