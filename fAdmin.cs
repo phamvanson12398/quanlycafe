@@ -17,8 +17,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using OfficeOpenXml; // Thư viện EPPlus
-using System.IO;    // Để làm việc với FileInfo
+using OfficeOpenXml; // Thư viện EPPlus   
 using OfficeOpenXml.Style; // <-- THÊM CÁI NÀY
 using System.Drawing;
 
@@ -604,7 +603,7 @@ namespace QuanlyquanCoffe
         private void ShowTotalBill()
         {
 
-            string connectionString = "Data Source=DESKTOP-2PIF1AG\\SQLEXPRESS01;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
+            string connectionString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
 
 
 
