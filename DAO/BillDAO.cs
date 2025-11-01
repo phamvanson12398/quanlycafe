@@ -27,6 +27,12 @@ namespace QuanlyquanCoffe.DAO
             }
             return -1;
         }
+        public void DeleteBill(int idBill)
+        {
+            string query = "DELETE FROM Bill WHERE id = @idBill";
+            Dataprovider.Instance.ExcuteNonQuery(query, new object[] { idBill });
+        }
+
         public void CheckOut(int id, int discount, float totalprice)
         {
             string query = "update Bill set dateCheckOut=GETDATE(),status=1" + ",discount=" + discount + ",totalPrice=" + totalprice + " where id =" + id;
@@ -37,6 +43,8 @@ namespace QuanlyquanCoffe.DAO
         {
             Dataprovider.Instance.ExcuteNonQuery("exec USP_InsertBill @idTable", new object[] { id });
         }
+        
+
         public DataTable GetBillListByDate(DateTime checkin,DateTime checkout)
         {
             if (checkin == checkout)

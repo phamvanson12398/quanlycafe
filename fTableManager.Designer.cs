@@ -52,6 +52,7 @@
             this.nmDiscount = new System.Windows.Forms.NumericUpDown();
             this.btnCheck = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.removeItemOfBill = new System.Windows.Forms.Button();
             this.btnRecordCall = new System.Windows.Forms.Button();
             this.nmFoodCount = new System.Windows.Forms.NumericUpDown();
             this.btnAddFood = new System.Windows.Forms.Button();
@@ -291,6 +292,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.removeItemOfBill);
             this.panel4.Controls.Add(this.btnRecordCall);
             this.panel4.Controls.Add(this.nmFoodCount);
             this.panel4.Controls.Add(this.btnAddFood);
@@ -301,6 +303,16 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(350, 59);
             this.panel4.TabIndex = 4;
+            // 
+            // removeItemOfBill
+            // 
+            this.removeItemOfBill.Location = new System.Drawing.Point(237, 3);
+            this.removeItemOfBill.Name = "removeItemOfBill";
+            this.removeItemOfBill.Size = new System.Drawing.Size(42, 26);
+            this.removeItemOfBill.TabIndex = 5;
+            this.removeItemOfBill.Text = "Xóa";
+            this.removeItemOfBill.UseVisualStyleBackColor = true;
+            this.removeItemOfBill.Click += new System.EventHandler(this.removeItemOfBill_Click);
             // 
             // btnRecordCall
             // 
@@ -315,13 +327,8 @@
             // 
             // nmFoodCount
             // 
-            this.nmFoodCount.Location = new System.Drawing.Point(237, 27);
+            this.nmFoodCount.Location = new System.Drawing.Point(237, 34);
             this.nmFoodCount.Margin = new System.Windows.Forms.Padding(2);
-            this.nmFoodCount.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
             this.nmFoodCount.Name = "nmFoodCount";
             this.nmFoodCount.Size = new System.Drawing.Size(40, 20);
             this.nmFoodCount.TabIndex = 3;
@@ -435,5 +442,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRecordCall;
+        private System.Windows.Forms.Button removeItemOfBill;
     }
 }

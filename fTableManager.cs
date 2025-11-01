@@ -644,7 +644,52 @@ namespace QuanlyquanCoffe
             LoadTable();
         }
 
+        private void removeItemOfBill_Click(object sender, EventArgs e)
+        {
+            if (lsvBill.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn một món để xóa!", "Thông báo");
+                return;
+            }
+
+            ListViewItem selected = lsvBill.SelectedItems[0];
+
+            string foodName = selected.SubItems[0].Text;
+            int idFood = FoodDAO.Instance.GetFoodIdByName(foodName);
+            Table table = lsvBill.Tag as Table;
+            if (table == null)
+            {
+                MessageBox.Show("Không tìm thấy bàn!", "Thông báo");
+                return;
+            }
+
+            int billId = BillDAO.Instance.getUnCheckBillIDbyTableID(table.ID);
+            
 
 
+            if (billId == -1)
+            {
+                MessageBox.Show("Bàn này chưa có bill!", "Thông báo");
+                return;
+            }
+
+            BillInfoDAO.Instance.DeleteFoodFromBill(billId, idFood);
+
+            int idBill = BillDAO.Instance.getUnCheckBillIDbyTableID(table.ID);
+            int countItems = BillInfoDAO.Instance.GetCountItemInBill(idBill);
+            ShowBill(table.ID);
+
+            if (countItems == 0)
+            {
+                BillInfoDAO.Instance.DeleteBillInfoByBillId(idBill);
+
+                
+                BillDAO.Instance.DeleteBill(idBill);
+
+                
+                TableDAO.Instance.UpdateTableStatus(table.ID, "Trống");
+                LoadTable();
+            }
+        }
     }
 }

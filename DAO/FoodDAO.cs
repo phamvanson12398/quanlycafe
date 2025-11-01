@@ -81,6 +81,17 @@ namespace QuanlyquanCoffe.DAO
 
             return result > 0;
         }
+        public int GetFoodIdByName(string foodName)
+        {
+            string query = "SELECT id FROM Food WHERE name = @name";
+            object result = Dataprovider.Instance.ExcuteScalar(query, new object[] { foodName });
+
+            if (result != null)
+                return Convert.ToInt32(result);
+
+            return -1; // Không tìm thấy
+        }
+
         public void DeleteFoodByIDCategory(int id)
         {
             Dataprovider.Instance.ExcuteQuery(string.Format("delete from BillInfo where idFood=(select id from Food where idCategory={0})",id));

@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace QuanlyquanCoffe.DAO
 {
@@ -31,6 +32,27 @@ namespace QuanlyquanCoffe.DAO
             return listbillInfos;
         
         }
+        public void DeleteFoodFromBill(int idBill, int idFood)
+        {
+            string query = @"DELETE FROM BillInfo WHERE idBill = @idBill AND idFood = @idFood";
+
+            Dataprovider.Instance.ExcuteNonQuery(query, new object[] { idBill, idFood });
+        }
+
+        public int GetCountItemInBill(int idBill)
+        {
+            string query = "SELECT COUNT(*) FROM BillInfo WHERE idBill = @idBill";
+            object result = Dataprovider.Instance.ExcuteScalar(query, new object[] { idBill });
+
+            return Convert.ToInt32(result);
+        }
+        public void DeleteBillInfoByBillId(int idBill)
+        {
+            string query = "DELETE FROM BillInfo WHERE idBill = @idBill";
+            Dataprovider.Instance.ExcuteNonQuery(query, new object[] { idBill });
+        }
+
+
         public void InsertBillInfo(int idBill,int idFood,int count)
         {
             Dataprovider.Instance.ExcuteNonQuery("exec USP_InsertBillInfo @idBill , @idFood , @count", new object[] { idBill,idFood,count });

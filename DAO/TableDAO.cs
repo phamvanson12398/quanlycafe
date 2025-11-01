@@ -60,5 +60,11 @@ namespace QuanlyquanCoffe.DAO
             int result = Dataprovider.Instance.ExcuteNonQuery(query);
             return result > 0;
         }
+        public void UpdateTableStatus(int idTable, string status)
+        {
+            string query = "UPDATE TableFood SET status = @status WHERE id = @idTable";
+            Dataprovider.Instance.ExcuteNonQuery(query, new object[] { status, idTable });
+        }
+
     }
 }
