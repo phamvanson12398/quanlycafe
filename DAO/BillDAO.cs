@@ -28,6 +28,9 @@ namespace QuanlyquanCoffe.DAO
             return -1;
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7b7a6f5 (function delete food in bill)
         public void DeleteBill(int idBill)
         {
             string query = "DELETE FROM Bill WHERE id = @idBill";

@@ -697,6 +697,9 @@ namespace QuanlyquanCoffe
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7b7a6f5 (function delete food in bill)
         private void removeItemOfBill_Click(object sender, EventArgs e)
         {
             if (lsvBill.SelectedItems.Count == 0)
@@ -744,11 +747,14 @@ namespace QuanlyquanCoffe
                 LoadTable();
             }
         }
+<<<<<<< HEAD
 =======
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
 =======
 
 
 >>>>>>> cd3d953 (fix switch table and new function aiOrder)
+=======
+>>>>>>> 7b7a6f5 (function delete food in bill)
     }
 }

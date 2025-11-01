@@ -54,6 +54,9 @@
             this.panel4 = new System.Windows.Forms.Panel();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7b7a6f5 (function delete food in bill)
             this.removeItemOfBill = new System.Windows.Forms.Button();
             this.btnRecordCall = new System.Windows.Forms.Button();
 =======
@@ -373,9 +376,13 @@
             // panel4
             // 
 <<<<<<< HEAD
+<<<<<<< HEAD
             this.panel4.Controls.Add(this.removeItemOfBill);
 =======
 >>>>>>> cd3d953 (fix switch table and new function aiOrder)
+=======
+            this.panel4.Controls.Add(this.removeItemOfBill);
+>>>>>>> 7b7a6f5 (function delete food in bill)
             this.panel4.Controls.Add(this.btnRecordCall);
             this.panel4.Controls.Add(this.nmFoodCount);
             this.panel4.Controls.Add(this.btnAddFood);
@@ -389,6 +396,9 @@
             // 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7b7a6f5 (function delete food in bill)
             // removeItemOfBill
             // 
             this.removeItemOfBill.Location = new System.Drawing.Point(237, 3);
@@ -399,8 +409,11 @@
             this.removeItemOfBill.UseVisualStyleBackColor = true;
             this.removeItemOfBill.Click += new System.EventHandler(this.removeItemOfBill_Click);
             // 
+<<<<<<< HEAD
 =======
 >>>>>>> cd3d953 (fix switch table and new function aiOrder)
+=======
+>>>>>>> 7b7a6f5 (function delete food in bill)
             // btnRecordCall
             // 
             this.btnRecordCall.Location = new System.Drawing.Point(285, 3);
@@ -424,13 +437,8 @@
 >>>>>>> cd3d953 (fix switch table and new function aiOrder)
             // nmFoodCount
             // 
-            this.nmFoodCount.Location = new System.Drawing.Point(237, 27);
+            this.nmFoodCount.Location = new System.Drawing.Point(237, 34);
             this.nmFoodCount.Margin = new System.Windows.Forms.Padding(2);
-            this.nmFoodCount.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
             this.nmFoodCount.Name = "nmFoodCount";
 <<<<<<< HEAD
             this.nmFoodCount.Size = new System.Drawing.Size(53, 22);
@@ -580,10 +588,13 @@
 <<<<<<< HEAD
         private System.Windows.Forms.Button btnRecordCall;
         private System.Windows.Forms.Button removeItemOfBill;
+<<<<<<< HEAD
 =======
 >>>>>>> f1546d6 ( goi mon , hoa don , quan ly ban)
 =======
         private System.Windows.Forms.Button btnRecordCall;
 >>>>>>> cd3d953 (fix switch table and new function aiOrder)
+=======
+>>>>>>> 7b7a6f5 (function delete food in bill)
     }
 }
