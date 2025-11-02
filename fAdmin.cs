@@ -29,8 +29,19 @@ namespace QuanlyquanCoffe
         BindingSource accountlist=new BindingSource();
         BindingSource categorylist=new BindingSource();
       BindingSource tablelist=new BindingSource();
-         
+        DataTable dtTempNhap = new DataTable();
+
         public Account loginAccount;
+
+        private void fAdmin_Load(object sender, EventArgs e)
+        {
+            dtTempNhap = new DataTable();
+            dtTempNhap.Columns.Add("TenNL", typeof(string));
+            dtTempNhap.Columns.Add("SoLuong", typeof(decimal));
+            dtTempNhap.Columns.Add("DonGia", typeof(decimal));
+            dtTempNhap.Columns.Add("ThanhTien", typeof(decimal));
+        }
+
         public fAdmin()
         {
             InitializeComponent();
@@ -65,7 +76,7 @@ namespace QuanlyquanCoffe
             LoadCategoryFoodList();
             txbPageBill_TextChanged(this, new EventArgs());
             //ShowTotalBill();
-
+            LoadNguyenLieu();
         }
   
         //Table
@@ -830,10 +841,8 @@ namespace QuanlyquanCoffe
             }
         }
 
-        private void fAdmin_Load(object sender, EventArgs e)
-        {
+       
 
-        }
 
         private void cbFoodCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -958,5 +967,172 @@ namespace QuanlyquanCoffe
                  MessageBox.Show("Ngày kết thúc không thể nhỏ hơn ngày bắt đầu. Đã tự động điều chỉnh.", "Thông báo");
             }
         }
+        void LoadNguyenLieu()
+        {
+            List<NguyenLieu> categories = PhieuNhapDAO.Instance.GetListNguyenLieu();
+            cbNguyenlieu.DataSource = categories;
+            cbNguyenlieu.DisplayMember = "Name";
+        }
+        public void ShowChiTietNhap(int idPhieuNhap)
+        {
+            dgvListNhapKho.Items.Clear();
+            List<ChiTietNhap> list = ChiTietNhapDAO.Instance.GetListByPhieuNhap(idPhieuNhap);
+
+            decimal totalPrice = 0;
+
+            foreach (ChiTietNhap item in list)
+            {
+                // Tính thành tiền cho từng dòng
+                decimal thanhTien = item.Quantity * item.Price;
+
+                // Tạo dòng ListView
+                ListViewItem lsvItem = new ListViewItem(item.TenNguyenLieu);
+                lsvItem.SubItems.Add(item.Quantity.ToString("N0", new CultureInfo("vi-VN")));
+                lsvItem.SubItems.Add(item.Price.ToString("N0", new CultureInfo("vi-VN")));
+                lsvItem.SubItems.Add(thanhTien.ToString("N0", new CultureInfo("vi-VN")));
+                // Cộng tổng
+                totalPrice += thanhTien;
+
+                dgvListNhapKho.Items.Add(lsvItem);
+            }
+
+            // Format tiền VNĐ
+            CultureInfo culture = new CultureInfo("vi-VN");
+            txbTotalImport.Text = totalPrice.ToString("c", culture); // hiển thị tổng tiền
+        }
+
+        private void UpdateTotal()
+        {
+            decimal total = 0;
+
+            foreach (DataRow row in dtTempNhap.Rows)
+            {
+                total += (decimal)row["ThanhTien"];
+            }
+
+            txbTotalImport.Text = total.ToString();
+        }
+
+        private void ShowTempNhap()
+        {
+            dgvListNhapKho.Items.Clear();
+
+            decimal tongTien = 0;
+
+            foreach (DataRow row in dtTempNhap.Rows)
+            {
+                ListViewItem item = new ListViewItem(row["TenNL"].ToString());
+
+                item.SubItems.Add(row["SoLuong"].ToString());
+                item.SubItems.Add(row["DonGia"].ToString());
+                item.SubItems.Add(row["ThanhTien"].ToString());
+
+                dgvListNhapKho.Items.Add(item);
+
+                tongTien += (decimal)row["ThanhTien"];
+            }
+
+            CultureInfo culture = new CultureInfo("vi-VN");
+            txbTotalImport.Text = tongTien.ToString("c", culture);
+        }
+
+
+        private void btnAddNl_Click(object sender, EventArgs e)
+        {
+            string tenNL = (cbNguyenlieu.SelectedItem as NguyenLieu).Name;
+            decimal soLuong = nmQuantity.Value;
+            decimal donGia = nmPrice.Value;
+            decimal thanhTien = soLuong * donGia;
+            dtTempNhap.Rows.Add(tenNL, soLuong, donGia, thanhTien);
+
+            ShowTempNhap();
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            string supplier = txbSupplier.Text;
+            string raw = txbTotalImport.Text.Trim();
+
+            // Xóa chữ "đ", "₫" và khoảng trắng
+            raw = raw.Replace("đ", "")
+                     .Replace("₫", "")
+                     .Replace(" ", "");
+
+            // Xóa dấu phẩy và dấu chấm nếu có
+            raw = raw.Replace(",", "").Replace(".", "");
+
+            decimal total;
+            if (!decimal.TryParse(raw, out total))
+            {
+                MessageBox.Show("Giá trị tổng nhập không hợp lệ!");
+                return;
+            }
+            int idAcc = AccountDAO.Instance.GetIDByUserName(loginAccount.Username);
+
+            int idPhieu = PhieuNhapDAO.Instance.InsertImportReceipt(supplier, total, idAcc);
+
+            foreach (DataRow row in dtTempNhap.Rows)
+            {
+                int idNL = NguyenLieuDAO.Instance.GetIdByName(row["TenNL"].ToString());
+                decimal sl = (decimal)row["SoLuong"];
+                decimal gia = (decimal)row["DonGia"];
+
+                ChiTietNhapDAO.Instance.InsertChiTietNhap(idPhieu, idNL, sl, gia);
+            }
+
+            MessageBox.Show("Lưu phiếu nhập thành công!");
+            dtTempNhap.Clear();           
+            dgvListNhapKho.Items.Clear(); 
+
+            // Reset TextBox
+            txbSupplier.Text = "";
+            txbTotalImport.Text = "0";    
+            nmQuantity.Value = 1;         
+            nmPrice.Value = 0;            
+
+            cbNguyenlieu.SelectedIndex = -1; 
+        }
+        private void RecalculateTempTotal()
+        {
+            decimal total = 0;
+
+            foreach (ListViewItem item in dgvListNhapKho.Items)
+            {
+                // Thành tiền nằm ở SubItem[3]
+                decimal thanhTien = Decimal.Parse(item.SubItems[3].Text);
+                total += thanhTien;
+            }
+
+            txbTotalImport.Text = total.ToString();
+        }
+
+        private void removeItemOfPhieu_Click(object sender, EventArgs e)
+        {
+            if (dgvListNhapKho.Items.Count == 0)
+            {
+                MessageBox.Show("Không có dữ liệu để xóa!");
+                return;
+            }
+
+            if (dgvListNhapKho.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn 1 nguyên liệu để xóa!");
+                return;
+            }
+
+            // Lấy item đang chọn
+            ListViewItem selectedItem = dgvListNhapKho.SelectedItems[0];
+
+            int index = dgvListNhapKho.SelectedItems[0].Index;
+
+            dtTempNhap.Rows[index].Delete();
+
+            dgvListNhapKho.Items.RemoveAt(index);
+
+            RecalculateTempTotal();
+        }
+
+       
     }
 }

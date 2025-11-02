@@ -81,5 +81,18 @@ namespace QuanlyquanCoffe.DAO
             int result = Dataprovider.Instance.ExcuteNonQuery(query);
             return result > 0;
         }
+        public int GetIDByUserName(string username)
+        {
+            string query = "SELECT id FROM Account WHERE username = @username";
+            DataTable data = Dataprovider.Instance.ExcuteQuery(query, new object[] { username });
+
+            if (data.Rows.Count > 0)
+            {
+                return Convert.ToInt32(data.Rows[0]["id"]);
+            }
+
+            return -1;  
+        }
+
     }
 }

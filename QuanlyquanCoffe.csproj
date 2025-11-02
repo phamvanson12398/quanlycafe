@@ -169,16 +169,21 @@
     <Compile Include="DAO\BillDAO.cs" />
     <Compile Include="DAO\BillInfoDAO.cs" />
     <Compile Include="DAO\CategoryDAO.cs" />
+    <Compile Include="DAO\ChiTietNhapDAO.cs" />
     <Compile Include="DAO\Dataprovider.cs" />
     <Compile Include="DAO\FoodDAO.cs" />
+    <Compile Include="DAO\NguyenLieuDAO.cs" />
+    <Compile Include="DAO\PhieuNhapDAO.cs" />
     <Compile Include="DAO\MenuDAO.cs" />
     <Compile Include="DAO\TableDAO.cs" />
     <Compile Include="DTO\Account.cs" />
     <Compile Include="DTO\Bill.cs" />
     <Compile Include="DTO\BillInfo.cs" />
     <Compile Include="DTO\Category.cs" />
+    <Compile Include="DTO\ChiTietNhap.cs" />
     <Compile Include="DTO\Food.cs" />
     <Compile Include="DTO\Menu.cs" />
+    <Compile Include="DTO\NguyenLieu.cs" />
     <Compile Include="DTO\Table.cs" />
     <Compile Include="fAccoutProfile.cs">
       <SubType>Form</SubType>
