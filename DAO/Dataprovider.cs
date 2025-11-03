@@ -21,7 +21,7 @@ namespace QuanlyquanCoffe.DAO
         }
 
         private Dataprovider() { }
-        private string StrConnection = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
+        private string StrConnection = "Data Source=DESKTOP-2PIF1AG\\SQLEXPRESS01;Initial Catalog=QuanLyQuanCoffe2;Integrated Security=True;Encrypt=False";
         //Ham de thuc thi 1 cau lenh tuong tac voi db va no tra lai 1 datatable
         public DataTable ExcuteQuery(string query, object[] parameter=null) {
             DataTable data = new DataTable();

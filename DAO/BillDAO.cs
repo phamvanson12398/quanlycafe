@@ -64,5 +64,19 @@ namespace QuanlyquanCoffe.DAO
                 return 1;
             }
         }
+
+        public DataTable GetIngredientUsageByDate(DateTime checkIn, DateTime checkOut)
+        {
+            // 1. Lấy chuỗi truy vấn là tên của Thủ tục
+            // (Thủ tục USP_GetIngredientUsageByDate bạn đã tạo ở bước trước)
+            string query = "EXEC USP_GetIngredientUsageByDate @datecheckin , @datecheckout";
+
+            // 2. Dùng DataProvider có sẵn của dự án để thực thi
+            // Nó sẽ tự động dùng đúng connectionString, không bao giờ bị lỗi kết nối
+            DataTable data = Dataprovider.Instance.ExcuteQuery(query, new object[] { checkIn, checkOut });
+
+            // 3. Trả về DataTable
+            return data;
+        }
     }
 }

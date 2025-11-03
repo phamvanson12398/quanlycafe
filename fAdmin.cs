@@ -64,6 +64,7 @@ namespace QuanlyquanCoffe
             AddTableBinding();
             LoadCategoryFoodList();
             txbPageBill_TextChanged(this, new EventArgs());
+            LoadIngredientComboBox();
             //ShowTotalBill();
 
         }
@@ -422,6 +423,27 @@ namespace QuanlyquanCoffe
             }catch {
                 MessageBox.Show("Vui lòng nhập đúng tên món ăn ");
             }
+
+            // --- PHẦN 2: CODE MỚI (ĐỂ TẢI CÔNG THỨC) ---
+            try
+            {
+                // Kiểm tra xem txbFoodID có rỗng hay không
+                if (!string.IsNullOrEmpty(txbFoodID.Text))
+                {
+                    int idFood = Convert.ToInt32(txbFoodID.Text);
+                    LoadRecipe(idFood); // <-- GỌI HÀM MỚI Ở ĐÂY
+                }
+                else
+                {
+                    // Nếu txbFoodID bị rỗng (ví dụ: đang thêm món mới)
+                    rdoRecipeNo.Checked = true;
+                }
+            }
+            catch
+            {
+                // Trường hợp này xảy ra khi ID không phải là số (ít khi xảy ra)
+                rdoRecipeNo.Checked = true;
+            }
         }
 
         private void btnEditFood_Click(object sender, EventArgs e)
@@ -603,7 +625,7 @@ namespace QuanlyquanCoffe
         private void ShowTotalBill()
         {
 
-            string connectionString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
+            string connectionString = "Data Source=DESKTOP-2PIF1AG\\SQLEXPRESS01;Initial Catalog=QuanLyQuanCoffe2;Integrated Security=True;Encrypt=False";
 
 
 
@@ -830,14 +852,173 @@ namespace QuanlyquanCoffe
             }
         }
 
-        private void fAdmin_Load(object sender, EventArgs e)
+        void LoadIngredientComboBox()
         {
+            DataTable ingredientList = IngredientDAO.Instance.GetListIngredient();
+
+            cbNguyenLieu.DataSource = ingredientList;
+            cbNguyenLieu.DisplayMember = "name";
+            cbNguyenLieu.ValueMember = "id";
+            // Dùng dt này để cập nhật Label đơn vị
+            cbNguyenLieu.Tag = ingredientList;
+        }
+
+        private void cbNguyenLieu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Cập nhật Label đơn vị
+            if (cbNguyenLieu.SelectedItem != null)
+            {
+                DataRowView drv = cbNguyenLieu.SelectedItem as DataRowView;
+                string unit = drv["unit"].ToString();
+                 lblDonVi.Text = $"({unit})";
+            }
+        }
+
+        void LoadRecipe(int idFood)
+        {
+            // 1. Gọi DAO để lấy công thức
+            DataTable dtRecipe = FoodIngredientMapDAO.Instance.GetListIngredientByFoodID(idFood);
+            dtgvCongThuc.DataSource = dtRecipe;
+            // 2. Kiểm tra xem có công thức không
+            if (dtRecipe.Rows.Count > 0)
+            {
+                // Nếu CÓ công thức:
+                rdoRecipeYes.Checked = true; // Tự động chọn "Có"
+                dtgvCongThuc.DataSource = dtRecipe; // Tải dữ liệu vào lưới công thức
+
+                // =========================================================================
+                // === PHẦN SỬA ĐỔI: ĐIỀU CHỈNH CÁC CỘT SAU KHI DATASOURCE ĐƯỢC GÁN ===
+                // =========================================================================
+
+                // 3. Ẩn cột idIngredient (người dùng không cần thấy)
+                if (dtgvCongThuc.Columns.Contains("idIngredient"))
+                {
+                    dtgvCongThuc.Columns["idIngredient"].Visible = false;
+                }
+
+                // 4. Đảm bảo cột "Xóa" tồn tại (nếu chưa có thì tạo) và chỉnh sửa
+                //    Đây là cột nút mà bạn đã thêm thủ công trong Designer,
+                //    Chúng ta cần đảm bảo nó là cột cuối cùng và có kích thước phù hợp.
+                DataGridViewButtonColumn btnDeleteRecipe = null;
+                if (dtgvCongThuc.Columns.Contains("colDelete"))
+                {
+                    btnDeleteRecipe = dtgvCongThuc.Columns["colDelete"] as DataGridViewButtonColumn;
+                }
+                else // Nếu chưa có, chúng ta tạo mới nó
+                {
+                    btnDeleteRecipe = new DataGridViewButtonColumn();
+                    btnDeleteRecipe.Name = "colDelete";
+                    btnDeleteRecipe.HeaderText = "";
+                    dtgvCongThuc.Columns.Add(btnDeleteRecipe);
+                }
+
+                // Luôn đảm bảo nút "X" có chữ "X" và nằm ở cuối
+                btnDeleteRecipe.Text = "X";
+                btnDeleteRecipe.UseColumnTextForButtonValue = true; // HIỂN THỊ CHỮ "X" TRÊN NÚT
+                btnDeleteRecipe.Width = 30; // CHIỀU RỘNG CỦA CỘT NÚT, ĐỂ NÓ NHỎ HƠN
+                btnDeleteRecipe.FlatStyle = FlatStyle.Flat; // LÀM CHO NÚT TRÔNG ĐẸP HƠN
+                btnDeleteRecipe.DefaultCellStyle.Padding = new Padding(0); // Bỏ padding để nút nhỏ gọn hơn
+                btnDeleteRecipe.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; // Canh giữa nút
+
+                // Di chuyển cột "Xóa" về cuối cùng
+                dtgvCongThuc.Columns["colDelete"].DisplayIndex = dtgvCongThuc.ColumnCount - 1;
+
+
+                // 5. Điều chỉnh kích thước các cột khác để đẹp hơn
+                if (dtgvCongThuc.Columns.Contains("Tên nguyên liệu"))
+                {
+                    dtgvCongThuc.Columns["Tên nguyên liệu"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; 
+                }
+                if (dtgvCongThuc.Columns.Contains("Định lượng"))
+                {
+                    dtgvCongThuc.Columns["Định lượng"].Width = 80; // Chiều rộng cho cột số
+                    dtgvCongThuc.Columns["Định lượng"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                }
+                if (dtgvCongThuc.Columns.Contains("Đơn vị"))
+                {
+                    dtgvCongThuc.Columns["Đơn vị"].Width = 50; // Chiều rộng cho cột đơn vị
+                    dtgvCongThuc.Columns["Đơn vị"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                }
+                // =========================================================================
+
+            }
+            else
+            {
+                // Nếu KHÔNG có công thức:
+                rdoRecipeNo.Checked = true; // Tự động chọn "Không"
+
+            }
 
         }
 
-        private void cbFoodCategory_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnThemNguyenLieu_Click(object sender, EventArgs e)
         {
+            try
+            {
+                int idFood = Convert.ToInt32(txbFoodID.Text);                                                           
 
+                int idIngredient = (int)cbNguyenLieu.SelectedValue;
+                decimal amount = nmDinhLuong.Value;
+
+                if (amount <= 0)
+                {
+                    MessageBox.Show("Định lượng phải lớn hơn 0.");
+                    return;
+                }
+
+                if (FoodIngredientMapDAO.Instance.InsertOrUpdateIngredient(idFood, idIngredient, amount))
+                {
+                    MessageBox.Show("Cập nhật công thức thành công!");
+                    LoadRecipe(idFood); // Tải lại lưới công thức ngay lập tức
+                }
+                else
+                {
+                    MessageBox.Show("Có lỗi khi cập nhật công thức!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }
+        }
+
+
+        private void dtgvCongThuc_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Bỏ qua nếu click vào header
+            if (e.RowIndex < 0) return;
+
+            // Kiểm tra xem có click vào cột "Xóa" (tên là 'colDelete') không
+            // (Hãy đảm bảo tên 'colDelete' khớp với tên bạn đặt trong Designer)
+            if (dtgvCongThuc.Columns[e.ColumnIndex].Name == "colDelete")
+            {
+                try
+                {
+                    // === DÙNG TÊN ĐÚNG Ở ĐÂY ===
+                    int idFood = Convert.ToInt32(txbFoodID.Text); // Dùng "txbFoodID"
+                                                                  // ==========================
+
+                    // Lấy idIngredient từ cột đã bị ẩn của dòng được click
+                    int idIngredient = (int)dtgvCongThuc.Rows[e.RowIndex].Cells["idIngredient"].Value;
+
+                    if (MessageBox.Show("Bạn có chắc muốn xóa nguyên liệu này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        if (FoodIngredientMapDAO.Instance.DeleteIngredient(idFood, idIngredient))
+                        {
+                            //MessageBox.Show("Xóa thành công!");
+                            LoadRecipe(idFood); // Tải lại lưới công thức
+                        }
+                        else
+                        {
+                            MessageBox.Show("Có lỗi khi xóa!");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi: " + ex.Message);
+                }
+            }
         }
 
         private void pictureBox16_Click_1(object sender, EventArgs e)
@@ -852,36 +1033,38 @@ namespace QuanlyquanCoffe
 
         private void btnExportExcel_Click_1(object sender, EventArgs e)
         {
-            // 1. LẤY DỮ LIỆU TỪ DATAGRIDVIEW
-            DataTable dt = (DataTable)dtgvBill.DataSource;
+            // 1. LẤY DỮ LIỆU TỪ DATAGRIDVIEW (CHO SHEET 1)
+            DataTable dtDoanhThu = (DataTable)dtgvBill.DataSource;
+
+            // *** LẤY DỮ LIỆU CHO SHEET 2 ***
+            // (Giả sử bạn đã tạo IngredientDAO.cs và BillDAO.cs có hàm này)
+            DataTable dtNguyenLieu = BillDAO.Instance.GetIngredientUsageByDate(dtpkfromDate.Value, dtpktoDate.Value);
 
             // 2. YÊU CẦU NGƯỜI DÙNG CHỌN NƠI LƯU FILE
             SaveFileDialog saveDialog = new SaveFileDialog();
             saveDialog.Filter = "Excel Files (*.xlsx)|*.xlsx|All Files (*.*)|*.*";
-            // Tự động tạo tên file dựa trên ngày bắt đầu và kết thúc
-            saveDialog.FileName = $"ThongKeDoanhThu_Tu_{dtpkfromDate.Value:dd-MM-yyyy}_Den_{dtpktoDate.Value:dd-MM-yyyy}.xlsx";
+            saveDialog.FileName = $"ThongKeTongHop_Tu_{dtpkfromDate.Value:dd-MM-yyyy}_Den_{dtpktoDate.Value:dd-MM-yyyy}.xlsx";
 
             if (saveDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    // 3. SET LICENSE
                     ExcelPackage.License.SetNonCommercialPersonal("fAdmin");
 
                     using (var p = new ExcelPackage())
                     {
-                        // TẠO MỘT SHEET MỚI
+                        // =======================================================
+                        // 4. TẠO SHEET 1: DOANH THU
+                        // =======================================================
                         var ws = p.Workbook.Worksheets.Add("DoanhThu");
-
-                        // 4. LOAD DỮ LIỆU TỪ DATATABLE VÀO SHEET
-                        ws.Cells["A1"].LoadFromDataTable(dt, true);
+                        ws.Cells["A1"].LoadFromDataTable(dtDoanhThu, true);
 
                         // =======================================================
                         // 4.1. LÀM ĐẸP (STYLING) CHO FILE EXCEL
                         // =======================================================
 
                         // A. Format cho Header (Dòng 1)
-                        int lastColumn = ws.Dimension.End.Column;
+                        int lastColumn = ws.Dimension.End.Column; // Sẽ là 6
                         using (var range = ws.Cells[1, 1, 1, lastColumn])
                         {
                             range.Style.Font.Bold = true;
@@ -890,53 +1073,86 @@ namespace QuanlyquanCoffe
                             range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                         }
 
-                        // B. Format cột "Tổng tiền" (Cột B = 2)
-                        ws.Column(2).Style.Numberformat.Format = "#,##0";
-                        ws.Column(2).Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+                        // --- BẮT ĐẦU SỬA LỖI (CODE MỚI) ---
 
-                        // C. Format cột "Ngày vào" (Cột C = 3)
-                        ws.Column(3).Style.Numberformat.Format = "dd/MM/yyyy HH:mm";
+                        // *** SỬA 1: Ẩn cột 'id' (Cột A - cột 1) ***
+                        ws.Column(1).Hidden = true;
 
-                        // D. Format cột "Ngày ra" (Cột D = 4)
+                        // *** SỬA 2: Dịch chuyển các cột format sang phải 1 ***
+
+                        // B. Format cột "Tổng tiền" (BÂY GIỜ LÀ CỘT C = 3)
+                        ws.Column(3).Style.Numberformat.Format = "#,##0";
+                        ws.Column(3).Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+
+                        // C. Format cột "Ngày vào" (BÂY GIỜ LÀ CỘT D = 4)
                         ws.Column(4).Style.Numberformat.Format = "dd/MM/yyyy HH:mm";
 
+                        // D. Format cột "Ngày ra" (BÂY GIỜ LÀ CỘT E = 5)
+                        ws.Column(5).Style.Numberformat.Format = "dd/MM/yyyy HH:mm";
+
+                        // (Cột F - Giảm giá - Cột 6 - không cần format)
 
                         // =======================================================
-                        // 4.2. THÊM TỔNG DOANH SỐ VÀO CUỐI (PHẦN MỚI)
+                        // 4.2. THÊM TỔNG DOANH SỐ VÀO CUỐI
                         // =======================================================
 
-                        // Lấy dòng cuối cùng mà dữ liệu chiếm + 2 (để cách ra 1 dòng)
                         int totalRow = ws.Dimension.End.Row + 2;
 
-                        // Ghi chữ "Doanh số:" vào cột A (cột 1)
-                        var labelCell = ws.Cells[totalRow, 1];
+                        // *** SỬA 3: Dịch chuyển vị trí "Tổng Doanh số" ***
+
+                        // Ghi chữ "Doanh số:" vào cột B (cột 2) (Vì cột A bị ẩn)
+                        var labelCell = ws.Cells[totalRow, 2];
                         labelCell.Value = "Doanh số:";
                         labelCell.Style.Font.Bold = true;
-                        labelCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right; // Căn phải
+                        labelCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
 
-                        // Ghi giá trị Doanh số (lấy từ TextBox) vào cột B (cột 2)
-                        var valueCell = ws.Cells[totalRow, 2];
-                        valueCell.Value = txbTotalBillAll.Text; // Lấy text từ ô Doanh số
+                        // Ghi giá trị Doanh số (lấy từ TextBox) vào cột C (cột 3)
+                        var valueCell = ws.Cells[totalRow, 3];
+                        valueCell.Value = txbTotalBillAll.Text;
                         valueCell.Style.Font.Bold = true;
-                        valueCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right; // Căn phải
-                                                                                              // Đặt định dạng số cho ô này (dù nó là text)
+                        valueCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
                         valueCell.Style.Numberformat.Format = "#,##0";
 
 
-                        // E. (Tùy chọn) Tự động dãn cột cho vừa dữ liệu
-                        // Phải đặt ở cuối sau khi đã format và thêm tổng
+                        // E. Tự động dãn cột
                         ws.Cells[ws.Dimension.Address].AutoFitColumns();
 
-                        // Điều chỉnh lại cột A và B một chút cho đẹp hơn
-                        ws.Column(1).Width = ws.Column(1).Width + 5;
-                        ws.Column(2).Width = ws.Column(2).Width + 5;
+                        // *** SỬA 4: Điều chỉnh lại cột B và C ***
+                        ws.Column(2).Width = ws.Column(2).Width + 5; // Cột Tên Bàn
+                        ws.Column(3).Width = ws.Column(3).Width + 5; // Cột Tổng tiền
 
-                        // 5. LƯU FILE
+                        // --- KẾT THÚC SỬA LỖI ---
+
+
+                        // =======================================================
+                        // 5. TẠO SHEET 2: NGUYÊN LIỆU 
+                        // =======================================================
+                        var wsNguyenLieu = p.Workbook.Worksheets.Add("NguyenLieuSuDung");
+                        wsNguyenLieu.Cells["A1"].LoadFromDataTable(dtNguyenLieu, true);
+
+                        // (Toàn bộ code format cho Sheet 2 giữ nguyên...)
+                        int lastColumnNL = wsNguyenLieu.Dimension.End.Column;
+                        using (var range = wsNguyenLieu.Cells[1, 1, 1, lastColumnNL])
+                        {
+                            range.Style.Font.Bold = true;
+                            range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            range.Style.Fill.BackgroundColor.SetColor(Color.LightSkyBlue);
+                            range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        }
+                        wsNguyenLieu.Column(2).Style.Numberformat.Format = "#,##0";
+                        wsNguyenLieu.Column(2).Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+                        wsNguyenLieu.Column(3).Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                        wsNguyenLieu.Cells[wsNguyenLieu.Dimension.Address].AutoFitColumns();
+                        wsNguyenLieu.Column(1).Width = wsNguyenLieu.Column(1).Width + 5;
+
+                        // =======================================================
+                        // 6. LƯU FILE
+                        // =======================================================
                         FileInfo file = new FileInfo(saveDialog.FileName);
                         p.SaveAs(file);
                     }
 
-                    MessageBox.Show("Xuất file Excel thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Xuất file Excel thống kê thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -957,6 +1173,17 @@ namespace QuanlyquanCoffe
                 // (Tùy chọn) Hiển thị thông báo cho người dùng
                  MessageBox.Show("Ngày kết thúc không thể nhỏ hơn ngày bắt đầu. Đã tự động điều chỉnh.", "Thông báo");
             }
+        }
+
+        private void rdoRecipe_CheckedChanged(object sender, EventArgs e)
+        {
+            panelCongThuc.Visible = rdoRecipeYes.Checked;
+        }
+
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
