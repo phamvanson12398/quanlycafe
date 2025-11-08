@@ -77,6 +77,7 @@ namespace QuanlyquanCoffe
             txbPageBill_TextChanged(this, new EventArgs());
             //ShowTotalBill();
             LoadNguyenLieu();
+            LoadIngredientComboBox();
         }
   
         //Table
@@ -411,7 +412,7 @@ namespace QuanlyquanCoffe
         {
             try
             {
-                if (dtgvFood.SelectedCells.Count > 0&& dtgvFood.SelectedCells[0].OwningRow.Cells["Loại"].Value!=null)
+                if (dtgvFood.SelectedCells.Count > 0 && dtgvFood.SelectedCells[0].OwningRow.Cells["Loại"].Value != null)
                 {
                     int id = (int)dtgvFood.SelectedCells[0].OwningRow.Cells["Loại"].Value;
 
@@ -430,8 +431,31 @@ namespace QuanlyquanCoffe
                     }
                     cbFoodCategory.SelectedIndex = index;
                 }
-            }catch {
+            }
+            catch
+            {
                 MessageBox.Show("Vui lòng nhập đúng tên món ăn ");
+            }
+
+            // --- PHẦN 2: CODE MỚI (ĐỂ TẢI CÔNG THỨC) ---
+            try
+            {
+                // Kiểm tra xem txbFoodID có rỗng hay không
+                if (!string.IsNullOrEmpty(txbFoodID.Text))
+                {
+                    int idFood = Convert.ToInt32(txbFoodID.Text);
+                    LoadRecipe(idFood); // <-- GỌI HÀM MỚI Ở ĐÂY
+                }
+                else
+                {
+                    // Nếu txbFoodID bị rỗng (ví dụ: đang thêm món mới)
+                    rdoRecipeNo.Checked = true;
+                }
+            }
+            catch
+            {
+                // Trường hợp này xảy ra khi ID không phải là số (ít khi xảy ra)
+                rdoRecipeNo.Checked = true;
             }
         }
 
@@ -614,7 +638,7 @@ namespace QuanlyquanCoffe
         private void ShowTotalBill()
         {
 
-            string connectionString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=QuanLyQuanCoffe;Integrated Security=True;Encrypt=False";
+            string connectionString = "Data Source=DESKTOP-2PIF1AG\\SQLEXPRESS01;Initial Catalog=QuanLyQuanCoffe3;Integrated Security=True;Encrypt=False";
 
 
 
@@ -1133,6 +1157,182 @@ namespace QuanlyquanCoffe
             RecalculateTempTotal();
         }
 
-       
+
+        private void btnThemNguyenLieu_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int idFood = Convert.ToInt32(txbFoodID.Text);
+
+                int idIngredient = (int)cbNguyenLieu_ThucAn.SelectedValue;
+                decimal amount = nmDinhLuong.Value;
+
+                if (amount <= 0)
+                {
+                    MessageBox.Show("Định lượng phải lớn hơn 0.");
+                    return;
+                }
+
+                if (FoodIngredientMapDAO.Instance.InsertOrUpdateIngredient(idFood, idIngredient, amount))
+                {
+                    MessageBox.Show("Cập nhật công thức thành công!");
+                    LoadRecipe(idFood); // Tải lại lưới công thức ngay lập tức
+                }
+                else
+                {
+                    MessageBox.Show("Có lỗi khi cập nhật công thức!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }
+        }
+
+        void LoadIngredientComboBox()
+        {
+            List<QuanlyquanCoffe.DTO.NguyenLieu> ingredientList = NguyenLieuDAO.Instance.GetListNguyenLieu();
+
+            cbNguyenLieu_ThucAn.DataSource = ingredientList;
+
+            // Bước 2: Dùng tên Thuộc tính (Property) của class DTO (viết hoa)
+            cbNguyenLieu_ThucAn.DisplayMember = "Name"; // Thay vì "name"
+            cbNguyenLieu_ThucAn.ValueMember = "ID";   // Thay vì "id"
+
+            // Dùng dt này để cập nhật Label đơn vị
+            cbNguyenLieu_ThucAn.Tag = ingredientList;
+        }
+
+        private void cbNguyenLieu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Cập nhật Label đơn vị
+            if (cbNguyenLieu_ThucAn.SelectedItem != null)
+            {
+                QuanlyquanCoffe.DTO.NguyenLieu selectedIngredient = cbNguyenLieu_ThucAn.SelectedItem as QuanlyquanCoffe.DTO.NguyenLieu;
+                string unit = selectedIngredient.Unit; // Đơn giản hơn code cũ rất nhiều!
+                 lblDonVi.Text = $"({unit})";
+            }
+        }
+
+        void LoadRecipe(int idFood)
+        {
+            // 1. Gọi DAO để lấy công thức
+            DataTable dtRecipe = FoodIngredientMapDAO.Instance.GetListIngredientByFoodID(idFood);
+            dtgvCongThuc.DataSource = dtRecipe;
+            // 2. Kiểm tra xem có công thức không
+            if (dtRecipe.Rows.Count > 0)
+            {
+                // Nếu CÓ công thức:
+                rdoRecipeYes.Checked = true; // Tự động chọn "Có"
+                dtgvCongThuc.DataSource = dtRecipe; // Tải dữ liệu vào lưới công thức
+
+                // =========================================================================
+                // === PHẦN SỬA ĐỔI: ĐIỀU CHỈNH CÁC CỘT SAU KHI DATASOURCE ĐƯỢC GÁN ===
+                // =========================================================================
+
+                // 3. Ẩn cột idIngredient (người dùng không cần thấy)
+                if (dtgvCongThuc.Columns.Contains("idIngredient"))
+                {
+                    dtgvCongThuc.Columns["idIngredient"].Visible = false;
+                }
+
+                // 4. Đảm bảo cột "Xóa" tồn tại (nếu chưa có thì tạo) và chỉnh sửa
+                //    Đây là cột nút mà bạn đã thêm thủ công trong Designer,
+                //    Chúng ta cần đảm bảo nó là cột cuối cùng và có kích thước phù hợp.
+                DataGridViewButtonColumn btnDeleteRecipe = null;
+                if (dtgvCongThuc.Columns.Contains("colDelete"))
+                {
+                    btnDeleteRecipe = dtgvCongThuc.Columns["colDelete"] as DataGridViewButtonColumn;
+                }
+                else // Nếu chưa có, chúng ta tạo mới nó
+                {
+                    btnDeleteRecipe = new DataGridViewButtonColumn();
+                    btnDeleteRecipe.Name = "colDelete";
+                    btnDeleteRecipe.HeaderText = "";
+                    dtgvCongThuc.Columns.Add(btnDeleteRecipe);
+                }
+
+                // Luôn đảm bảo nút "X" có chữ "X" và nằm ở cuối
+                btnDeleteRecipe.Text = "X";
+                btnDeleteRecipe.UseColumnTextForButtonValue = true; // HIỂN THỊ CHỮ "X" TRÊN NÚT
+                btnDeleteRecipe.Width = 30; // CHIỀU RỘNG CỦA CỘT NÚT, ĐỂ NÓ NHỎ HƠN
+                btnDeleteRecipe.FlatStyle = FlatStyle.Flat; // LÀM CHO NÚT TRÔNG ĐẸP HƠN
+                btnDeleteRecipe.DefaultCellStyle.Padding = new Padding(0); // Bỏ padding để nút nhỏ gọn hơn
+                btnDeleteRecipe.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; // Canh giữa nút
+
+                // Di chuyển cột "Xóa" về cuối cùng
+                dtgvCongThuc.Columns["colDelete"].DisplayIndex = dtgvCongThuc.ColumnCount - 1;
+
+
+                // 5. Điều chỉnh kích thước các cột khác để đẹp hơn
+                if (dtgvCongThuc.Columns.Contains("Tên nguyên liệu"))
+                {
+                    dtgvCongThuc.Columns["Tên nguyên liệu"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                }
+                if (dtgvCongThuc.Columns.Contains("Định lượng"))
+                {
+                    dtgvCongThuc.Columns["Định lượng"].Width = 80; // Chiều rộng cho cột số
+                    dtgvCongThuc.Columns["Định lượng"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                }
+                if (dtgvCongThuc.Columns.Contains("Đơn vị"))
+                {
+                    dtgvCongThuc.Columns["Đơn vị"].Width = 50; // Chiều rộng cho cột đơn vị
+                    dtgvCongThuc.Columns["Đơn vị"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                }
+                // =========================================================================
+
+            }
+            else
+            {
+                // Nếu KHÔNG có công thức:
+                rdoRecipeNo.Checked = true; // Tự động chọn "Không"
+
+            }
+
+        }
+
+
+        private void rdoRecipe_CheckedChanged(object sender, EventArgs e)
+        {
+            panelCongThuc.Visible = rdoRecipeYes.Checked;
+        }
+
+        private void dtgvCongThuc_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Bỏ qua nếu click vào header
+            if (e.RowIndex < 0) return;
+
+            // Kiểm tra xem có click vào cột "Xóa" (tên là 'colDelete') không
+            // (Hãy đảm bảo tên 'colDelete' khớp với tên bạn đặt trong Designer)
+            if (dtgvCongThuc.Columns[e.ColumnIndex].Name == "colDelete")
+            {
+                try
+                {
+                    // === DÙNG TÊN ĐÚNG Ở ĐÂY ===
+                    int idFood = Convert.ToInt32(txbFoodID.Text); // Dùng "txbFoodID"
+                                                                  // ==========================
+
+                    // Lấy idIngredient từ cột đã bị ẩn của dòng được click
+                    int idIngredient = (int)dtgvCongThuc.Rows[e.RowIndex].Cells["idIngredient"].Value;
+
+                    if (MessageBox.Show("Bạn có chắc muốn xóa nguyên liệu này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        if (FoodIngredientMapDAO.Instance.DeleteIngredient(idFood, idIngredient))
+                        {
+                            //MessageBox.Show("Xóa thành công!");
+                            LoadRecipe(idFood); // Tải lại lưới công thức
+                        }
+                        else
+                        {
+                            MessageBox.Show("Có lỗi khi xóa!");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi: " + ex.Message);
+                }
+            }
+        }
     }
 }
