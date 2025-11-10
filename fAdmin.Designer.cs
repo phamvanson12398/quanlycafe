@@ -1396,7 +1396,7 @@
             // 
             this.pictureBox8.BackColor = System.Drawing.Color.PeachPuff;
             this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
-            this.pictureBox8.Location = new System.Drawing.Point(360, 26);
+            this.pictureBox8.Location = new System.Drawing.Point(370, 26);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(33, 37);
             this.pictureBox8.TabIndex = 3;
@@ -1406,7 +1406,7 @@
             // 
             this.pictureBox7.BackColor = System.Drawing.Color.PeachPuff;
             this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
-            this.pictureBox7.Location = new System.Drawing.Point(3, 26);
+            this.pictureBox7.Location = new System.Drawing.Point(19, 26);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(45, 37);
             this.pictureBox7.TabIndex = 2;
@@ -1416,7 +1416,7 @@
             // 
             this.pictureBox6.BackColor = System.Drawing.Color.PeachPuff;
             this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(248, 26);
+            this.pictureBox6.Location = new System.Drawing.Point(256, 26);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(33, 37);
             this.pictureBox6.TabIndex = 2;
@@ -1426,7 +1426,7 @@
             // 
             this.pictureBox5.BackColor = System.Drawing.Color.PeachPuff;
             this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(132, 26);
+            this.pictureBox5.Location = new System.Drawing.Point(141, 26);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(33, 37);
             this.pictureBox5.TabIndex = 1;
@@ -1437,7 +1437,7 @@
             // 
             this.button3.BackColor = System.Drawing.Color.PeachPuff;
             this.button3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(348, 3);
+            this.button3.Location = new System.Drawing.Point(360, 4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(108, 85);
             this.button3.TabIndex = 5;
@@ -1450,7 +1450,7 @@
             // 
             this.btnDeleteFood.BackColor = System.Drawing.Color.PeachPuff;
             this.btnDeleteFood.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteFood.Location = new System.Drawing.Point(232, 3);
+            this.btnDeleteFood.Location = new System.Drawing.Point(246, 4);
             this.btnDeleteFood.Name = "btnDeleteFood";
             this.btnDeleteFood.Size = new System.Drawing.Size(108, 85);
             this.btnDeleteFood.TabIndex = 4;
@@ -1463,7 +1463,7 @@
             // 
             this.btnEditFood.BackColor = System.Drawing.Color.PeachPuff;
             this.btnEditFood.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditFood.Location = new System.Drawing.Point(118, 3);
+            this.btnEditFood.Location = new System.Drawing.Point(132, 7);
             this.btnEditFood.Name = "btnEditFood";
             this.btnEditFood.Size = new System.Drawing.Size(108, 85);
             this.btnEditFood.TabIndex = 3;
@@ -1476,7 +1476,7 @@
             // 
             this.btnAddFood.BackColor = System.Drawing.Color.PeachPuff;
             this.btnAddFood.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddFood.Location = new System.Drawing.Point(-4, 3);
+            this.btnAddFood.Location = new System.Drawing.Point(10, 7);
             this.btnAddFood.Name = "btnAddFood";
             this.btnAddFood.Size = new System.Drawing.Size(116, 85);
             this.btnAddFood.TabIndex = 2;
