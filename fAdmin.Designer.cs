@@ -156,10 +156,11 @@
             this.dtgvBill = new System.Windows.Forms.DataGridView();
             this.btnAddPhieu = new System.Windows.Forms.TabControl();
             this.import = new System.Windows.Forms.TabPage();
-            this.label21 = new System.Windows.Forms.Label();
+            this.TT = new System.Windows.Forms.Label();
             this.txbTotalImport = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.panel29 = new System.Windows.Forms.Panel();
+            this.cNLAdd = new System.Windows.Forms.Panel();
+            this.DG = new System.Windows.Forms.Label();
             this.nmPrice = new System.Windows.Forms.NumericUpDown();
             this.removeItemOfPhieu = new System.Windows.Forms.Button();
             this.btnAddNl = new System.Windows.Forms.Button();
@@ -169,11 +170,10 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panel20 = new System.Windows.Forms.Panel();
+            this.CNCC = new System.Windows.Forms.Panel();
             this.txbSupplier = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
+            this.NCC = new System.Windows.Forms.Label();
+            this.TTNK = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nmQuantity)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).BeginInit();
@@ -243,9 +243,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgvBill)).BeginInit();
             this.btnAddPhieu.SuspendLayout();
             this.import.SuspendLayout();
-            this.panel29.SuspendLayout();
+            this.cNLAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmPrice)).BeginInit();
-            this.panel20.SuspendLayout();
+            this.CNCC.SuspendLayout();
             this.SuspendLayout();
             // 
             // nmQuantity
@@ -1735,13 +1735,13 @@
             // 
             // import
             // 
-            this.import.Controls.Add(this.label21);
+            this.import.Controls.Add(this.TT);
             this.import.Controls.Add(this.txbTotalImport);
             this.import.Controls.Add(this.btnAdd);
-            this.import.Controls.Add(this.panel29);
+            this.import.Controls.Add(this.cNLAdd);
             this.import.Controls.Add(this.dgvListNhapKho);
-            this.import.Controls.Add(this.panel20);
-            this.import.Controls.Add(this.label20);
+            this.import.Controls.Add(this.CNCC);
+            this.import.Controls.Add(this.TTNK);
             this.import.Location = new System.Drawing.Point(4, 22);
             this.import.Name = "import";
             this.import.Padding = new System.Windows.Forms.Padding(3);
@@ -1750,17 +1750,17 @@
             this.import.Text = "Nhập";
             this.import.UseVisualStyleBackColor = true;
             // 
-            // label21
+            // TT
             // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.ForeColor = System.Drawing.Color.Black;
-            this.label21.Location = new System.Drawing.Point(221, 382);
-            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(83, 20);
-            this.label21.TabIndex = 17;
-            this.label21.Text = "Tổng tiền :";
+            this.TT.AutoSize = true;
+            this.TT.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TT.ForeColor = System.Drawing.Color.Black;
+            this.TT.Location = new System.Drawing.Point(221, 382);
+            this.TT.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.TT.Name = "TT";
+            this.TT.Size = new System.Drawing.Size(83, 20);
+            this.TT.TabIndex = 17;
+            this.TT.Text = "Tổng tiền :";
             // 
             // txbTotalImport
             // 
@@ -1788,19 +1788,31 @@
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // panel29
+            // cNLAdd
             // 
-            this.panel29.Controls.Add(this.label22);
-            this.panel29.Controls.Add(this.nmPrice);
-            this.panel29.Controls.Add(this.removeItemOfPhieu);
-            this.panel29.Controls.Add(this.nmQuantity);
-            this.panel29.Controls.Add(this.btnAddNl);
-            this.panel29.Controls.Add(this.cbNguyenlieu);
-            this.panel29.Location = new System.Drawing.Point(151, 99);
-            this.panel29.Margin = new System.Windows.Forms.Padding(2);
-            this.panel29.Name = "panel29";
-            this.panel29.Size = new System.Drawing.Size(350, 59);
-            this.panel29.TabIndex = 14;
+            this.cNLAdd.Controls.Add(this.DG);
+            this.cNLAdd.Controls.Add(this.nmPrice);
+            this.cNLAdd.Controls.Add(this.removeItemOfPhieu);
+            this.cNLAdd.Controls.Add(this.nmQuantity);
+            this.cNLAdd.Controls.Add(this.btnAddNl);
+            this.cNLAdd.Controls.Add(this.cbNguyenlieu);
+            this.cNLAdd.Location = new System.Drawing.Point(151, 99);
+            this.cNLAdd.Margin = new System.Windows.Forms.Padding(2);
+            this.cNLAdd.Name = "cNLAdd";
+            this.cNLAdd.Size = new System.Drawing.Size(350, 59);
+            this.cNLAdd.TabIndex = 14;
+            // 
+            // DG
+            // 
+            this.DG.AutoSize = true;
+            this.DG.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DG.ForeColor = System.Drawing.Color.Black;
+            this.DG.Location = new System.Drawing.Point(3, 34);
+            this.DG.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.DG.Name = "DG";
+            this.DG.Size = new System.Drawing.Size(61, 17);
+            this.DG.TabIndex = 18;
+            this.DG.Text = "Đơn giá:";
             // 
             // nmPrice
             // 
@@ -1879,15 +1891,15 @@
             this.columnHeader4.Text = "Thành tiền";
             this.columnHeader4.Width = 75;
             // 
-            // panel20
+            // CNCC
             // 
-            this.panel20.Controls.Add(this.txbSupplier);
-            this.panel20.Controls.Add(this.label19);
-            this.panel20.Location = new System.Drawing.Point(151, 58);
-            this.panel20.Margin = new System.Windows.Forms.Padding(2);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(348, 37);
-            this.panel20.TabIndex = 12;
+            this.CNCC.Controls.Add(this.txbSupplier);
+            this.CNCC.Controls.Add(this.NCC);
+            this.CNCC.Location = new System.Drawing.Point(151, 58);
+            this.CNCC.Margin = new System.Windows.Forms.Padding(2);
+            this.CNCC.Name = "CNCC";
+            this.CNCC.Size = new System.Drawing.Size(348, 37);
+            this.CNCC.TabIndex = 12;
             // 
             // txbSupplier
             // 
@@ -1897,40 +1909,28 @@
             this.txbSupplier.Size = new System.Drawing.Size(186, 20);
             this.txbSupplier.TabIndex = 1;
             // 
-            // label19
+            // NCC
             // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(2, 9);
-            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(125, 19);
-            this.label19.TabIndex = 0;
-            this.label19.Text = "Nhà cung cấp :";
+            this.NCC.AutoSize = true;
+            this.NCC.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NCC.Location = new System.Drawing.Point(2, 9);
+            this.NCC.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.NCC.Name = "NCC";
+            this.NCC.Size = new System.Drawing.Size(125, 19);
+            this.NCC.TabIndex = 0;
+            this.NCC.Text = "Nhà cung cấp :";
             // 
-            // label20
+            // TTNK
             // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Arial", 22.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ForeColor = System.Drawing.Color.Salmon;
-            this.label20.Location = new System.Drawing.Point(201, 22);
-            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(236, 34);
-            this.label20.TabIndex = 11;
-            this.label20.Text = "Phiếu nhập kho";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.ForeColor = System.Drawing.Color.Black;
-            this.label22.Location = new System.Drawing.Point(3, 34);
-            this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(61, 17);
-            this.label22.TabIndex = 18;
-            this.label22.Text = "Đơn giá:";
+            this.TTNK.AutoSize = true;
+            this.TTNK.Font = new System.Drawing.Font("Arial", 22.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TTNK.ForeColor = System.Drawing.Color.Salmon;
+            this.TTNK.Location = new System.Drawing.Point(201, 22);
+            this.TTNK.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.TTNK.Name = "TTNK";
+            this.TTNK.Size = new System.Drawing.Size(236, 34);
+            this.TTNK.TabIndex = 11;
+            this.TTNK.Text = "Phiếu nhập kho";
             // 
             // fAdmin
             // 
@@ -2032,11 +2032,11 @@
             this.btnAddPhieu.ResumeLayout(false);
             this.import.ResumeLayout(false);
             this.import.PerformLayout();
-            this.panel29.ResumeLayout(false);
-            this.panel29.PerformLayout();
+            this.cNLAdd.ResumeLayout(false);
+            this.cNLAdd.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmPrice)).EndInit();
-            this.panel20.ResumeLayout(false);
-            this.panel20.PerformLayout();
+            this.CNCC.ResumeLayout(false);
+            this.CNCC.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2169,24 +2169,24 @@
         private System.Windows.Forms.Button btnExportExcel;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabPage import;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Panel panel20;
+        private System.Windows.Forms.Label TTNK;
+        private System.Windows.Forms.Panel CNCC;
         private System.Windows.Forms.TextBox txbSupplier;
-        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label NCC;
         private System.Windows.Forms.ListView dgvListNhapKho;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.Panel panel29;
+        private System.Windows.Forms.Panel cNLAdd;
         private System.Windows.Forms.Button removeItemOfPhieu;
         private System.Windows.Forms.Button btnAddNl;
         private System.Windows.Forms.ComboBox cbNguyenlieu;
         private System.Windows.Forms.NumericUpDown nmPrice;
-        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label TT;
         private System.Windows.Forms.TextBox txbTotalImport;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.NumericUpDown nmQuantity;
-        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label DG;
     }
 }
