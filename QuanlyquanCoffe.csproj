@@ -172,6 +172,7 @@
     <Compile Include="DAO\ChiTietNhapDAO.cs" />
     <Compile Include="DAO\Dataprovider.cs" />
     <Compile Include="DAO\FoodDAO.cs" />
+    <Compile Include="DAO\FoodIngredientMapDAO.cs" />
     <Compile Include="DAO\NguyenLieuDAO.cs" />
     <Compile Include="DAO\PhieuNhapDAO.cs" />
     <Compile Include="DAO\MenuDAO.cs" />
