@@ -50,5 +50,17 @@ namespace QuanlyquanCoffe.DAO
             int result = Dataprovider.Instance.ExcuteNonQuery(query, new object[] { idFood, idIngredient });
             return result > 0;
         }
+
+        public bool DeleteByFoodID(int idFood)
+        {
+            // Lệnh SQL: Xóa tất cả các hàng trong FoodIngredientMap có idFood tương ứng
+            string query = "DELETE FROM dbo.FoodIngredientMap WHERE idFood = @idFood";
+
+            // Sử dụng Dataprovider để thực thi lệnh
+            int result = Dataprovider.Instance.ExcuteNonQuery(query, new object[] { idFood });
+
+            // Trả về true nếu có ít nhất 1 hàng bị ảnh hưởng, hoặc thành công (0 nếu không có)
+            return result >= 0;
+        }
     }
 }
