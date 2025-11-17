@@ -182,6 +182,29 @@
             this.txbSupplier = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
+            this.tpNguyenLieu = new System.Windows.Forms.TabPage();
+            this.panelInfo = new System.Windows.Forms.Panel();
+            this.panelSearch = new System.Windows.Forms.Panel();
+            this.btnSearchIngre = new System.Windows.Forms.Button();
+            this.textSearch = new System.Windows.Forms.TextBox();
+            this.panelDonVi = new System.Windows.Forms.Panel();
+            this.txtDonViTinh = new System.Windows.Forms.TextBox();
+            this.labelDonViTinh = new System.Windows.Forms.Label();
+            this.panelNguyenLieu = new System.Windows.Forms.Panel();
+            this.txtTenNguyenLieu = new System.Windows.Forms.TextBox();
+            this.labelTenNguyenLieu = new System.Windows.Forms.Label();
+            this.panelMaSo = new System.Windows.Forms.Panel();
+            this.txtMaSo = new System.Windows.Forms.TextBox();
+            this.labelMaSo = new System.Windows.Forms.Label();
+            this.dgvLstNguyenLieu = new System.Windows.Forms.DataGridView();
+            this.labelTitleNL = new System.Windows.Forms.Label();
+            this.panelBtnNL = new System.Windows.Forms.Panel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox28 = new System.Windows.Forms.PictureBox();
+            this.btnXoaNguyenLieu = new System.Windows.Forms.Button();
+            this.btnSuaNguyenLieu = new System.Windows.Forms.Button();
+            this.btnThemNL = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nmQuantity)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).BeginInit();
@@ -254,6 +277,17 @@
             this.panel29.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmPrice)).BeginInit();
             this.panel20.SuspendLayout();
+            this.tpNguyenLieu.SuspendLayout();
+            this.panelInfo.SuspendLayout();
+            this.panelSearch.SuspendLayout();
+            this.panelDonVi.SuspendLayout();
+            this.panelNguyenLieu.SuspendLayout();
+            this.panelMaSo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLstNguyenLieu)).BeginInit();
+            this.panelBtnNL.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox28)).BeginInit();
             this.SuspendLayout();
             // 
             // nmQuantity
@@ -1706,6 +1740,7 @@
             this.btnAddPhieu.Controls.Add(this.tabPage1);
             this.btnAddPhieu.Controls.Add(this.tabPage2);
             this.btnAddPhieu.Controls.Add(this.import);
+            this.btnAddPhieu.Controls.Add(this.tpNguyenLieu);
             this.btnAddPhieu.Location = new System.Drawing.Point(27, 15);
             this.btnAddPhieu.Name = "btnAddPhieu";
             this.btnAddPhieu.SelectedIndex = 0;
@@ -1903,6 +1938,244 @@
             this.label20.TabIndex = 11;
             this.label20.Text = "Phiếu nhập kho";
             // 
+            // tpNguyenLieu
+            // 
+            this.tpNguyenLieu.BackColor = System.Drawing.Color.Linen;
+            this.tpNguyenLieu.Controls.Add(this.panelInfo);
+            this.tpNguyenLieu.Controls.Add(this.dgvLstNguyenLieu);
+            this.tpNguyenLieu.Controls.Add(this.labelTitleNL);
+            this.tpNguyenLieu.Controls.Add(this.panelBtnNL);
+            this.tpNguyenLieu.Location = new System.Drawing.Point(4, 29);
+            this.tpNguyenLieu.Name = "tpNguyenLieu";
+            this.tpNguyenLieu.Padding = new System.Windows.Forms.Padding(3);
+            this.tpNguyenLieu.Size = new System.Drawing.Size(1012, 702);
+            this.tpNguyenLieu.TabIndex = 8;
+            this.tpNguyenLieu.Text = "Nguyên liệu";
+            // 
+            // panelInfo
+            // 
+            this.panelInfo.Controls.Add(this.panelSearch);
+            this.panelInfo.Controls.Add(this.panelDonVi);
+            this.panelInfo.Controls.Add(this.panelNguyenLieu);
+            this.panelInfo.Controls.Add(this.panelMaSo);
+            this.panelInfo.Location = new System.Drawing.Point(517, 94);
+            this.panelInfo.Name = "panelInfo";
+            this.panelInfo.Size = new System.Drawing.Size(489, 580);
+            this.panelInfo.TabIndex = 10;
+            // 
+            // panelSearch
+            // 
+            this.panelSearch.Controls.Add(this.btnSearchIngre);
+            this.panelSearch.Controls.Add(this.textSearch);
+            this.panelSearch.Location = new System.Drawing.Point(3, 3);
+            this.panelSearch.Name = "panelSearch";
+            this.panelSearch.Size = new System.Drawing.Size(476, 78);
+            this.panelSearch.TabIndex = 5;
+            // 
+            // btnSearchIngre
+            // 
+            this.btnSearchIngre.BackColor = System.Drawing.Color.PeachPuff;
+            this.btnSearchIngre.Location = new System.Drawing.Point(351, 18);
+            this.btnSearchIngre.Name = "btnSearchIngre";
+            this.btnSearchIngre.Size = new System.Drawing.Size(108, 44);
+            this.btnSearchIngre.TabIndex = 7;
+            this.btnSearchIngre.Text = "Tìm kiếm";
+            this.btnSearchIngre.UseVisualStyleBackColor = false;
+            this.btnSearchIngre.Click += new System.EventHandler(this.btnTimKiemNL_Click);
+            // 
+            // textSearch
+            // 
+            this.textSearch.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.textSearch.Location = new System.Drawing.Point(18, 27);
+            this.textSearch.Name = "textSearch";
+            this.textSearch.Size = new System.Drawing.Size(298, 26);
+            this.textSearch.TabIndex = 2;
+            this.textSearch.Text = "Nhập tên nguyên liệu";
+            // 
+            // panelDonVi
+            // 
+            this.panelDonVi.Controls.Add(this.txtDonViTinh);
+            this.panelDonVi.Controls.Add(this.labelDonViTinh);
+            this.panelDonVi.Location = new System.Drawing.Point(3, 255);
+            this.panelDonVi.Name = "panelDonVi";
+            this.panelDonVi.Size = new System.Drawing.Size(476, 78);
+            this.panelDonVi.TabIndex = 4;
+            // 
+            // txtDonViTinh
+            // 
+            this.txtDonViTinh.Location = new System.Drawing.Point(211, 18);
+            this.txtDonViTinh.Name = "txtDonViTinh";
+            this.txtDonViTinh.Size = new System.Drawing.Size(262, 26);
+            this.txtDonViTinh.TabIndex = 1;
+            // 
+            // labelDonViTinh
+            // 
+            this.labelDonViTinh.AutoSize = true;
+            this.labelDonViTinh.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDonViTinh.Location = new System.Drawing.Point(3, 15);
+            this.labelDonViTinh.Name = "labelDonViTinh";
+            this.labelDonViTinh.Size = new System.Drawing.Size(96, 29);
+            this.labelDonViTinh.TabIndex = 0;
+            this.labelDonViTinh.Text = "Đơn vị:";
+            // 
+            // panelNguyenLieu
+            // 
+            this.panelNguyenLieu.Controls.Add(this.txtTenNguyenLieu);
+            this.panelNguyenLieu.Controls.Add(this.labelTenNguyenLieu);
+            this.panelNguyenLieu.Location = new System.Drawing.Point(0, 171);
+            this.panelNguyenLieu.Name = "panelNguyenLieu";
+            this.panelNguyenLieu.Size = new System.Drawing.Size(479, 78);
+            this.panelNguyenLieu.TabIndex = 3;
+            // 
+            // txtTenNguyenLieu
+            // 
+            this.txtTenNguyenLieu.Location = new System.Drawing.Point(214, 15);
+            this.txtTenNguyenLieu.Name = "txtTenNguyenLieu";
+            this.txtTenNguyenLieu.Size = new System.Drawing.Size(262, 26);
+            this.txtTenNguyenLieu.TabIndex = 1;
+            // 
+            // labelTenNguyenLieu
+            // 
+            this.labelTenNguyenLieu.AutoSize = true;
+            this.labelTenNguyenLieu.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTenNguyenLieu.Location = new System.Drawing.Point(3, 15);
+            this.labelTenNguyenLieu.Name = "labelTenNguyenLieu";
+            this.labelTenNguyenLieu.Size = new System.Drawing.Size(205, 29);
+            this.labelTenNguyenLieu.TabIndex = 0;
+            this.labelTenNguyenLieu.Text = "Tên nguyên liệu:";
+            // 
+            // panelMaSo
+            // 
+            this.panelMaSo.Controls.Add(this.txtMaSo);
+            this.panelMaSo.Controls.Add(this.labelMaSo);
+            this.panelMaSo.Location = new System.Drawing.Point(3, 87);
+            this.panelMaSo.Name = "panelMaSo";
+            this.panelMaSo.Size = new System.Drawing.Size(476, 78);
+            this.panelMaSo.TabIndex = 2;
+            // 
+            // txtMaSo
+            // 
+            this.txtMaSo.Location = new System.Drawing.Point(211, 18);
+            this.txtMaSo.Name = "txtMaSo";
+            this.txtMaSo.ReadOnly = true;
+            this.txtMaSo.Size = new System.Drawing.Size(262, 26);
+            this.txtMaSo.TabIndex = 1;
+            // 
+            // labelMaSo
+            // 
+            this.labelMaSo.AutoSize = true;
+            this.labelMaSo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMaSo.Location = new System.Drawing.Point(3, 15);
+            this.labelMaSo.Name = "labelMaSo";
+            this.labelMaSo.Size = new System.Drawing.Size(89, 29);
+            this.labelMaSo.TabIndex = 0;
+            this.labelMaSo.Text = "Mã số:";
+            // 
+            // dgvLstNguyenLieu
+            // 
+            this.dgvLstNguyenLieu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvLstNguyenLieu.BackgroundColor = System.Drawing.Color.Linen;
+            this.dgvLstNguyenLieu.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvLstNguyenLieu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLstNguyenLieu.Location = new System.Drawing.Point(6, 119);
+            this.dgvLstNguyenLieu.Name = "dgvLstNguyenLieu";
+            this.dgvLstNguyenLieu.RowHeadersWidth = 51;
+            this.dgvLstNguyenLieu.RowTemplate.Height = 24;
+            this.dgvLstNguyenLieu.Size = new System.Drawing.Size(495, 577);
+            this.dgvLstNguyenLieu.TabIndex = 9;
+            // 
+            // labelTitleNL
+            // 
+            this.labelTitleNL.AutoSize = true;
+            this.labelTitleNL.Font = new System.Drawing.Font("Arial", 22.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTitleNL.ForeColor = System.Drawing.Color.Salmon;
+            this.labelTitleNL.Location = new System.Drawing.Point(639, 29);
+            this.labelTitleNL.Name = "labelTitleNL";
+            this.labelTitleNL.Size = new System.Drawing.Size(275, 51);
+            this.labelTitleNL.TabIndex = 8;
+            this.labelTitleNL.Text = "Nguyên liệu";
+            // 
+            // panelBtnNL
+            // 
+            this.panelBtnNL.Controls.Add(this.pictureBox3);
+            this.panelBtnNL.Controls.Add(this.pictureBox4);
+            this.panelBtnNL.Controls.Add(this.pictureBox28);
+            this.panelBtnNL.Controls.Add(this.btnXoaNguyenLieu);
+            this.panelBtnNL.Controls.Add(this.btnSuaNguyenLieu);
+            this.panelBtnNL.Controls.Add(this.btnThemNL);
+            this.panelBtnNL.Location = new System.Drawing.Point(0, 3);
+            this.panelBtnNL.Name = "panelBtnNL";
+            this.panelBtnNL.Size = new System.Drawing.Size(358, 92);
+            this.panelBtnNL.TabIndex = 7;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.PeachPuff;
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(252, 26);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(33, 37);
+            this.pictureBox3.TabIndex = 8;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackColor = System.Drawing.Color.PeachPuff;
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(141, 26);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(33, 37);
+            this.pictureBox4.TabIndex = 7;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox28
+            // 
+            this.pictureBox28.BackColor = System.Drawing.Color.PeachPuff;
+            this.pictureBox28.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox28.Image")));
+            this.pictureBox28.Location = new System.Drawing.Point(20, 26);
+            this.pictureBox28.Name = "pictureBox28";
+            this.pictureBox28.Size = new System.Drawing.Size(45, 37);
+            this.pictureBox28.TabIndex = 6;
+            this.pictureBox28.TabStop = false;
+            // 
+            // btnXoaNguyenLieu
+            // 
+            this.btnXoaNguyenLieu.BackColor = System.Drawing.Color.PeachPuff;
+            this.btnXoaNguyenLieu.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoaNguyenLieu.Location = new System.Drawing.Point(243, 4);
+            this.btnXoaNguyenLieu.Name = "btnXoaNguyenLieu";
+            this.btnXoaNguyenLieu.Size = new System.Drawing.Size(108, 85);
+            this.btnXoaNguyenLieu.TabIndex = 4;
+            this.btnXoaNguyenLieu.Text = "Xóa";
+            this.btnXoaNguyenLieu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnXoaNguyenLieu.UseVisualStyleBackColor = false;
+            this.btnXoaNguyenLieu.Click += new System.EventHandler(this.btnXoaNguyenLieu_Click);
+            // 
+            // btnSuaNguyenLieu
+            // 
+            this.btnSuaNguyenLieu.BackColor = System.Drawing.Color.PeachPuff;
+            this.btnSuaNguyenLieu.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSuaNguyenLieu.Location = new System.Drawing.Point(129, 4);
+            this.btnSuaNguyenLieu.Name = "btnSuaNguyenLieu";
+            this.btnSuaNguyenLieu.Size = new System.Drawing.Size(108, 85);
+            this.btnSuaNguyenLieu.TabIndex = 3;
+            this.btnSuaNguyenLieu.Text = "Sửa";
+            this.btnSuaNguyenLieu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSuaNguyenLieu.UseVisualStyleBackColor = false;
+            this.btnSuaNguyenLieu.Click += new System.EventHandler(this.btnSuaNguyenLieu_Click);
+            // 
+            // btnThemNL
+            // 
+            this.btnThemNL.BackColor = System.Drawing.Color.PeachPuff;
+            this.btnThemNL.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThemNL.Location = new System.Drawing.Point(9, 4);
+            this.btnThemNL.Name = "btnThemNL";
+            this.btnThemNL.Size = new System.Drawing.Size(114, 85);
+            this.btnThemNL.TabIndex = 2;
+            this.btnThemNL.Text = "Thêm";
+            this.btnThemNL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnThemNL.UseVisualStyleBackColor = false;
+            // 
             // fAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -2009,6 +2282,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.nmPrice)).EndInit();
             this.panel20.ResumeLayout(false);
             this.panel20.PerformLayout();
+            this.tpNguyenLieu.ResumeLayout(false);
+            this.tpNguyenLieu.PerformLayout();
+            this.panelInfo.ResumeLayout(false);
+            this.panelSearch.ResumeLayout(false);
+            this.panelSearch.PerformLayout();
+            this.panelDonVi.ResumeLayout(false);
+            this.panelDonVi.PerformLayout();
+            this.panelNguyenLieu.ResumeLayout(false);
+            this.panelNguyenLieu.PerformLayout();
+            this.panelMaSo.ResumeLayout(false);
+            this.panelMaSo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLstNguyenLieu)).EndInit();
+            this.panelBtnNL.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox28)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2168,5 +2457,28 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.TextBox txbFoodID;
         private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TabPage tpNguyenLieu;
+        private System.Windows.Forms.Label labelTitleNL;
+        private System.Windows.Forms.Panel panelBtnNL;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox28;
+        private System.Windows.Forms.Button btnXoaNguyenLieu;
+        private System.Windows.Forms.Button btnSuaNguyenLieu;
+        private System.Windows.Forms.Button btnThemNL;
+        private System.Windows.Forms.DataGridView dgvLstNguyenLieu;
+        private System.Windows.Forms.Panel panelInfo;
+        private System.Windows.Forms.Panel panelNguyenLieu;
+        private System.Windows.Forms.TextBox txtTenNguyenLieu;
+        private System.Windows.Forms.Label labelTenNguyenLieu;
+        private System.Windows.Forms.Panel panelMaSo;
+        private System.Windows.Forms.TextBox txtMaSo;
+        private System.Windows.Forms.Label labelMaSo;
+        private System.Windows.Forms.Panel panelDonVi;
+        private System.Windows.Forms.TextBox txtDonViTinh;
+        private System.Windows.Forms.Label labelDonViTinh;
+        private System.Windows.Forms.Panel panelSearch;
+        private System.Windows.Forms.Button btnSearchIngre;
+        private System.Windows.Forms.TextBox textSearch;
     }
 }

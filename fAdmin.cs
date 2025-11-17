@@ -25,11 +25,12 @@ namespace QuanlyquanCoffe
 {
     public partial class fAdmin : Form
     {
-        BindingSource foodlist=new BindingSource();
-        BindingSource accountlist=new BindingSource();
-        BindingSource categorylist=new BindingSource();
-      BindingSource tablelist=new BindingSource();
+        BindingSource foodlist = new BindingSource();
+        BindingSource accountlist = new BindingSource();
+        BindingSource categorylist = new BindingSource();
+        BindingSource tablelist = new BindingSource();
         DataTable dtTempNhap = new DataTable();
+        BindingSource nguyenLieuList = new BindingSource();
 
         public Account loginAccount;
 
@@ -48,23 +49,25 @@ namespace QuanlyquanCoffe
             Load_info();
         }
         #region methods
-       /* void LoadFoodList()
-        {
-            string query = "select * from Food";
+        /* void LoadFoodList()
+         {
+             string query = "select * from Food";
 
-            dtgvFood.DataSource = Dataprovider.Instance.ExcuteQuery(query);
+             dtgvFood.DataSource = Dataprovider.Instance.ExcuteQuery(query);
 
-        }*/
+         }*/
 
-       void Load_info()
+        void Load_info()
         {
             dtgvFood.DataSource = foodlist;
             dtgvAccount.DataSource = accountlist;
             dtgvCategoryFood.DataSource = categorylist;
             dtgv_TableFood.DataSource = tablelist;
-            
+            dgvLstNguyenLieu.DataSource = nguyenLieuList;
+
+
             LoadDateTimePickerBill();
-           LoadAccoutList();
+            LoadAccoutList();
             LoadListBillByDate(dtpkfromDate.Value, dtpktoDate.Value);
             LoadListFood();
             LoadTableList();
@@ -78,8 +81,10 @@ namespace QuanlyquanCoffe
             //ShowTotalBill();
             LoadNguyenLieu();
             LoadIngredientComboBox();
+            LoadNguyenLieuList();
+            AddNguyenLieuBinding();
         }
-  
+
         //Table
         void AddTableBinding()
         {
@@ -90,7 +95,7 @@ namespace QuanlyquanCoffe
         void LoadTableList()
         {
 
-           tablelist.DataSource = TableDAO.Instance.GetListTable();
+            tablelist.DataSource = TableDAO.Instance.GetListTable();
         }
         //Category
         void AddCategoryBinding()
@@ -112,7 +117,7 @@ namespace QuanlyquanCoffe
             txbDisplayName.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "Tên hiển thị", true, DataSourceUpdateMode.Never));
             nmAccountType.DataBindings.Add(new Binding("Value", dtgvAccount.DataSource, "Loại TK", true, DataSourceUpdateMode.Never));
         }
-     
+
         public void LoadAccoutList()
         {
             accountlist.DataSource = AccountDAO.Instance.GetListAccount();
@@ -120,13 +125,13 @@ namespace QuanlyquanCoffe
         //Food
         List<Food> SearchFoodByName(string name)
         {
-            List<Food> listFood =FoodDAO.Instance.SearchFoodbyName(name);
+            List<Food> listFood = FoodDAO.Instance.SearchFoodbyName(name);
             return listFood;
         }
-        void LoadListBillByDate(DateTime checkin,DateTime checkout)
+        void LoadListBillByDate(DateTime checkin, DateTime checkout)
         {
-            
-            dtgvBill.DataSource= BillDAO.Instance.GetBillListByDate(checkin, checkout);
+
+            dtgvBill.DataSource = BillDAO.Instance.GetBillListByDate(checkin, checkout);
             decimal total = 0;
 
             foreach (DataGridViewRow row in dtgvBill.Rows)
@@ -144,11 +149,12 @@ namespace QuanlyquanCoffe
         }
         void LoadDateTimePickerBill()
         {
-            DateTime today=DateTime.Now;
+            DateTime today = DateTime.Now;
             dtpkfromDate.Value = new DateTime(today.Year, today.Month, 1);
-            dtpktoDate.Value=dtpkfromDate.Value.AddMonths(1).AddDays(-1);
+            dtpktoDate.Value = dtpkfromDate.Value.AddMonths(1).AddDays(-1);
         }
-        void AddFoodBinding() {
+        void AddFoodBinding()
+        {
             /* txbFoodName.DataBindings.Add(new Binding("Text", dtgvFood.DataSource, "name",true,DataSourceUpdateMode.Never));
              txbFoodID.DataBindings.Add(new Binding("Text",dtgvFood.DataSource,"id", true, DataSourceUpdateMode.Never));
              nmFoodPrice.DataBindings.Add(new Binding("Value", dtgvFood.DataSource, "price", true, DataSourceUpdateMode.Never));*/
@@ -172,16 +178,17 @@ namespace QuanlyquanCoffe
             DataTable a = Dataprovider.Instance.ExcuteQuery(string.Format("select * from Account where UserName=N'{0}'", name));
             return a.Rows.Count > 0;
         }
-        void AddAccount(string username,string displayname,int type,string pasword)
+        void AddAccount(string username, string displayname, int type, string pasword)
         {
             if (MessageBox.Show("Bạn có chắc chắn muốn thêm tài khoản mới", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
             {
-                if (checksameAccount(username)) {
+                if (checksameAccount(username))
+                {
                     MessageBox.Show("Đã tồn tại tên tài khoản");
                 }
                 else
                 {
-                    if (AccountDAO.Instance.InsertAccount(username, displayname, type, pasword ))
+                    if (AccountDAO.Instance.InsertAccount(username, displayname, type, pasword))
                     {
                         MessageBox.Show("Thêm tài khoản thành công");
                     }
@@ -191,7 +198,7 @@ namespace QuanlyquanCoffe
                     }
                 }
             }
-           LoadAccoutList();
+            LoadAccoutList();
         }
         void EditAccount(string username, string displayname, int type)
         {
@@ -212,7 +219,7 @@ namespace QuanlyquanCoffe
         {
             if (MessageBox.Show("Bạn có chắc chắn muốn xóa tài khoản này", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
             {
-                
+
                 if (loginAccount.Username.Equals(username))
                 {
                     MessageBox.Show("Không thể xóa tài khoản đang sử dụng");
@@ -284,7 +291,7 @@ namespace QuanlyquanCoffe
                 dtpktoDate.Value = dtpkfromDate.Value;
 
                 // (Tùy chọn) Hiển thị thông báo cho người dùng
-                 MessageBox.Show("Ngày bắt đầu không thể lớn hơn ngày kết thúc. Đã tự động điều chỉnh.", "Thông báo");
+                MessageBox.Show("Ngày bắt đầu không thể lớn hơn ngày kết thúc. Đã tự động điều chỉnh.", "Thông báo");
             }
         }
 
@@ -295,7 +302,7 @@ namespace QuanlyquanCoffe
 
         private void btnViewBill_Click(object sender, EventArgs e)
         {
-            LoadListBillByDate(dtpkfromDate.Value,dtpktoDate.Value);
+            LoadListBillByDate(dtpkfromDate.Value, dtpktoDate.Value);
 
         }
         private bool checksameFood(string name)
@@ -306,32 +313,32 @@ namespace QuanlyquanCoffe
         }
         private void btnAddFood1(object sender, EventArgs e)
         {
-/*            string name = txbFoodName.Text;
-            int categoryID=(cbFoodCategory.SelectedItem as Category).ID;
-            float price = (float)nmFoodPrice.Value;
-            if (MessageBox.Show("Bạn có chắc chắn muốn thêm món ăn mới", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
-            {
-                if (checksameFood(name)) {
-                    MessageBox.Show("Đã tồn tại món ăn này");
-                }
-                else
-                {
-                    if (FoodDAO.Instance.InsertFood(name, categoryID, price))
-                    {
-                        MessageBox.Show("Thêm món thành công");
-                        LoadListFood();
-                        if (insertFood != null)
+            /*            string name = txbFoodName.Text;
+                        int categoryID=(cbFoodCategory.SelectedItem as Category).ID;
+                        float price = (float)nmFoodPrice.Value;
+                        if (MessageBox.Show("Bạn có chắc chắn muốn thêm món ăn mới", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
                         {
-                            insertFood(this, new EventArgs());
+                            if (checksameFood(name)) {
+                                MessageBox.Show("Đã tồn tại món ăn này");
+                            }
+                            else
+                            {
+                                if (FoodDAO.Instance.InsertFood(name, categoryID, price))
+                                {
+                                    MessageBox.Show("Thêm món thành công");
+                                    LoadListFood();
+                                    if (insertFood != null)
+                                    {
+                                        insertFood(this, new EventArgs());
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Có lỗi khi thêm thức ăn");
+                                }
+                            }
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Có lỗi khi thêm thức ăn");
-                    }
-                }
-            }
-        */
+                    */
             AddFormFood f = new AddFormFood();
             f.InsertFood += F_InsertFood;
             f.ShowDialog();
@@ -396,8 +403,8 @@ namespace QuanlyquanCoffe
         {
 
         }
-       
-        
+
+
         private void button3_Click(object sender, EventArgs e)
         {
             LoadListFood();
@@ -464,7 +471,7 @@ namespace QuanlyquanCoffe
             string name = txbFoodName.Text;
             int categoryID = (cbFoodCategory.SelectedItem as Category).ID;
             float price = (float)nmFoodPrice.Value;
-            int id=Convert.ToInt32(txbFoodID.Text);
+            int id = Convert.ToInt32(txbFoodID.Text);
             if (MessageBox.Show("Bạn có chắc chắn muốn chỉnh sửa món ăn mới", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
             {
                 if (FoodDAO.Instance.UpdateFood(id, name, categoryID, price))
@@ -499,7 +506,7 @@ namespace QuanlyquanCoffe
         public event EventHandler UpdateFood
         {
             add { updateFood += value; }
-            remove {updateFood -= value; }
+            remove { updateFood -= value; }
         }
         //Event Category
         private event EventHandler insertCategory;
@@ -542,7 +549,7 @@ namespace QuanlyquanCoffe
 
         private void btn_searchfood_Click(object sender, EventArgs e)
         {
-            foodlist.DataSource= SearchFoodByName(txbSearchFoodName.Text);
+            foodlist.DataSource = SearchFoodByName(txbSearchFoodName.Text);
         }
 
         private void btn_ShowAccount_Click(object sender, EventArgs e)
@@ -582,47 +589,48 @@ namespace QuanlyquanCoffe
 
         private void btnLastBillPage_Click(object sender, EventArgs e)
         {
-            int sumRecord = BillDAO.Instance.GetNumBillListByDate(dtpkfromDate.Value,dtpktoDate.Value);
+            int sumRecord = BillDAO.Instance.GetNumBillListByDate(dtpkfromDate.Value, dtpktoDate.Value);
             int LastPage = sumRecord / 10;
             if (sumRecord % 10 != 0)
             {
                 LastPage++;
             }
-            txbPageBill.Text=LastPage.ToString();
+            txbPageBill.Text = LastPage.ToString();
         }
 
         private void txbPageBill_TextChanged(object sender, EventArgs e)
         {
-            dtgvBill.DataSource = BillDAO.Instance.GetBillListByDateAndPage(dtpkfromDate.Value, dtpktoDate.Value,Convert.ToInt32(txbPageBill.Text));
+            dtgvBill.DataSource = BillDAO.Instance.GetBillListByDateAndPage(dtpkfromDate.Value, dtpktoDate.Value, Convert.ToInt32(txbPageBill.Text));
             if (dtgvBill.Columns["id"] != null) // Thêm kiểm tra để tránh lỗi
             {
                 dtgvBill.Columns["id"].Visible = false;
             }
         }
-        
+
         private void btnPreviousBillPage_Click(object sender, EventArgs e)
         {
-            int page =Convert.ToInt32(txbPageBill.Text);
+            int page = Convert.ToInt32(txbPageBill.Text);
             if (page > 1)
             {
                 page--;
             }
-            txbPageBill.Text=page.ToString();
+            txbPageBill.Text = page.ToString();
         }
 
         private void btnNextBillPage_Click(object sender, EventArgs e)
         {
             int page = Convert.ToInt32(txbPageBill.Text);
             int sumRecord = BillDAO.Instance.GetNumBillListByDate(dtpkfromDate.Value, dtpktoDate.Value);
-            if (sumRecord % 10 == 0) { 
-                if (page < sumRecord/10)
+            if (sumRecord % 10 == 0)
+            {
+                if (page < sumRecord / 10)
                 {
                     page++;
                 }
             }
             else
             {
-                if (page < ((sumRecord / 10)+1))
+                if (page < ((sumRecord / 10) + 1))
                 {
                     page++;
                 }
@@ -646,22 +654,22 @@ namespace QuanlyquanCoffe
             {
                 connection.Open();
 
-                
+
                 string sql = "SELECT SUM(b.totalPrice) FROM Bill AS b WHERE b.status = 1";
 
-                
+
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
-                  
 
-                    
+
+
                     object result = command.ExecuteScalar();
 
-                    
+
                     if (result != DBNull.Value && result != null)
                     {
                         double sum = Convert.ToDouble(result);
-                      
+
                         CultureInfo culture = new CultureInfo("vi-VN");
                         Thread.CurrentThread.CurrentCulture = culture;
                         //txbTotalBillAll.Text = sum.ToString("c",culture);
@@ -678,39 +686,39 @@ namespace QuanlyquanCoffe
         //Quản lý loại thức ăn
         private bool checksameFoodCategory(string name)
         {
-            
-            DataTable a= Dataprovider.Instance.ExcuteQuery(string.Format("select * from FoodCategory where name=N'{0}'",name));
+
+            DataTable a = Dataprovider.Instance.ExcuteQuery(string.Format("select * from FoodCategory where name=N'{0}'", name));
             return a.Rows.Count > 0;
         }
         private void btnAddCategory_Click(object sender, EventArgs e)
         {
-/*            string name=txbNameCategory.Text;
-            if (MessageBox.Show("Bạn có chắc chắn muốn thêm loại thức ăn mới", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
-            {
-                if (checksameFoodCategory(name))
-                {
-                    MessageBox.Show("Đã tồn tại loại thức ăn này");
-                }
-                else
-                {
-                    if (CategoryDAO.Instance.InsertCategory(name))
-                    {
-                        MessageBox.Show("Thêm loại thức ăn mới thành công");
-                        LoadCategoryFoodList();
-                        LoadCategoryIntoComboBox(cbFoodCategory);
-
-                        if (insertCategory != null)
+            /*            string name=txbNameCategory.Text;
+                        if (MessageBox.Show("Bạn có chắc chắn muốn thêm loại thức ăn mới", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
                         {
-                            insertCategory(this, new EventArgs());
-                        }
+                            if (checksameFoodCategory(name))
+                            {
+                                MessageBox.Show("Đã tồn tại loại thức ăn này");
+                            }
+                            else
+                            {
+                                if (CategoryDAO.Instance.InsertCategory(name))
+                                {
+                                    MessageBox.Show("Thêm loại thức ăn mới thành công");
+                                    LoadCategoryFoodList();
+                                    LoadCategoryIntoComboBox(cbFoodCategory);
 
-                    }
-                    else
-                    {
-                        MessageBox.Show("Có lỗi khi thêm loại thức ăn mới");
-                    }
-                }
-            }*/
+                                    if (insertCategory != null)
+                                    {
+                                        insertCategory(this, new EventArgs());
+                                    }
+
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Có lỗi khi thêm loại thức ăn mới");
+                                }
+                            }
+                        }*/
             AddFormCategory f = new AddFormCategory();
             f.InsertCategory += F_InsertCategory;
             f.ShowDialog();
@@ -773,29 +781,29 @@ namespace QuanlyquanCoffe
                 }
             }
         }
-      
+
         //Quản lý Bàn
         private void btnAddTable_Click(object sender, EventArgs e)
         {
-/*            string name=txbNameTable.Text;
-            if (MessageBox.Show("Bạn có chắc chắn muốn thêm bàn mới", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
-            {
-                
-                if (TableDAO.Instance.InsertTable(name))
-                {
-                    MessageBox.Show("Thêm bàn mới thành công");
-                    LoadTableList();
-                    if (insertTable != null)
-                    {
-                        insertTable(this, new EventArgs());
-                    }
+            /*            string name=txbNameTable.Text;
+                        if (MessageBox.Show("Bạn có chắc chắn muốn thêm bàn mới", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+                        {
 
-                }
-                else
-                {
-                    MessageBox.Show("Thêm bàn mới thất bại");
-                }
-            }*/
+                            if (TableDAO.Instance.InsertTable(name))
+                            {
+                                MessageBox.Show("Thêm bàn mới thành công");
+                                LoadTableList();
+                                if (insertTable != null)
+                                {
+                                    insertTable(this, new EventArgs());
+                                }
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("Thêm bàn mới thất bại");
+                            }
+                        }*/
             AddFormTable addFormTable = new AddFormTable();
             addFormTable.InsertTable += AddFormTable_InsertTable;
             addFormTable.ShowDialog();
@@ -815,8 +823,8 @@ namespace QuanlyquanCoffe
         private void btnUpdateTable_Click(object sender, EventArgs e)
         {
             string name = txbNameTable.Text;
-            int id= Convert.ToInt32(txbIDTable.Text);
-            string status=txbStatusTable.Text;
+            int id = Convert.ToInt32(txbIDTable.Text);
+            string status = txbStatusTable.Text;
             if (MessageBox.Show("Bạn có chắc chắn muốn cập nhật bàn mới", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
             {
                 if (TableDAO.Instance.UpdateTable(name, id, status))
@@ -840,7 +848,7 @@ namespace QuanlyquanCoffe
             string name = txbNameTable.Text;
             int id = Convert.ToInt32(txbIDTable.Text);
             string status = txbStatusTable.Text;
-            if (MessageBox.Show("Bạn có chắc chắn xóa bàn "+name, "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            if (MessageBox.Show("Bạn có chắc chắn xóa bàn " + name, "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
             {
                 if (status == "Trống")
                 {
@@ -865,7 +873,7 @@ namespace QuanlyquanCoffe
             }
         }
 
-       
+
 
 
         private void cbFoodCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -988,14 +996,16 @@ namespace QuanlyquanCoffe
                 dtpkfromDate.Value = dtpktoDate.Value;
 
                 // (Tùy chọn) Hiển thị thông báo cho người dùng
-                 MessageBox.Show("Ngày kết thúc không thể nhỏ hơn ngày bắt đầu. Đã tự động điều chỉnh.", "Thông báo");
+                MessageBox.Show("Ngày kết thúc không thể nhỏ hơn ngày bắt đầu. Đã tự động điều chỉnh.", "Thông báo");
             }
         }
         void LoadNguyenLieu()
         {
+
             List<NguyenLieu> categories = PhieuNhapDAO.Instance.GetListNguyenLieu();
             cbNguyenlieu.DataSource = categories;
             cbNguyenlieu.DisplayMember = "Name";
+            nguyenLieuList.DataSource = NguyenLieuDAO.Instance.GetListNguyenLieu();
         }
         public void ShowChiTietNhap(int idPhieuNhap)
         {
@@ -1106,16 +1116,16 @@ namespace QuanlyquanCoffe
             }
 
             MessageBox.Show("Lưu phiếu nhập thành công!");
-            dtTempNhap.Clear();           
-            dgvListNhapKho.Items.Clear(); 
+            dtTempNhap.Clear();
+            dgvListNhapKho.Items.Clear();
 
             // Reset TextBox
             txbSupplier.Text = "";
-            txbTotalImport.Text = "0";    
-            nmQuantity.Value = 1;         
-            nmPrice.Value = 0;            
+            txbTotalImport.Text = "0";
+            nmQuantity.Value = 1;
+            nmPrice.Value = 0;
 
-            cbNguyenlieu.SelectedIndex = -1; 
+            cbNguyenlieu.SelectedIndex = -1;
         }
         private void RecalculateTempTotal()
         {
@@ -1210,35 +1220,23 @@ namespace QuanlyquanCoffe
             {
                 QuanlyquanCoffe.DTO.NguyenLieu selectedIngredient = cbNguyenLieu_ThucAn.SelectedItem as QuanlyquanCoffe.DTO.NguyenLieu;
                 string unit = selectedIngredient.Unit; // Đơn giản hơn code cũ rất nhiều!
-                 lblDonVi.Text = $"({unit})";
+                lblDonVi.Text = $"({unit})";
             }
         }
 
         void LoadRecipe(int idFood)
         {
-            // 1. Gọi DAO để lấy công thức
             DataTable dtRecipe = FoodIngredientMapDAO.Instance.GetListIngredientByFoodID(idFood);
             dtgvCongThuc.DataSource = dtRecipe;
-            // 2. Kiểm tra xem có công thức không
             if (dtRecipe.Rows.Count > 0)
             {
-                // Nếu CÓ công thức:
                 rdoRecipeYes.Checked = true; // Tự động chọn "Có"
                 dtgvCongThuc.DataSource = dtRecipe; // Tải dữ liệu vào lưới công thức
 
-                // =========================================================================
-                // === PHẦN SỬA ĐỔI: ĐIỀU CHỈNH CÁC CỘT SAU KHI DATASOURCE ĐƯỢC GÁN ===
-                // =========================================================================
-
-                // 3. Ẩn cột idIngredient (người dùng không cần thấy)
                 if (dtgvCongThuc.Columns.Contains("idIngredient"))
                 {
                     dtgvCongThuc.Columns["idIngredient"].Visible = false;
                 }
-
-                // 4. Đảm bảo cột "Xóa" tồn tại (nếu chưa có thì tạo) và chỉnh sửa
-                //    Đây là cột nút mà bạn đã thêm thủ công trong Designer,
-                //    Chúng ta cần đảm bảo nó là cột cuối cùng và có kích thước phù hợp.
                 DataGridViewButtonColumn btnDeleteRecipe = null;
                 if (dtgvCongThuc.Columns.Contains("colDelete"))
                 {
@@ -1251,8 +1249,6 @@ namespace QuanlyquanCoffe
                     btnDeleteRecipe.HeaderText = "";
                     dtgvCongThuc.Columns.Add(btnDeleteRecipe);
                 }
-
-                // Luôn đảm bảo nút "X" có chữ "X" và nằm ở cuối
                 btnDeleteRecipe.Text = "X";
                 btnDeleteRecipe.UseColumnTextForButtonValue = true; // HIỂN THỊ CHỮ "X" TRÊN NÚT
                 btnDeleteRecipe.Width = 30; // CHIỀU RỘNG CỦA CỘT NÚT, ĐỂ NÓ NHỎ HƠN
@@ -1260,11 +1256,7 @@ namespace QuanlyquanCoffe
                 btnDeleteRecipe.DefaultCellStyle.Padding = new Padding(0); // Bỏ padding để nút nhỏ gọn hơn
                 btnDeleteRecipe.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; // Canh giữa nút
 
-                // Di chuyển cột "Xóa" về cuối cùng
                 dtgvCongThuc.Columns["colDelete"].DisplayIndex = dtgvCongThuc.ColumnCount - 1;
-
-
-                // 5. Điều chỉnh kích thước các cột khác để đẹp hơn
                 if (dtgvCongThuc.Columns.Contains("Tên nguyên liệu"))
                 {
                     dtgvCongThuc.Columns["Tên nguyên liệu"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -1279,12 +1271,9 @@ namespace QuanlyquanCoffe
                     dtgvCongThuc.Columns["Đơn vị"].Width = 50; // Chiều rộng cho cột đơn vị
                     dtgvCongThuc.Columns["Đơn vị"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 }
-                // =========================================================================
-
             }
             else
             {
-                // Nếu KHÔNG có công thức:
                 rdoRecipeNo.Checked = true; // Tự động chọn "Không"
 
             }
@@ -1333,6 +1322,122 @@ namespace QuanlyquanCoffe
                     MessageBox.Show("Lỗi: " + ex.Message);
                 }
             }
+        }
+
+        void LoadNguyenLieuList()
+        {
+            nguyenLieuList.DataSource = NguyenLieuDAO.Instance.GetListNguyenLieu();
+            if (dgvLstNguyenLieu.Columns.Count == 0)
+            {
+                return;
+            }
+            if (dgvLstNguyenLieu.Columns["Name"] != null)
+            {
+                dgvLstNguyenLieu.Columns["Name"].HeaderText = "Tên";
+                dgvLstNguyenLieu.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+
+            if (dgvLstNguyenLieu.Columns["Unit"] != null)
+            {
+                dgvLstNguyenLieu.Columns["Unit"].HeaderText = "Đơn vị";
+                dgvLstNguyenLieu.Columns["Unit"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+
+            //---Ẩn các cột không mong muốn-- -
+            if (dgvLstNguyenLieu.Columns["ID"] != null)
+            {
+                dgvLstNguyenLieu.Columns["ID"].Visible = false;
+            }
+
+            if (dgvLstNguyenLieu.Columns["Stock"] != null)
+            {
+                dgvLstNguyenLieu.Columns["Stock"].Visible = false;
+            }
+
+            if (dgvLstNguyenLieu.Columns["Note"] != null)
+            {
+                dgvLstNguyenLieu.Columns["Note"].Visible = false;
+            }
+        }
+
+        void AddNguyenLieuBinding()
+        {
+            txtMaSo.DataBindings.Add(new Binding("Text", dgvLstNguyenLieu.DataSource, "ID", true, DataSourceUpdateMode.Never));
+            txtTenNguyenLieu.DataBindings.Add(new Binding("Text", dgvLstNguyenLieu.DataSource, "Name", true, DataSourceUpdateMode.Never));
+            txtDonViTinh.DataBindings.Add(new Binding("Text", dgvLstNguyenLieu.DataSource, "Unit", true, DataSourceUpdateMode.Never));
+        }
+
+        private void btnSuaNguyenLieu_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = Convert.ToInt32(txtMaSo.Text);
+                string tenCu = (nguyenLieuList.Current as NguyenLieu).Name;
+
+                if (MessageBox.Show($"Bạn có thật sự muốn cập nhật nguyên liệu: {tenCu}?", "Xác nhận cập nhật", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    string name = txtTenNguyenLieu.Text;
+                    string unit = txtDonViTinh.Text;
+
+                    NguyenLieu nl = nguyenLieuList.Current as NguyenLieu;
+                    decimal stock = nl.Stock;
+                    string note = nl.Note;
+
+                    if (NguyenLieuDAO.Instance.UpdateNguyenLieu(id, name, unit, stock, note))
+                    {
+                        MessageBox.Show("Cập nhật nguyên liệu thành công!");
+                        LoadNguyenLieuList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhật nguyên liệu thất bại!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }
+        }
+
+        private void btnXoaNguyenLieu_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = Convert.ToInt32(txtMaSo.Text);
+                if (FoodIngredientMapDAO.Instance.CheckIngredientExists(id))
+                {
+                    MessageBox.Show("Không thể xoá nguyên liệu này!\nNó đang được sử dụng trong công thức của một món ăn.",
+                                    "Lỗi",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                    return;
+                }
+
+                string name = txtTenNguyenLieu.Text;
+                if (MessageBox.Show($"Bạn có thật sự muốn xoá nguyên liệu: {name}?", "Xác nhận xoá", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    if (NguyenLieuDAO.Instance.DeleteNguyenLieu(id))
+                    {
+                        MessageBox.Show("Xoá nguyên liệu thành công!");
+                        LoadNguyenLieuList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Xoá nguyên liệu thất bại!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }
+        }
+
+        private void btnTimKiemNL_Click(object sender, EventArgs e)
+        {
+            string keySearch = textSearch.Text;
+            nguyenLieuList.DataSource = NguyenLieuDAO.Instance.SearchNguyenLieuByName(keySearch);
         }
     }
 }

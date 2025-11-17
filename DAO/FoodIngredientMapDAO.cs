@@ -62,5 +62,15 @@ namespace QuanlyquanCoffe.DAO
             // Trả về true nếu có ít nhất 1 hàng bị ảnh hưởng, hoặc thành công (0 nếu không có)
             return result >= 0;
         }
+
+        public bool CheckIngredientExists(int idIngredient)
+        {
+            string query = "SELECT COUNT(*) FROM FoodIngredientMap WHERE idIngredient = @idIngredient";
+
+            // Chạy ExcuteScalar để lấy về 1 con số (số dòng đếm được)
+            int count = (int)Dataprovider.Instance.ExcuteScalar(query, new object[] { idIngredient });
+
+            return count > 0;
+        }
     }
 }
