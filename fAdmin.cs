@@ -20,6 +20,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using OfficeOpenXml; // Thư viện EPPlus   
 using OfficeOpenXml.Style; // <-- THÊM CÁI NÀY
 using System.Drawing;
+using QuanlyquanCoffe.ADD;
 
 namespace QuanlyquanCoffe
 {
@@ -527,6 +528,13 @@ namespace QuanlyquanCoffe
             add { deleteCategory += value; }
             remove { deleteCategory -= value; }
         }
+        //Event Ingredient
+        private event EventHandler insertNguyenLieu;
+        public event EventHandler InsertNguyenLieu
+        {
+            add { insertNguyenLieu += value; }
+            remove { insertNguyenLieu -= value; }
+        }
         //Event Table
         private event EventHandler insertTable;
         public event EventHandler InsertTable
@@ -779,6 +787,15 @@ namespace QuanlyquanCoffe
                 {
                     MessageBox.Show("Xóa loại thức ăn thất bại");
                 }
+            }
+        }
+
+        private void F_InsertNguyenLieu(object sender, EventArgs e)
+        {
+            LoadNguyenLieuList();
+            if (insertNguyenLieu != null)
+            {
+                insertNguyenLieu(this, new EventArgs());
             }
         }
 
@@ -1438,6 +1455,13 @@ namespace QuanlyquanCoffe
         {
             string keySearch = textSearch.Text;
             nguyenLieuList.DataSource = NguyenLieuDAO.Instance.SearchNguyenLieuByName(keySearch);
+        }
+
+        private void btnAddIngredient_Click(object sender, EventArgs e)
+        {
+            AddFormIngredient f = new AddFormIngredient();
+            f.InsertNguyenLieu += F_InsertNguyenLieu;
+            f.ShowDialog();
         }
     }
 }

@@ -2175,6 +2175,7 @@
             this.btnThemNL.Text = "Thêm";
             this.btnThemNL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnThemNL.UseVisualStyleBackColor = false;
+            this.btnThemNL.Click += new System.EventHandler(this.btnAddIngredient_Click);
             // 
             // fAdmin
             // 

@@ -165,6 +165,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADD\AddFormIngredient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ADD\AddFormIngredient.Designer.cs">
+      <DependentUpon>AddFormIngredient.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\BillDAO.cs" />
     <Compile Include="DAO\BillInfoDAO.cs" />
@@ -250,6 +256,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ADD\AddFormFood.resx">
       <DependentUpon>AddFormFood.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ADD\AddFormIngredient.resx">
+      <DependentUpon>AddFormIngredient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ADD\AddFormTable.resx">
       <DependentUpon>AddFormTable.cs</DependentUpon>
