@@ -170,11 +170,13 @@
     <Compile Include="DAO\BillInfoDAO.cs" />
     <Compile Include="DAO\CategoryDAO.cs" />
     <Compile Include="DAO\ChiTietNhapDAO.cs" />
+    <Compile Include="DAO\ChiTietXuatDAO.cs" />
     <Compile Include="DAO\Dataprovider.cs" />
     <Compile Include="DAO\FoodDAO.cs" />
     <Compile Include="DAO\NguyenLieuDAO.cs" />
     <Compile Include="DAO\PhieuNhapDAO.cs" />
     <Compile Include="DAO\MenuDAO.cs" />
+    <Compile Include="DAO\PhieuXuatDAO.cs" />
     <Compile Include="DAO\TableDAO.cs" />
     <Compile Include="DTO\Account.cs" />
     <Compile Include="DTO\Bill.cs" />
