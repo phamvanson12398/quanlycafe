@@ -2115,5 +2115,131 @@ namespace QuanlyquanCoffe
             f.InsertNguyenLieu += F_InsertNguyenLieu;
             f.ShowDialog();
         }
+
+        private void tkx_Click(object sender, EventArgs e)
+        {
+            // 1) Kiểm tra chọn phiếu xuất
+            if (dtgvPhieuXuat.CurrentRow == null)
+            {
+                MessageBox.Show("Bạn hãy chọn 1 phiếu xuất để xuất!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // Cột MaPhieuXuat có thể đang Visible = false
+            int maPX = Convert.ToInt32(dtgvPhieuXuat.CurrentRow.Cells["MaPhieuXuat"].Value);
+
+            // 2) Lấy dữ liệu từ DB
+            DataTable dtPhieu = PhieuXuatDAO.Instance.GetPhieuXuatById(maPX);
+            DataTable dtCT = PhieuXuatDAO.Instance.GetChiTietXuatByPhieuId(maPX);
+
+            if (dtPhieu.Rows.Count == 0)
+            {
+                MessageBox.Show("Không tìm thấy phiếu xuất!", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Lấy dữ liệu phiếu
+            var r = dtPhieu.Rows[0];
+            var ngayXuat = r["NgayXuat"];
+            var nguoiXuat = r["NguoiXuat"]?.ToString();
+            var lyDo = r["Reason"]?.ToString();
+
+            // 3) Chọn nơi lưu
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Excel Files (*.xlsx)|*.xlsx|All Files (*.*)|*.*";
+            saveDialog.FileName = $"PhieuXuat_{maPX}_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+
+            if (saveDialog.ShowDialog() != DialogResult.OK) return;
+
+            try
+            {
+                ExcelPackage.License.SetNonCommercialPersonal("fAdmin");
+
+                using (var p = new ExcelPackage())
+                {
+                    var ws = p.Workbook.Worksheets.Add("PhieuXuat");
+                    int row = 1;
+
+                    // ===== TIÊU ĐỀ =====
+                    ws.Cells[row, 1].Value = "PHIẾU XUẤT KHO";
+                    ws.Cells[row, 1, row, 3].Merge = true;
+                    ws.Cells[row, 1].Style.Font.Bold = true;
+                    ws.Cells[row, 1].Style.Font.Size = 16;
+                    ws.Cells[row, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    row += 2;
+
+                    // ===== THÔNG TIN PHIẾU (KHÔNG HIỆN MÃ) =====
+                    ws.Cells[row, 1].Value = "Ngày xuất:";
+                    ws.Cells[row, 2].Value = ngayXuat;
+                    ws.Cells[row, 2].Style.Numberformat.Format = "dd/MM/yyyy HH:mm";
+                    row++;
+
+                    ws.Cells[row, 1].Value = "Người xuất:";
+                    ws.Cells[row, 2].Value = nguoiXuat;
+                    row++;
+
+                    ws.Cells[row, 1].Value = "Lý do xuất:";
+                    ws.Cells[row, 2].Value = lyDo;
+                    row += 2;
+
+                    // Làm đậm label
+                    ws.Cells[3, 1, row - 2, 1].Style.Font.Bold = true;
+
+                    // ===== BẢNG CHI TIẾT =====
+                    int startTableRow = row;
+
+                    ws.Cells[row, 1].Value = "Tên nguyên liệu";
+                    ws.Cells[row, 2].Value = "Số lượng";
+
+                    using (var header = ws.Cells[row, 1, row, 2])
+                    {
+                        header.Style.Font.Bold = true;
+                        header.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        header.Style.Fill.BackgroundColor.SetColor(Color.LightGray);
+                        header.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    }
+
+                    row++;
+
+                    // Đổ chi tiết
+                    foreach (DataRow dr in dtCT.Rows)
+                    {
+                        ws.Cells[row, 1].Value = dr["TenNguyenLieu"]?.ToString();
+                        ws.Cells[row, 2].Value = Convert.ToDecimal(dr["SoLuong"]);
+
+                        // Bỏ .00
+                        ws.Cells[row, 2].Style.Numberformat.Format = "0.##";
+                        ws.Cells[row, 2].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+                        row++;
+                    }
+
+                    // ===== TỔNG SỐ LƯỢNG =====
+                    ws.Cells[row + 1, 1].Value = "Tổng số lượng:";
+                    ws.Cells[row + 1, 1].Style.Font.Bold = true;
+                    ws.Cells[row + 1, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+
+                    ws.Cells[row + 1, 2].Formula = $"SUM(B{startTableRow + 1}:B{row - 1})";
+                    ws.Cells[row + 1, 2].Style.Numberformat.Format = "0.##";
+                    ws.Cells[row + 1, 2].Style.Font.Bold = true;
+                    ws.Cells[row + 1, 2].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+
+                    // AutoFit + Freeze header bảng
+                    ws.Cells[ws.Dimension.Address].AutoFitColumns();
+                    ws.View.FreezePanes(startTableRow + 1, 1);
+
+                    p.SaveAs(new FileInfo(saveDialog.FileName));
+                }
+
+                MessageBox.Show("Xuất phiếu xuất thành công!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi khi xuất Excel: " + ex.Message, "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
