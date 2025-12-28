@@ -75,8 +75,15 @@ namespace QuanlyquanCoffe.DAO
         }
         public bool DeleteFood(int idFood)
         {
+            // 1. Xóa chi tiết hóa đơn (BillInfo)
             BillInfoDAO.Instance.DeleteBillInfoByFoodID(idFood);
-            string query = "Delete Food where id="+idFood;
+
+            // 2. 🔥 GỌI PHƯƠNG THỨC MỚI: Xóa công thức/nguyên liệu liên quan (FoodIngredientMap)
+            // Đây là bước giải quyết lỗi FK_Map_Food
+            FoodIngredientMapDAO.Instance.DeleteByFoodID(idFood);
+
+            // 3. Xóa món ăn chính (Food)
+            string query = "Delete Food where id=" + idFood;
             int result = Dataprovider.Instance.ExcuteNonQuery(query);
 
             return result > 0;
