@@ -100,23 +100,18 @@ namespace QuanlyquanCoffe.DAO
 
             return -1; // không tìm thấy
         }
-
-
         public void CongSoLuongTon(int idNguyenLieu, decimal soLuongNhap)
         {
             string sl = soLuongNhap.ToString(System.Globalization.CultureInfo.InvariantCulture);
             string query = $"UPDATE NguyenLieu SET stock = stock + {sl} WHERE id = {idNguyenLieu}";
             Dataprovider.Instance.ExcuteNonQuery(query);
         }
-
-
         public decimal GetTonById(int idNguyenLieu)
         {
             string q = $"SELECT stock FROM NguyenLieu WHERE id = {idNguyenLieu}";
             object r = Dataprovider.Instance.ExcuteScalar(q);
             return (r == null || r == DBNull.Value) ? 0 : Convert.ToDecimal(r);
         }
-
         public void TruSoLuongTon(int idNguyenLieu, decimal soLuongXuat)
         {
             string q = $@"
@@ -134,5 +129,23 @@ namespace QuanlyquanCoffe.DAO
             return (r == null || r == DBNull.Value) ? "" : r.ToString();
         }
 
+        public List<NguyenLieu> SearchNguyenLieuByName(string name)
+        {
+            List<NguyenLieu> list = new List<NguyenLieu>();
+
+            // Sử dụng N'...' để hỗ trợ Unicode (Tiếng Việt)
+            // Sử dụng '%' ở 2 đầu để tìm kiếm tương đối (chứa chuỗi)
+            string query = string.Format("SELECT * FROM NguyenLieu WHERE name LIKE N'%{0}%'", name);
+
+            DataTable data = Dataprovider.Instance.ExcuteQuery(query);
+
+            foreach (DataRow row in data.Rows)
+            {
+                NguyenLieu nl = new NguyenLieu(row);
+                list.Add(nl);
+            }
+
+            return list;
+        }
     }
 }
