@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 
 namespace QuanlyquanCoffe.DAO
 {
@@ -98,6 +99,39 @@ namespace QuanlyquanCoffe.DAO
             }
 
             return -1; // không tìm thấy
+        }
+
+
+        public void CongSoLuongTon(int idNguyenLieu, decimal soLuongNhap)
+        {
+            string sl = soLuongNhap.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            string query = $"UPDATE NguyenLieu SET stock = stock + {sl} WHERE id = {idNguyenLieu}";
+            Dataprovider.Instance.ExcuteNonQuery(query);
+        }
+
+
+        public decimal GetTonById(int idNguyenLieu)
+        {
+            string q = $"SELECT stock FROM NguyenLieu WHERE id = {idNguyenLieu}";
+            object r = Dataprovider.Instance.ExcuteScalar(q);
+            return (r == null || r == DBNull.Value) ? 0 : Convert.ToDecimal(r);
+        }
+
+        public void TruSoLuongTon(int idNguyenLieu, decimal soLuongXuat)
+        {
+            string q = $@"
+                UPDATE NguyenLieu
+                SET stock = stock - {soLuongXuat.ToString(CultureInfo.InvariantCulture)}
+                WHERE id = {idNguyenLieu};
+            ";
+            Dataprovider.Instance.ExcuteNonQuery(q);
+        }
+
+        public string GetDonViById(int idNguyenLieu)
+        {
+            string query = $"SELECT Unit FROM NguyenLieu WHERE id = {idNguyenLieu}";
+            object r = Dataprovider.Instance.ExcuteScalar(query);
+            return (r == null || r == DBNull.Value) ? "" : r.ToString();
         }
 
     }
