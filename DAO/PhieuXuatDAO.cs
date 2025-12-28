@@ -78,5 +78,34 @@ namespace QuanlyquanCoffe.DAO
 
             return Dataprovider.Instance.ExcuteQuery(query);
         }
+
+        // PhieuXuatDAO
+        public DataTable GetPhieuXuatById(int maPX)
+        {
+            string query = @"
+        SELECT 
+            px.id AS MaPhieuXuat,
+            px.date AS NgayXuat,
+            a.UserName AS NguoiXuat,
+            px.reason AS Reason
+        FROM PhieuXuat px
+        JOIN Account a ON a.id = px.idAcc
+        WHERE px.id = @id";
+            return Dataprovider.Instance.ExcuteQuery(query, new object[] { maPX });
+        }
+
+        // ChiTietPhieuXuatDAO
+        public DataTable GetChiTietXuatByPhieuId(int maPX)
+        {
+            string query = @"
+        SELECT 
+            nl.Name AS TenNguyenLieu,
+            ctx.quantity AS SoLuong
+        FROM ChiTietXuat ctx
+        JOIN NguyenLieu nl ON nl.id = ctx.idNguyenLieu
+        WHERE ctx.idPhieuXuat = @id";
+            return Dataprovider.Instance.ExcuteQuery(query, new object[] { maPX });
+        }
+
     }
 }

@@ -2300,6 +2300,7 @@
             this.tkx.TabIndex = 3;
             this.tkx.Text = "Xuất excel";
             this.tkx.UseVisualStyleBackColor = false;
+            this.tkx.Click += new System.EventHandler(this.tkx_Click);
             // 
             // btnThongKeXuat
             // 
