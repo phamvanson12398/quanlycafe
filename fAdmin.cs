@@ -2241,5 +2241,20 @@ namespace QuanlyquanCoffe
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void CNCC_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dgvChiTietNhap_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dtpToDateXuat_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
